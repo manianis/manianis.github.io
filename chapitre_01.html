@@ -1,0 +1,518 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="scripts/sh.css">
+  <style type="text/css">
+    .center {
+      text-align: center;
+    }
+
+    .black_border {
+      text-align: center;
+      border: 1px #000 solid;
+    }
+
+    .surlignage {
+      background-color: #FF3300;
+      color: #FFFFFF;
+    }
+  </style>
+</head>
+
+<body onload="sh_highlightDocument();">
+
+  <div class="container">
+    <h1>Les structures de données</h1>
+    <h2>1. Variables &amp; Constantes</h2>
+    <h3>Activité 1</h3>
+    <p>Ecrire un programme qui permet de calculer la quantité de peinture
+      nécessaire pour peindre des portes de la forme suivante, sachant qu'un Kg de
+      peinture permet de peindre une surface moyenne de 6 m².</p>
+    <p class="center">
+      <img alt="Forme de la porte" height="397" src="Images/img01.png" width="265" /></p>
+  </div>
+
+
+  <p><a class="btn_solution" href="#activite1">Solution</a></p>
+
+  <pre id="activite1" class="sh_pascal solution">program prog01;
+{ Déclarations }
+const
+  PI = 3.14159265;
+  QPM2 = 6; { 6 m²/Kg }
+var
+  n : integer;
+  l, h : real;
+  sp, qp : real;
+begin
+  { Entrée des données }
+  Write('Largeur de la porte : ');
+  Readln(l);
+
+  Write('Hauteur de la porte : ');
+  Readln(h);
+
+  Write('Donner le nbre de portes : ');
+  Readln(n);
+
+  { Traitements }
+  sp := (l * (h - l)) + PI * L * L / 4;
+  qp := (n * 2 * sp) / QPM2;
+
+  { Affichage }
+  Writeln('Quantité de peinture requise : ', qp:5:1, 'Kg');
+  Readln;
+end.</pre>
+
+  <h3>Activité 2</h3>
+  <ol>
+    <li>Relever à partir du programme précédent la structure générale d'un
+      programme.</li>
+    <li>Quels sont les deux mots clés utilisés dans la partie déclaration ?
+      Quelle est la différence entre-eux ?</li>
+  </ol>
+
+  <h3>Activité 3</h3>
+  <p>Un projectile est laissé en chute libre sans vitesse initiale à partir d'un
+    point M haut du sol. On souhaite écrire un programme qui permet de calculer le
+    temps de chute.</p>
+  <p class="center">
+    <img alt="Projectile en chute libre sans vitesse initiale" height="265" src="Images/img02.png" width="302" /></p>
+  <div class="a_retenir">
+    <p class="titre">A Retenir</p>
+    <p>Une <strong>constante</strong> est un objet ayant une valeur fixe tout le long de l'exécution d'un
+      algorithme ou d'un programme.</p>
+    <p>Une <strong>constante</strong> est caractérisée par son
+      <span class="auto-style2"><strong>nom</strong></span> et sa
+      <span class="auto-style2"><strong>valeur</strong></span>.</p>
+    <p>Une <strong>variable</strong> est un objet pouvant prendre différentes
+      valeurs tout le long de l'exécution d'un algorithme ou d'un programme.</p>
+    <p>Une variable est caractérisée par son<strong> <span class="auto-style2">
+          nom</span></strong>, son <span class="auto-style2"><strong>type</strong></span>
+      et son <span class="auto-style2"><strong>contenu</strong></span>.</p>
+  </div>
+
+  <h2>2. Types de données</h2>
+  <h3>Activité 4</h3>
+  <p>Relever les types de données utilisés dans le programme suivant :</p>
+
+  <pre class="sh_pascal">program prog02.pas;
+{Décalarations}
+var
+  nom : string;
+  sal : string;
+  age : integer;
+  genre : char;
+  p, h, imc : real;
+  ok : boolean;
+{P.P}
+begin
+  Writeln('Donner votre nom : ');
+  Readln(nom);
+
+  Writeln('Donner votre age : ');
+  Readln(age);
+
+  Writeln('Donner votre genre (G : Garçon, F : Fille) : ');
+  Readln(genre);
+
+  Writeln('Donner votre masse en Kg : ');
+  Readln(p);
+
+  Writeln('Donner votre taille en m : ');
+  Readln(h);
+
+  imc := p / (h * h);
+  ok := (imc >= 18) and (imc <= 23);
+
+  if genre in ['G', 'g'] then sal := 'Mr'
+  else if genre ['F', 'f'] then sal := 'Mlle/Mme'
+  else sal := '';
+
+  Writeln('Bonjour, ', sal, ' ', nom);
+  Writeln('Vous aurez bientot ', succ(age), ' ans.');
+  Writeln('Votre IMC est ', imc:4:1);
+  if ok then
+      Writeln('Votre poids est adapté à votre taille!')
+  else
+      Writen('Vous devez vous mettre au régime!');
+  Readln;
+end.</pre>
+
+  <div class="a_retenir">
+    <p class="titre">A retenir</p>
+    <p>Le <strong>type d'une variable</strong> permet de déterminer le <strong>
+        domaine de valeurs possible</strong> que peut prendre cette variable. </p>
+    <p>La connaissance du type permet également de :</p>
+    <ul>
+      <li>Déduire <strong>les opérateurs</strong> applicables sur les
+        variables de ce type</li>
+      <li>Déduire <strong>l'espace mémoire</strong> (en octets) qui sera
+        réservé à ces variables</li>
+      <li>Déterminer l'ensemble de <strong>fonctions prédéfinies</strong>
+        compatible avec ce type de variables</li>
+    </ul>
+  </div>
+  <h2>3. Le type Entier</h2>
+  <p>Le langage Pascal a cinq types entiers prédéfinis. Chaque type a un domaine
+    de définition spécifique.</p>
+  <table style="width: 100%">
+    <tr>
+      <th style="width: 108px">Type</th>
+      <th>Domaine de définition</th>
+      <th>Taille (bits)</th>
+    </tr>
+    <tr>
+      <td style="width: 108px; height: 23px;">SHORTINT</td>
+      <td style="height: 23px">&nbsp;-128..127</td>
+      <td style="height: 23px">8 bits</td>
+    </tr>
+    <tr>
+      <td style="height: 23px">INTEGER</td>
+      <td style="height: 23px">-32768..32767</td>
+      <td style="height: 23px">16 bits</td>
+    </tr>
+    <tr>
+      <td>LONGINT</td>
+      <td>-2147483648..2147483647</td>
+      <td>32 bits</td>
+    </tr>
+    <tr>
+      <td>BYTE</td>
+      <td>0..255</td>
+      <td>8 bits</td>
+    </tr>
+    <tr>
+      <td>WORD</td>
+      <td>0..65535</td>
+      <td>16 bits</td>
+    </tr>
+  </table>
+  <h3>Activité 5</h3>
+  <p>Evaluer les expressions arithmétiques suivantes :</p>
+  <ol type="a">
+    <li>17 DIV 5</li>
+    <li>17 MOD 5</li>
+    <li>((58 DIV 7) MOD 2) + 5</li>
+    <li>(49 MOD 17) DIV (4 * 3)</li>
+  </ol>
+  <h2>4. Le type réel</h2>
+  <h3>Activité 6</h3>
+  <p>Ecrire un programme en pascal qui permet d'afficher les valeurs du tableau
+    suivant :</p>
+  <table>
+    <tr>
+      <td class="black_border" style="width: 14%">0.0</td>
+      <td class="black_border" style="width: 14%">-55.36</td>
+      <td class="black_border" style="width: 14%">3.14</td>
+      <td class="black_border" style="width: 14%">60 10<sup>-9</sup></td>
+      <td class="black_border" style="width: 14%">1.23</td>
+      <td class="black_border" style="width: 14%">&nbsp;-38.0</td>
+      <td class="black_border" style="width: 14%">&nbsp;5.6 10<sup>6</sup></td>
+    </tr>
+  </table>
+
+  <p><a href="#activite6" class="btn_solution">Solution</a></p>
+
+  <pre class="sh_pascal solution" id="activite6">program prog03;
+begin
+  Writeln(0.0);
+  Writeln(-55.36);
+  Writeln(3.14);
+  Writeln(60E-9);
+  Writeln(1.23);
+  Writeln(-38.0);
+  Writeln(5.6E6);
+  Readln;
+end.</pre>
+
+  <h3>Activité 7</h3>
+  <p>Le programme précédent permet d'obtenir le résultat suivant :</p>
+  <p class="center">
+    <img alt="Résultat du programme" src="Images/img03.png" /></p>
+  <p>Rectifier votre programme pour obtenir l'affichage suivant :</p>
+  <p class="center">
+    <img alt="Nouveau affichage après rectification" src="Images/img04.png" /></p>
+
+  <p><a href="#activite7" class="btn_solution">Solution</a></p>
+
+  <pre class="sh_pascal solution" id="activite7">program prog04;
+begin
+  Writeln(0.0:3:1);
+  Writeln(-55.36:6:2);
+  Writeln(3.14:4:2);
+  Writeln(60E-9:10);
+  Writeln(1.23:4:2);
+  Writeln(-38.0:5:1);
+  Writeln(5.6E6:9);
+  Readln;
+end.</pre>
+
+  <div class="a_retenir">
+    <p class="titre">A retenir</p>
+    <p>La mise en forme des réels est effectuée de la façon suivante :</p>
+    <p class="center">
+      <img alt="Mise en forme des réels" src="Images/img05.png" />&nbsp;</p>
+    <p>
+      3.2<strong><span class="surlignage">E</span></strong>-5 est équivalente à 3,2<strong><span class="surlignage">&times;10</span></strong><sup>-5</sup></p>
+  </div>
+
+  <h2>5. Le type booléen</h2>
+  <p class="center"><img alt="Type booléen" src="Images/img06.png" /></p>
+  <h3>Activité 8</h3>
+  <p>Compléter les tableaux de vérités suivants :</p>
+  <table style="width: 100%; background-color: #FFFFFF;">
+    <tr>
+      <td style="width: 25%; background-color: #fff" class="center">
+        <img alt="Fonction NON" src="Images/img09.jpg" width="155" />&nbsp;&nbsp;</td>
+      <td style="width: 25%; background-color: #fff" class="center">
+        <img alt="Fonction ET" src="Images/img07.jpg" width="155" /></td>
+      <td style="width: 25%; background-color: #fff" class="center">
+        <img alt="Fonction OU" src="Images/img08.jpg" width="155" /></td>
+      <td style="width: 25%; background-color: #fff" class="center">
+        <img alt="Fonction XOR" height="68" src="Images/img10.png" width="155" /></td>
+    </tr>
+    <tr>
+      <th>Fonction NON</th>
+      <th>Fonction ET</th>
+      <th>Fonction OU</th>
+      <th>Fonction XOR</th>
+    </tr>
+    <tr>
+      <td valign="top">
+        <table style="width: 100%">
+          <tr>
+            <td style="width: 50%" class="black_border">A</td>
+            <td style="width: 50%" class="black_border">NON A</td>
+          </tr>
+          <tr>
+            <td style="width: 50%" class="black_border">Faux</td>
+            <td style="width: 50%" class="black_border">-</td>
+          </tr>
+          <tr>
+            <td style="width: 50%" class="black_border">Vrai</td>
+            <td style="width: 50%" class="black_border">-</td>
+          </tr>
+        </table>
+      </td>
+      <td valign="top">
+        <table style="width: 100%">
+          <tr>
+            <td style="width: 33%" class="black_border">A</td>
+            <td style="width: 33%" class="black_border">B</td>
+            <td style="width: 33%" class="black_border">A ET B</td>
+          </tr>
+          <tr>
+            <td style="width: 33%" class="black_border">F</td>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">-</td>
+          </tr>
+          <tr>
+            <td style="width: 33%" class="black_border">F</td>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">-</td>
+          </tr>
+          <tr>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">F</td>
+            <td style="width: 33%" class="black_border">-</td>
+          </tr>
+          <tr>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">-</td>
+          </tr>
+        </table>
+      </td>
+      <td style="width: 25%" valign="top">
+        <table style="width: 100%">
+          <tr>
+            <td style="width: 33%" class="black_border">A</td>
+            <td style="width: 33%" class="black_border">B</td>
+            <td style="width: 33%" class="black_border">A OU B</td>
+          </tr>
+          <tr>
+            <td style="width: 33%" class="black_border">F</td>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">-</td>
+          </tr>
+          <tr>
+            <td style="width: 33%" class="black_border">F</td>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">-</td>
+          </tr>
+          <tr>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">F</td>
+            <td style="width: 33%" class="black_border">-</td>
+          </tr>
+          <tr>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">-</td>
+          </tr>
+        </table>
+      </td>
+      <td valign="top">
+        <table style="width: 100%">
+          <tr>
+            <td style="width: 33%" class="black_border">A</td>
+            <td style="width: 33%" class="black_border">B</td>
+            <td style="width: 33%" class="black_border">A XOR B</td>
+          </tr>
+          <tr>
+            <td style="width: 33%" class="black_border">F</td>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="width: 33%" class="black_border">F</td>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">F</td>
+            <td style="width: 33%" class="black_border">&nbsp;</td>
+          </tr>
+          <tr>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">V</td>
+            <td style="width: 33%" class="black_border">&nbsp;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <h3>Activité 9</h3>
+  <p>Evaluer les expressions logiques suivantes :</p>
+  <ul>
+    <li>( x &lt;= 4) ET (x &gt;= 1) avec x = 3</li>
+    <li>( x &lt;= 2) ET (x &gt;= 0) avec x = -4</li>
+    <li>NON ( x &lt;= 55) OU (x &gt;= 0) avec x = 21</li>
+  </ul>
+
+  <h2>6. Le type caractère</h2>
+  <p>Il s'agit du domaine constitué des&nbsp;<strong>caractères alphabétiques</strong>
+    et <strong>numériques</strong>&nbsp;. Une variable de ce type ne peut contenir
+    qu'un&nbsp;seul et unique caractère.&nbsp; </p>
+  <p>Les caractères sont ordonnés selon leurs code ASCII. En ASCII, il est
+    possible de représenter 256 caractères.</p>
+  <p>La table suivante contient les 128 premiers caractères standard, code 0
+    ➞ 127, les caractères de code 128 ➞ 255 ne sont pas standard.</p>
+  <p class="center">
+    <img alt="Table ASCII" height="224" src="Images/img11.png" width="517" /></p>
+  <p>
+    Le tableau suivant résume les principales fonctions prédéfinies sur les
+    caractères :</p>
+  <table>
+    <tr>
+      <th>Fonction</th>
+      <th>Pascal</th>
+      <th>Exemples</th>
+    </tr>
+    <tr>
+      <td>ORD(car)</td>
+      <td>ORD(car)</td>
+      <td>ORD("0") ➞ 48<br />
+        ORD("A") ➞ 65<br />
+        ORD("a") ➞ 97</td>
+    </tr>
+    <tr>
+      <td>CHR(code)</td>
+      <td>CHR(code)</td>
+      <td>CHR(48) ➞ "0"<br />
+        CHR(65) ➞ "A"<br />
+        CHR(97) ➞ "a"</td>
+    </tr>
+    <tr>
+      <td>SUCC(car)</td>
+      <td>SUCC(car)</td>
+      <td>SUCC("A") ➞ "B"</td>
+    </tr>
+    <tr>
+      <td>PRED(car)</td>
+      <td>PRED(car)</td>
+      <td>PRED("A") ➞ "@"</td>
+    </tr>
+    <tr>
+      <td>MAJUS(car)</td>
+      <td>UPCASE(car)</td>
+      <td>MAJUS("a") ➞ "A"<br />
+        MAJUS("A") ➞ "A"<br />
+        MAJUS("0") ➞ "0"</td>
+    </tr>
+  </table>
+
+  <h3>Activité 10</h3>
+  <p>Ecrire un programme qui permet de saisir une lettre Majuscule puis l'affiche
+    en miniscules.</p>
+  <p><a class="btn_solution" href="#activite10">Solution</a><br />
+  </p>
+
+  <pre id="activite10" class="sh_pascal solution">program prog05;
+var
+  cmaj, cmin : char;
+begin
+  Write('Entrer une lettre majuscule : ');
+  Readln(cmaj);
+
+  cmin := Chr(Ord(cmaj) + 32);
+
+  Writeln('Miniscule("', cmaj, '") = "', cmin, '"');
+  Readln;
+end.</pre>
+
+  <h2>7. Le type chaîne de caractères</h2>
+  <p>Une chaîne de caractères est une suite de caractères. Elle peut être définie
+    comme suit :</p>
+  <table style="width: 100%">
+    <tr>
+      <th>Objet</th>
+      <th>Type/Nature</th>
+      <th>Rôle</th>
+    </tr>
+    <tr>
+      <td>Prénom</td>
+      <td>Chaîne [10]</td>
+      <td>Prénom d’un individu sur 10 caractères maximum</td>
+    </tr>
+    <tr>
+      <td>Nom</td>
+      <td>Chaîne</td>
+      <td>Chaîne pouvant contenir jusqu'à 255 caractères.</td>
+    </tr>
+  </table>
+  <h3>&nbsp; Activité 11</h3>
+  <p>Décalrer les variables du tableau ci-dessus en Pascal.</p>
+  <p><a class="btn_solution" href="#activite11">Solution</a></p>
+
+  <pre id="activite11" class="sh_pascal solution">
+var
+  Prenom: string[10];
+  Nom: string;</pre>
+
+  <p>La figure suivante explique comment accéder aux caractères d'une chaîne.</p>
+  <p class="center">
+    <img alt="Accès aux caractères d'une chaîne" height="500" src="Images/img12.png" width="500" /></p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+
+
+  <script type="text/javascript" src="scripts/jquery.js"></script>
+  <script src="scripts/sh.min.js"></script>
+  <script src="scripts/sh_pascal.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $('.btn_solution').click(function (e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        $(href).toggle();
+      });
+    });
+  </script>
+</body>
+
+</html>

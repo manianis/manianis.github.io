@@ -12,7 +12,7 @@ h2 {
 }
 
 h3 {
-	color:#FF3399;
+	color: #FF3399;
 }
 
 iframe {
@@ -66,5 +66,46 @@ a.btn_solution {
 	color: white;
 	border-radius: 10px;
 	text-decoration: none;
-	font-weight:bold;
+	font-weight: bold;
+}
+
+nav>ul {
+	list-style: none;
+	padding: 0;
+}
+
+nav>ul>li {
+	padding: 15px;
+	margin: 5px;
+	background-color: #4CAF50;
+	border-radius: 5px;
+	color: #fff;
+}
+
+nav>ul>li>a {
+	text-decoration: none;
+	color: #fff;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+nav>ul>li.active {
+	background-color: #4CAF50;
+}
+
+nav>ul>li.active:hover {
+	background-color: #93ff97;
+	color: #000;
+}
+
+nav>ul>li.active:hover>a {
+	color: #000;
+}
+
+nav>ul>li.incomplete::after {
+	display: inline-block;
+	margin-left: 15px;
+	content: "Non achevé";
+	font-size: 0.8em;
+	vertical-align: super;
 }
