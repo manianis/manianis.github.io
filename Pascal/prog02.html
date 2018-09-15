@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="Lazarus SynEdit Html Exporter">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>prog02</title>
+</head>
+<body text="black" bgcolor="#FFFFFF"><pre><code><font  size=3 face="Courier New"><font color="black"><b>program </b>prog02<font color="red">.</font>pas<font color="red">;
+</font><font color="blue"><b>{Décalarations}
+</b></font><b>var
+  </b>nom <font color="red">: </font><b>string</b><font color="red">;
+  </font>sal <font color="red">: </font><b>string</b><font color="red">;
+  </font>age <font color="red">: </font>integer<font color="red">;
+  </font>genre <font color="red">: </font>char<font color="red">;
+  </font>p<font color="red">, </font>h<font color="red">, </font>imc <font color="red">: </font>real<font color="red">;
+  </font>ok <font color="red">: </font>boolean<font color="red">;
+</font><font color="blue"><b>{P.P}
+</b></font><b>begin
+  </b>Writeln<font color="red">(</font><font color="blue">'Donner votre nom : '</font><font color="red">);
+  </font>Readln<font color="red">(</font>nom<font color="red">);
+
+  </font>Writeln<font color="red">(</font><font color="blue">'Donner votre age : '</font><font color="red">);
+  </font>Readln<font color="red">(</font>age<font color="red">);
+
+  </font>Writeln<font color="red">(</font><font color="blue">'Donner votre genre (G : Garçon, F : Fille) : '</font><font color="red">);
+  </font>Readln<font color="red">(</font>genre<font color="red">);
+
+  </font>Writeln<font color="red">(</font><font color="blue">'Donner votre masse en Kg : '</font><font color="red">);
+  </font>Readln<font color="red">(</font>p<font color="red">);
+
+  </font>Writeln<font color="red">(</font><font color="blue">'Donner votre taille en m : '</font><font color="red">);
+  </font>Readln<font color="red">(</font>h<font color="red">);
+
+  </font>imc <font color="red">:= </font>p <font color="red">/ (</font>h <font color="red">* </font>h<font color="red">);
+  </font>ok <font color="red">:= (</font>imc <font color="red">&gt;= </font><font color="navy">18</font><font color="red">) </font><b>and </b><font color="red">(</font>imc <font color="red">&lt;= </font><font color="navy">23</font><font color="red">);
+
+  </font><b>if </b>genre <b>in </b><font color="red">[</font><font color="blue">'G'</font><font color="red">, </font><font color="blue">'g'</font><font color="red">] </font><b>then </b>sal <font color="red">:= </font><font color="blue">'Mr'
+  </font><b>else if </b>genre <font color="red">[</font><font color="blue">'F'</font><font color="red">, </font><font color="blue">'f'</font><font color="red">] </font><b>then </b>sal <font color="red">:= </font><font color="blue">'Mlle/Mme'
+  </font><b>else </b>sal <font color="red">:= </font><font color="blue">''</font><font color="red">;
+
+  </font>Writeln<font color="red">(</font><font color="blue">'Bonjour, '</font><font color="red">, </font>sal<font color="red">, </font><font color="blue">' '</font><font color="red">, </font>nom<font color="red">);
+  </font>Writeln<font color="red">(</font><font color="blue">'Vous aurez bientot '</font><font color="red">, </font>succ<font color="red">(</font>age<font color="red">), </font><font color="blue">' ans.'</font><font color="red">);
+  </font>Writeln<font color="red">(</font><font color="blue">'Votre IMC est '</font><font color="red">, </font>imc<font color="red">:</font><font color="navy">4</font><font color="red">:</font><font color="navy">1</font><font color="red">);
+  </font><b>if </b>ok <b>then
+     </b>Writeln<font color="red">(</font><font color="blue">'Votre poids est adapté à votre taille!'</font><font color="red">)
+  </font><b>else
+     </b>Writen<font color="red">(</font><font color="blue">'Vous devez vous mettre au régime!'</font><font color="red">);
+  </font>Readln<font color="red">;
+</font><b>end</b><font color="red">.
+
+</font></font>
+</code></pre>
+</body>
+</html>
