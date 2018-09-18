@@ -59,6 +59,30 @@ tr:nth-child(odd) {
 	background-color: #FFCC66;
 }
 
+table.normal {
+	width: initial;
+}
+
+.normal td {
+	background-color: #fff;
+}
+
+.center {
+	text-align: center;
+}
+
+.small {
+	font-size: small;
+}
+
+.border {
+	border: thin solid #000;
+}
+
+.borderless {
+	border: none;
+}
+
 a.btn_solution {
 	display: inline-block;
 	padding: 10px 15px;
@@ -108,4 +132,28 @@ nav>ul>li.incomplete::after {
 	content: "Non achevé";
 	font-size: 0.8em;
 	vertical-align: super;
+}
+
+@media print {
+	* {
+		page-break-inside: avoid;
+	}
+
+	h1, h2, h3 {
+		page-break-before: initial;
+		page-break-after: avoid;
+	}
+
+	a.btn_solution, #sommaire {
+		display: none;
+	}
+
+	.solution {
+		display: block;
+		page-break-inside: auto;
+	}
+
+	.sh_pascal {
+		page-break-inside: auto;
+	}
 }

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fonctions Prédéfinies</title>
+
+  <style>
+    table {
+      width: 100%;
+      border: 1px solid #000;
+      border-collapse: collapse;
+    }
+
+    table td,
+    table th {
+      border: 1px solid #000;
+      padding: 3px;
+      text-align: center;
+    }
+
+    table td:last-of-type {
+      text-align: initial;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    input {
+      display: none;
+      position: relative;
+    }
+
+    .entier,
+    .réel,
+    .chaine,
+    .caractère,
+    .entier_réel {
+      border-bottom: 3px solid #3f51b5;
+    }
+
+    .chaine::before,
+    .chaine::after,
+    .caractère::before,
+    .caractère::after {
+      content: '"';
+    }
+
+    .actions {
+      margin-top: 10px;
+    }
+
+    .resultat {
+      display: block;
+      margin: 10px 0;
+    }
+
+    @media print {
+      @page {size: landscape}
+
+      body {
+        font-size: small;
+      }
+
+      .entier,
+      .réel,
+      .chaine,
+      .caractère,
+      .entier_réel {
+        border-bottom: none;
+      }
+
+      .actions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Fonctions Prédéfinies - Types Entiers et Réels</h1>
+  <table>
+    <thead>
+      <tr>
+        <th width="10%">Nom Fonction</th>
+        <th width="10%">Nom Pascal</th>
+        <th width="30%">Rôle</th>
+        <th width="50%">Test</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>abs(x)</td>
+        <td>abs(x)</td>
+        <td>Valeur Absolue de x</td>
+        <td>ABS(<span class="test" id="abs_input" name="x" data-params="x" data-input="entier,réel" data-output="entier,réel"
+            data-id="abs_res" data-function="func_abs" data-default="-5.7"></span>) = <span id="abs_res"></span>
+          <div class="actions">
+            <button onclick="setValue('fn_abs_input_par_0', randomValue(-100, 100, 0.1)); func_abs('fn_abs_input_par', 'abs_res')">Actualiser</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>racine(x)</td>
+        <td>sqrt(x)</td>
+        <td>La racine carré de x</td>
+        <td>racine(<span class="test" id="racine_input" name="x" data-params="x" data-input="entier,réel" data-output="réel"
+            data-id="racine_res" data-function="func_racine" data-default="36"></span>) = <span id="racine_res"></span>
+          <div class="actions">
+            <button onclick="setValue('fn_racine_input_par_0', randomValue(0, 100, 1.0)); func_racine('fn_racine_input_par', 'racine_res')">Actualiser</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>carré(x)</td>
+        <td>sqr(x)</td>
+        <td>Le carré de x</td>
+        <td>carré(<span class="test" id="carre_input" name="x" data-params="x" data-input="entier,réel" data-output="réel"
+            data-id="carre_res" data-function="func_carre" data-default="9"></span>) = <span id="carre_res"></span>
+          <div class="actions">
+            <button onclick="setValue('fn_carre_input_par_0', randomValue(0, 10, 0.5)); func_carre('fn_carre_input_par', 'carre_res')">Actualiser</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>cos(x)</td>
+        <td>cos(x)</td>
+        <td>Le cosinus de x en radians</td>
+        <td>cos(<span class="test" id="cos_input" name="x" data-params="x" data-input="réel" data-output="réel" data-id="cos_res"
+            data-function="func_cos" data-default="0.7853981633"></span>) = <span id="cos_res"></span>
+          <div class="actions">
+            <button onclick="setValue('fn_cos_input_par_0', 0); func_cos('fn_cos_input_par', 'cos_res')">0</button>
+            <button onclick="setValue('fn_cos_input_par_0', Math.PI / 6); func_cos('fn_cos_input_par', 'cos_res')">PI/6</button>
+            <button onclick="setValue('fn_cos_input_par_0', Math.PI / 4); func_cos('fn_cos_input_par', 'cos_res')">PI/4</button>
+            <button onclick="setValue('fn_cos_input_par_0', Math.PI / 3); func_cos('fn_cos_input_par', 'cos_res')">PI/3</button>
+            <button onclick="setValue('fn_cos_input_par_0', Math.PI / 2); func_cos('fn_cos_input_par', 'cos_res')">PI/2</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>sin(x)</td>
+        <td>sin(x)</td>
+        <td>Le sinus de x en radians</td>
+        <td>sin(<span class="test" id="sin_input" name="x" data-params="x" data-input="réel" data-output="réel" data-id="sin_res"
+            data-function="func_sin" data-default="1.0471975511"></span>) = <span id="sin_res"></span>
+          <div class="actions">
+            <button onclick="setValue('fn_sin_input_par_0', 0); func_sin('fn_sin_input_par', 'sin_res')">0</button>
+            <button onclick="setValue('fn_sin_input_par_0', Math.PI / 6); func_sin('fn_sin_input_par', 'sin_res')">PI/6</button>
+            <button onclick="setValue('fn_sin_input_par_0', Math.PI / 4); func_sin('fn_sin_input_par', 'sin_res')">PI/4</button>
+            <button onclick="setValue('fn_sin_input_par_0', Math.PI / 3); func_sin('fn_sin_input_par', 'sin_res')">PI/3</button>
+            <button onclick="setValue('fn_sin_input_par_0', Math.PI / 2); func_sin('fn_sin_input_par', 'sin_res')">PI/2</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>tan(x)</td>
+        <td>tan(x)</td>
+        <td>La tangente de x en radians</td>
+        <td>tan(<span class="test" id="tan_input" name="x" data-params="x" data-input="réel" data-output="réel" data-id="tan_res"
+            data-function="func_tan" data-default="0.7853981633"></span>) = <span id="tan_res"></span>
+          <div class="actions">
+            <button onclick="setValue('fn_tan_input_par_0', 0); func_tan('fn_tan_input_par', 'tan_res')">0</button>
+            <button onclick="setValue('fn_tan_input_par_0', Math.PI / 6); func_tan('fn_tan_input_par', 'tan_res')">PI/6</button>
+            <button onclick="setValue('fn_tan_input_par_0', Math.PI / 4); func_tan('fn_tan_input_par', 'tan_res')">PI/4</button>
+            <button onclick="setValue('fn_tan_input_par_0', Math.PI / 3); func_tan('fn_tan_input_par', 'tan_res')">PI/3</button>
+            <button onclick="setValue('fn_tan_input_par_0', Math.PI / 2); func_tan('fn_tan_input_par', 'tan_res')">PI/2</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>atan(x)</td>
+        <td>atan(x)</td>
+        <td>L'artangente (tan<sup>-1</sup>) de x en radians</td>
+        <td>atan(<span class="test" id="atan_input" name="x" data-params="x" data-input="réel" data-output="réel"
+            data-id="atan_res" data-function="func_atan" data-default="0.5"></span>) = <span id="atan_res"></span>
+          <div class="actions">
+            <button onclick="setValue('fn_atan_input_par_0', 0); func_atan('fn_atan_input_par', 'atan_res')">0</button>
+            <button onclick="setValue('fn_atan_input_par_0', Math.tan(Math.PI / 6)); func_atan('fn_atan_input_par', 'atan_res')">tan(PI/6)</button>
+            <button onclick="setValue('fn_atan_input_par_0', Math.tan(Math.PI / 4)); func_atan('fn_atan_input_par', 'atan_res')">tan(PI/4)</button>
+            <button onclick="setValue('fn_atan_input_par_0', Math.tan(Math.PI / 3)); func_atan('fn_atan_input_par', 'atan_res')">tan(PI/3)</button>
+            <button onclick="setValue('fn_atan_input_par_0', Math.tan(Math.PI / 2)); func_atan('fn_atan_input_par', 'atan_res')">tan(PI/2)</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>ln(x)</td>
+        <td>ln(x)</td>
+        <td>Le logarithme népérien de x</td>
+        <td>ln(<span class="test" id="ln_input" name="x" data-params="x" data-input="réel" data-output="réel" data-id="ln_res"
+            data-function="func_ln" data-default="2.7182818284"></span>) = <span id="ln_res"></span></td>
+      </tr>
+      <tr>
+        <td>log(x)</td>
+        <td>log(x)</td>
+        <td>Le logarithme base 10 de x</td>
+        <td>log(<span class="test" id="log_input" name="x" data-params="x" data-input="réel" data-output="réel" data-id="log_res"
+            data-function="func_log" data-default="100"></span>) = <span id="log_res"></span></td>
+      </tr>
+      <tr>
+        <td>exp(x)</td>
+        <td>exp(x)</td>
+        <td>L'exponentielle de x (e<sup>x</sup>)</td>
+        <td>exp(<span class="test" id="exp_input" name="x" data-params="x" data-input="réel" data-output="réel" data-id="exp_res"
+            data-function="func_exp" data-default="2"></span>) = <span id="exp_res"></span></td>
+      </tr>
+      <tr>
+        <td>tronc(x)</td>
+        <td>trunc(x)</td>
+        <td>Supprime la partie fractionnaire de x et renvoie un entier</td>
+        <td>tronc(<span class="test" id="tronc_input" name="x" data-params="x" data-input="réel" data-output="entier"
+            data-id="tronc_res" data-function="func_tronc" data-default="2.9"></span>) = <span id="tronc_res"></span>
+          <div class="actions">
+            <button onclick="setValue('fn_tronc_input_par_0', randomValue(-10, 10, 0.2)); func_tronc('fn_tronc_input_par', 'tronc_res')">Actualiser</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>arrondi(x)</td>
+        <td>round(x)</td>
+        <td>Retourne l'entier le plus proche de x</td>
+        <td>round(<span class="test" id="round_input" name="x" data-params="x" data-input="réel" data-output="entier"
+            data-id="round_res" data-function="func_round" data-default="2.6"></span>) = <span id="round_res"></span>
+          <div class="actions">
+            <button onclick="setValue('fn_round_input_par_0', randomValue(-10, 10, 0.2)); func_round('fn_round_input_par', 'round_res')">Actualiser</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>alea</td>
+        <td>random</td>
+        <td>Retourne un réel aléatoire dans l'intervalle [0, 1[</td>
+        <td>alea<span class="test" id="random_input" name="x" data-params="" data-input="" data-output="réel" data-id="random_res"
+            data-function="func_random" data-default=""></span> = <span id="random_res"></span>
+          <div class="actions"><button onclick="func_random('fn_random_input_par', 'random_res')">Actualiser</button></div>
+        </td>
+      </tr>
+      <tr>
+        <td>alea(x)</td>
+        <td>random(x)</td>
+        <td>Retourne un entier aléatoire dans l'intervalle [0, x[</td>
+        <td>alea(<span class="test" id="alea_input" name="x" data-params="x" data-input="entier" data-output="entier"
+            data-id="alea_res" data-function="func_alea" data-default="60"></span>) = <span id="alea_res"></span>
+          <div class="actions"><button onclick="func_alea('fn_alea_input_par', 'alea_res')">Actualiser</button></div>
+        </td>
+      </tr>
+      <tr>
+        <td>impair(x)</td>
+        <td>odd(x)</td>
+        <td>Retourne si un entier x est impair</td>
+        <td>odd(<span class="test" id="odd_input" name="x" data-params="x" data-input="entier" data-output="booléen"
+            data-id="odd_res" data-function="func_odd" data-default="4"></span>) = <span id="odd_res"></span>
+          <div class="actions">
+            <button onclick="setValue('fn_odd_input_par_0', randomValue(-10, 10, 1)); func_odd('fn_odd_input_par', 'odd_res')">Actualiser</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1>Fonctions Prédéfinies - Types Caractères</h1>
+
+  <table style="page-break-after: always;">
+    <thead>
+      <tr>
+        <th width="10%">Nom Fonction</th>
+        <th width="10%">Nom Pascal</th>
+        <th width="30%">Rôle</th>
+        <th width="50%">Test</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>chr(c)</td>
+        <td>chr(c)</td>
+        <td>Retourne le caractère dont le code ASCII est c</td>
+        <td>chr(<span class="test" id="chr_input" name="c" data-params="c" data-input="entier" data-output="caractère"
+            data-id="chr_res" data-function="func_chr" data-default="65"></span>) = <span id="chr_res"></span>
+          <div class="actions">
+            <button onclick="setValue('fn_chr_input_par_0', randomValue(0, 128, 1)); func_chr('fn_chr_input_par', 'chr_res')">Actualiser</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>ord(c)</td>
+        <td>ord(c)</td>
+        <td>Retourne le code ASCII du caractère c</td>
+        <td>ord(<span class="test" id="ord_input" name="c" data-params="c" data-input="caractère" data-output="entier"
+            data-id="ord_res" data-function="func_ord" data-default="A"></span>) = <span id="ord_res"></span>
+        </td>
+      </tr>
+      <tr>
+        <td>majus(c)</td>
+        <td>upcase(c)</td>
+        <td>Convertit le caractère c en Majuscules</td>
+        <td>majus(<span class="test" id="majus_input" name="c" data-params="c" data-input="caractère" data-output="caractère"
+            data-id="majus_res" data-function="func_majus" data-default="a"></span>) = <span id="majus_res"></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1>Fonctions Prédéfinies - Types Chaînes</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th width="15%">Nom Fonction</th>
+        <th width="15%">Nom Pascal</th>
+        <th width="30%">Rôle</th>
+        <th width="40%">Test</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>long(ch)</td>
+        <td>length(ch)</td>
+        <td>Retourne la longueur d'une chaine de caractères</td>
+        <td>long(<span class="test" id="long_input" name="c" data-params="c" data-input="chaine" data-output="entier"
+            data-id="long_res" data-function="func_long" data-default="Bac 2019"></span>) = <span id="long_res"></span>
+        </td>
+      </tr>
+      <tr>
+        <td>pos(ch1, ch2)</td>
+        <td>pos(ch1, ch2)</td>
+        <td>Retourne la position de ch1 dans ch2</td>
+        <td>pos(<span class="test" id="pos_input" name="ch1;ch2" data-params="ch1;ch2" data-input="chaine;chaine"
+            data-output="entier" data-id="pos_res" data-function="func_pos" data-default="20;Bac 2019"></span>) = <span
+            id="pos_res"></span>
+        </td>
+      </tr>
+      <tr>
+        <td>sous_chaine(ch, pos, nbc)</td>
+        <td>copy(ch, pos, nbc)</td>
+        <td>Retourne une sous chaîne de nbc caractères à partir de la position pos</td>
+        <td>sous_chaine(<span class="test" id="copy_input" name="ch;pos;nbc" data-params="ch;pos;nbc" data-input="chaine;entier;entier"
+            data-output="chaine" data-id="copy_res" data-function="func_copy" data-default="Baccar;4;3"></span>) =
+          <span id="copy_res"></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1>Procédures Prédéfinies - Types Chaînes</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th width="15%">Nom Fonction</th>
+        <th width="15%">Nom Pascal</th>
+        <th width="30%">Rôle</th>
+        <th width="40%">Test</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>efface(ch, pos, nbc)</td>
+        <td>delete(ch, pos, nbc)</td>
+        <td>Supprime nbc caractères de ch à partir de la position pos</td>
+        <td>efface(<span class="test" id="delete_input" name="ch;pos;nbc" data-params="ch;pos;nbc" data-input="chaine;entier;entier"
+            data-output="chaine" data-id="delete_res" data-function="func_delete" data-default="Baccar;4;3"></span>)
+          <div id="delete_res" class="resultat"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>inserer(ch1, ch2, pos)</td>
+        <td>insert(ch1, ch2, pos)</td>
+        <td>Insérer ch1 dans ch2 à la position pos</td>
+        <td>inserer(<span class="test" id="insert_input" name="ch1;ch2;pos" data-params="ch1;ch2;pos" data-input="chaine;chaine;entier"
+            data-output="chaine" data-id="insert_res" data-function="func_insert" data-default="Ka;Librairie rim;11"></span>)
+          <div id="insert_res" class="resultat"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>valeur(ch, x, e)</td>
+        <td>val(ch, x, e)</td>
+        <td>Convertit une chaine en une valeur numérique</td>
+        <td>
+          <div>valeur(<span class="test" id="val_input" name="ch;x;e" data-params="ch" data-input="chaine" data-output="chaine"
+              data-id="val_res" data-function="func_val" data-default="18.5"></span>, x, e)
+            <div id="val_res" class="actions"></div>
+            x est de type réel, e est de type entier
+          </div>
+
+          <div>valeur(<span class="test" id="vale_input" name="ch;x;e" data-params="ch" data-input="chaine" data-output="chaine"
+              data-id="vale_res" data-function="func_vale" data-default="14"></span>, x, e)
+            <div id="vale_res" class="resultat"></div>
+            x est de type entier, e est de type entier
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>conv_ch(n, ch)</td>
+        <td>str(n, ch)</td>
+        <td>Convertit une valeur numérique en chaine</td>
+        <td>
+          <div>conv_ch(<span class="test" id="str_input" name="ch" data-params="n" data-input="entier,réel" data-output="chaine"
+              data-id="str_res" data-function="func_str" data-default="18.5"></span>, ch)
+            <div id="str_res" class="resultat"></div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script src="scripts/funcs.js"></script>
+  <script>
+    var tests = Array.prototype.slice.apply(document.getElementsByClassName('test'));
+    tests.forEach(el => {
+      console.log(el.dataset);
+      var params = el.dataset['params'].split(';');
+      var inputTypes = el.dataset['input'].split(';');
+      var outputTypes = el.dataset['output'].split(';');
+      var outResEl = el.dataset['id'];
+      var func = el.dataset['function'];
+      var def = el.dataset['default'].split(';');
+
+      const elClass = 'fn_' + el.id + '_par';
+
+      var ctrls = [];
+      for (var i = 0; i < params.length; i++) {
+        if (params[i] == '') continue;
+        var id = elClass + '_' + i;
+        var span_id = elClass + '_span_' + i;
+        var span = '<span id="' + span_id + '" class="' + inputTypes[i].replace(',', '_') + '" onclick="viewCtrl(\'' + id + '\', \'' + span_id + '\')">' + def[i] + '</span>';
+        var ctrl = '<input id="' + id + '" class="' + elClass + '" type="text" size="5" value="' + def[i] + '" onblur="' + func + '(\'' + elClass + '\', \'' + outResEl + '\'); hideCtrl(\'' + id + '\', \'' + span_id + '\')">';
+        if (inputTypes[i] === 'chaine' || inputTypes[i] === 'caractère') {
+          ctrl = ctrl;
+          span = span;
+        }
+        ctrls.push(ctrl + span);
+      }
+      el.innerHTML = ctrls.join(', ');
+      eval(func + '(\'' + elClass + '\', \'' + outResEl + '\')');
+    });
+    viewCtrl = function (ctrl_id, span_id) {
+      var ctrlEl = document.querySelector('#' + ctrl_id);
+      var spanEl = document.querySelector('#' + span_id);
+      ctrlEl.style.display = 'inline-block';
+      spanEl.style.display = 'none';
+      ctrlEl.focus();
+    };
+    hideCtrl = function (ctrl_id, span_id) {
+      var ctrlEl = document.querySelector('#' + ctrl_id);
+      var spanEl = document.querySelector('#' + span_id);
+      ctrlEl.style.display = 'none';
+      spanEl.style.display = 'inline-block';
+      spanEl.innerHTML = ctrlEl.value;
+    };
+  </script>
+</body>
+
+</html>

@@ -1,7 +1,8 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
+  <title>Structures de données</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="scripts/sh.css">
   <style type="text/css">
@@ -22,18 +23,18 @@
 </head>
 
 <body onload="sh_highlightDocument();">
-
-  <div class="container">
-    <h1>Les structures de données</h1>
-    <h2>1. Variables &amp; Constantes</h2>
-    <h3>Activité 1</h3>
-    <p>Ecrire un programme qui permet de calculer la quantité de peinture
-      nécessaire pour peindre des portes de la forme suivante, sachant qu'un Kg de
-      peinture permet de peindre une surface moyenne de 6 m².</p>
-    <p class="center">
-      <img alt="Forme de la porte" height="397" src="Images/img01.png" width="265" /></p>
+  <div id="sommaire">
+    <h3>Sommaire</h3>
   </div>
 
+  <h1>Les structures de données</h1>
+  <h2>1. Variables &amp; Constantes</h2>
+  <h3>Activité 1</h3>
+  <p>Ecrire un programme qui permet de calculer la quantité de peinture
+    nécessaire pour peindre des portes de la forme suivante, sachant qu'un Kg de
+    peinture permet de peindre une surface moyenne de 6 m².</p>
+  <p class="center">
+    <img alt="Forme de la porte" src="Images/img01.png" /></p>
 
   <p><a class="btn_solution" href="#activite1">Solution</a></p>
 
@@ -58,7 +59,7 @@ begin
   Readln(n);
 
   { Traitements }
-  sp := (l * (h - l)) + PI * L * L / 4;
+  sp := (l * (h - l/2)) + PI * L * L / 8;
   qp := (n * 2 * sp) / QPM2;
 
   { Affichage }
@@ -485,7 +486,7 @@ end.</pre>
       <td>Chaîne pouvant contenir jusqu'à 255 caractères.</td>
     </tr>
   </table>
-  <h3>&nbsp; Activité 11</h3>
+  <h3>Activité 11</h3>
   <p>Décalrer les variables du tableau ci-dessus en Pascal.</p>
   <p><a class="btn_solution" href="#activite11">Solution</a></p>
 
@@ -497,9 +498,163 @@ var
   <p>La figure suivante explique comment accéder aux caractères d'une chaîne.</p>
   <p class="center">
     <img alt="Accès aux caractères d'une chaîne" height="500" src="Images/img12.png" width="500" /></p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
 
+  <h2>8. Le type scalaire énuméré</h2>
+
+  <p>Un type scalaire énuméré est un type dont on énumère la liste effective des éléments (nombre fini d'éléments).</p>
+
+  <p><strong>Exemples</strong></p>
+
+  <ul>
+    <li>Les mois de l'année (janvier, février, mars, ...)</li>
+    <li>Les jours de semaine (Lundi, Mardi, Mercredi, ...)</li>
+    <li>L'état civil d'une personne (célibataire, marié, divorcé, veuf)</li>
+    <li>Les saisons de l'année (Printemps, Eté, Automne, Hiver)</li>
+  </ul>
+
+  <pre class="sh_pascal">type
+  Saison = (Printemps, Ete, Automne, Hiver);
+  Semaine = (Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche);</pre>
+
+  <p>Le type scalaire énuméré <strong>ne peut être</strong> ni lu ni affiché.</p>
+
+  <pre class="sh_pascal">var
+  s : Saison;
+begin
+  s := Printemps;
+  <strike>Writeln(s);</strike> { Cette instruction est incorrecte }
+
+  Writeln('Donner une saison : ');
+  <strike>Readln(s);</strike> { Cette instruction est incorrecte }
+end.</pre>
+
+  <p>Cependant, il est possible de déterminer le <strong>successeur</strong>, le <strong>prédécesseur</strong> et l'<strong>ordinal</strong>
+    d'un scalaire énuméré.</p>
+
+  <pre class="sh_pascal">var
+  s, s1, s2 : Saison;
+begin
+  s := Ete;
+  Writeln(ord(s)); { Affiche 1 }
+
+  s1 := succ(s); { s1 contient Automne }
+  s2 := pred(s); { s2 contient Printemps }
+end.</pre>
+
+  <h2>9. Le type tableau</h2>
+
+  <p>Le type tableau permet, en pascal, de stocker un ensemble de valeurs de même type. Les éléments du tableau sont
+    accessibles via le nom du tableau suivi par l'indice de l'élément.</p>
+  <p><strong>T[3]</strong> : Permet d'accéder à la case d'indice 3 dans le tableau t</p>
+
+  <h3>Activité 12</h3>
+
+  <p>Déclarer les tableaux suivants en Pascal : </p>
+
+  <table class="normal">
+    <tbody>
+      <tr>
+        <td class="center borderless">te</td>
+        <script>
+          for (var i = 1; i <= 10; i++) {
+            document.writeln('<td class="center border" width="9%">' + Math.floor(Math.random() * 100) + '</td>');
+          }
+        </script>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <script>
+          for (var i = 1; i <= 10; i++) {
+            document.writeln('<td class="center small borderless">' + i + '</td>');
+          }
+        </script>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="normal">
+    <tbody>
+      <tr>
+        <td class="center borderless">tr</td>
+        <script>
+          for (var i = -3; i <= 3; i++) {
+            document.writeln('<td class="center border" width="12.5%">' + Math.floor(Math.random() * 100) / 10.0 + '</td>');
+          }
+        </script>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <script>
+          for (var i = -3; i <= 3; i++) {
+            document.writeln('<td class="center small borderless">' + i + '</td>');
+          }
+        </script>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="normal">
+    <tbody>
+      <tr>
+        <td class="center borderless">tb</td>
+        <script>
+          for (var i = 0; i < 6; i++) {
+            document.writeln('<td class="center border" width="10%">' + (Math.random() >= 0.5 ? 'True' : 'False') + '</td>');
+          }
+          document.writeln('<td class="center border" width="10%">...</td>');
+          for (var i = 24; i < 26; i++) {
+            document.writeln('<td class="center border" width="10%">' + (Math.random() >= 0.5 ? 'True' : 'False') + '</td>');
+          }
+        </script>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <script>
+          for (var i = 0; i < 6; i++) {
+            document.writeln('<td class="center small borderless">"' + String.fromCharCode(65+i) + '"</td>');
+          }
+          document.writeln('<td class="center small borderless">...</td>');
+          for (var i = 24; i < 26; i++) {
+            document.writeln('<td class="center small borderless">"' + String.fromCharCode(65+i) + '"</td>');
+          }
+        </script>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="normal">
+    <tbody>
+      <tr>
+        <td class="center borderless" width="12.5%">tc</td>
+        <td class="center border" width="12.5%">Ahmed</td>
+        <td class="center border" width="12.5%">Youssef</td>
+        <td class="center border" width="12.5%">Karim</td>
+        <td class="center border" width="12.5%">Chiheb</td>
+        <td class="center border" width="12.5%">Farès</td>
+        <td class="center border" width="12.5%">Amine</td>
+        <td class="center border" width="12.5%">Khaled</td>
+      </tr>
+      <tr>
+        <td class="center small borderless">&nbsp;</td>
+        <td class="center small borderless">Lundi</td>
+        <td class="center small borderless">Mardi</td>
+        <td class="center small borderless">Mercredi</td>
+        <td class="center small borderless">Jeudi</td>
+        <td class="center small borderless">Vendredi</td>
+        <td class="center small borderless">Samedi</td>
+        <td class="center small borderless">Dimanche</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><a class="btn_solution" href="#activite12">Solution</a></p>
+
+  <pre id="activite12" class="solution sh_pascal">type
+  tab_e = array [1..10] of integer;
+  tab_r = array [-3..3] of real;
+  tab_b = array ['A'..'Z'] of boolean;
+  jours= (Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche);
+  tab_c = array [Lundi..Dimanche] of string;</pre>
 
   <script type="text/javascript" src="scripts/jquery.js"></script>
   <script src="scripts/sh.min.js"></script>
@@ -510,6 +665,18 @@ var
         e.preventDefault();
         var href = $(this).attr('href');
         $(href).toggle();
+      });
+
+      const sommaire = $('#sommaire');
+      const ul = $('<ul>').appendTo(sommaire);
+      $('h2').each((idx, el) => {
+        el.id = 'h2_titre_' + idx;
+        const text = $(el).text();
+        const li = $('<li>').appendTo(ul);
+        const a = $(`<a>`)
+          .attr('href', '#h2_titre_' + idx)
+          .text(text)
+          .appendTo(li);
       });
     });
   </script>
