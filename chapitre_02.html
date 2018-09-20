@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structures de controles conditionnelles</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="scripts/sh.css">
+
+</head>
+
+<body onload="sh_highlightDocument();">
+
+  <div id="sommaire">
+    <h3>Sommaire</h3>
+  </div>
+
+  <h1>Les structures de contrôles conditionnelles</h1>
+
+  <h2>1. Forme réduite</h2>
+
+  <h3>Définition</h3>
+  <p>Une <strong>structure conditionnelle</strong> simple <strong>à forme réduite</strong> admet un seul traitement qui
+    sera exécuté
+    uniquement si une condition est vraie.</p>
+
+  <h3>Activité 1</h3>
+
+  <p>Ecrire un programme qui calcule et affiche la valeur absolue d'un entier donné sans utiliser la fonction
+    prédéfinie <strong>abs</strong>.</p>
+
+  <p><a href="#activite_1" class="btn_solution">Solution</a></p>
+
+  <div class="solution" id="activite_1">
+    <div class="flex">
+      <pre class="col_2 sh_algo">{Algorithmique}
+si x < 0 alors
+  x ⟵ -x
+fin si</pre>
+      <pre class="col_2 sh_pascal">{Pascal}
+if x < 0 then
+  x := -x;</pre>
+    </div>
+  </div>
+
+  <h2>2. Forme alternative</h2>
+
+  <h3>Définition</h3>
+
+  <p>Une <strong>structure conditionnelle</strong> simple <strong>à forme alternative</strong> admet <u>deux
+      traitements</u> différents :</p>
+
+  <ul>
+    <li>Le <u>premier traitement</u> est exécuté uniquement si la <strong>condition est vraie</strong>,</li>
+    <li>Le <u>second traitement</u> est exécuté uniquement si la <strong>condition est fausse</strong>.</li>
+  </ul>
+
+  <p class="center"><img src="Images/img16.png" alt="Forme alternative"></p>
+
+  <h3>Activité 2</h3>
+
+  <p>Ecrire un programme qui demande à l'utilisateur de saisir les coordonnées de 2 vecteurs
+    du plan <img alt="Vecteur u" src="Images/img13.png"> et <img alt="Vecteur v" src="Images/img14.png">, et qui
+    détermine si les vecteurs sont orthogonaux entre eux ou pas.</p>
+
+  <p><strong>NB :</strong> Le <strong>produit scalaire</strong> de deux vecteurs orthogonaux est égal à 0.</p>
+
+  <p class="center"><img alt="produit scalaire de deux vecteurs" src="Images/img15.png"></p>
+
+  <p><a href="#activite_2" class="btn_solution">Solution</a></p>
+
+  <div class="solution" id="activite_2">
+    <div class="flex">
+      <pre class="col_2 sh_algo">{Algorithmique}
+ps ⟵ xu * xv + yu * yv
+si ps = 0 alors
+  Ecrire("Vecteurs orthogonaux")
+sinon
+  Ecrire("Vecteurs non orthogonaux")
+fin si</pre>
+      <pre class="col_2 sh_pascal">{Pascal}
+ps := xu * xv + yu * yv;
+if ps = 0 then
+  Writeln('Vecteurs orthogonaux')
+else
+  Writeln('Vecteurs non orthogonaux');</pre>
+    </div>
+  </div>
+
+  <h2>3. Forme généralisée</h2>
+
+  <h3>Définition</h3>
+
+  <p>Une <strong>structure conditionnelle</strong> simple <strong>à forme généralisée</strong> admet <u>plus de deux
+      traitements</u> différents qui seront exécutés en fonction de <u>plusieurs conditions</u>.</p>
+
+  <p class="center"><img src="Images/img17.png" alt="Forme alternative"></p>
+
+  <h3>Activité 3</h3>
+
+  <p>Un élève est <u>admis</u> s'il obtient une moyenne supèrieure ou égale à 10, il est <u>refusé</u> s'il obtient une
+    moyenne infèrieure à 9, sinon il est <u>contrôle</u>.</p>
+  <p>Ecrire un programme qui affiche l'appréciation d'un 'élève selon sa moyenne.</p>
+
+  <p><a href="#activite_3" class="btn_solution">Solution</a></p>
+
+  <div class="solution" id="activite_3">
+    <div class="flex">
+      <pre class="col_2 sh_algo">{Algorithmique}
+si moy >= 10 alors
+  Ecrire("Admis")
+sinon si moy >= 9 alors
+  Ecrire("Contrôle")
+sinon
+  Ecrire("Refusé")
+fin si</pre>
+      <pre class="col_2 sh_pascal">{Pascal}
+if moy >= 10 then
+  Writeln('Admis')
+else if moy >= 9 then
+  Writeln('Contrôle')
+else
+  Writeln('Refusé');</pre>
+    </div>
+  </div>
+
+  <h3>Activité 4</h3>
+
+  <p>Ecrire un programme qui détermine la nature d'un triangle à partir de la longueur de ses cotés.</p>
+
+  <ul type="">
+    <li>Equilatéral, si AB=BC=AC</li>
+    <li>Isocèle, si AB=AC ou AB=BC ou AC=BC</li>
+    <li>Rectangle, si AB²+AC²=BC² ou AC²+BC²=AB² ou BC²+AB²=AC²</li>
+    <li>Quelconque, sinon</li>
+  </ul>
+
+  <p><a href="#activite_4" class="btn_solution">Solution</a></p>
+
+  <div class="solution" id="activite_4">
+    <div class="flex">
+      <pre class="col_2 sh_algo">{Algorithmique}
+si (AB=AC) et 
+   (AC=BC) alors
+  Ecrire("triangle équilatéral")
+sinon si (AB=AC) ou 
+         (AB=BC) ou 
+         (AC=BC) alors
+  Ecrire("triangle isocèle")
+sinon si (AB*AB+AC*AC=BC*BC) ou 
+         (AC*AC+BC*BC=AB*AB) ou
+         (BC*BC+AB*AB=AC*AC) alors
+  Ecrire("triangle rectangle")
+sinon
+  Ecrire("triangle quelconque")
+fin si</pre>
+      <pre class="col_2 sh_pascal">{Pascal}
+if (AB=AC) and
+   (AC=BC) then
+  Writeln('triangle équilatéral')
+else if (AB=AC) or 
+        (AB=BC) or 
+        (AC=BC) then
+  Writeln('triangle isocèle')
+else if (AB*AB+AC*AC=BC*BC) or 
+        (AC*AC+BC*BC=AB*AB) or
+        (BC*BC+AB*AB=AC*AC) then
+  Writeln('triangle rectangle')
+else
+  Writeln('triangle quelconque');</pre>
+    </div>
+  </div>
+
+  <h2>4. Structure à choix</h2>
+
+  <h3>Définition</h3>
+
+  <p>Une <strong>structure conditionnelle à choix</strong> est une version simplifiée de la structure conditionnelle
+    généralisée.</p>
+  <p>L'exécution d'un traitement dépend d'un sélecteur de type ordinal (scalaire).</p>
+
+  <h3>Activité 5</h3>
+
+  <p>Ecrire un programme qui saisit une lettre puis détermine sa nature : Chiffre, Lettre miniscule, Lettre majuscule ou Symbole.</p>
+
+  <p><a href="#activite_5" class="btn_solution">Solution</a></p>
+
+  <div class="solution" id="activite_5">
+    <div class="flex">
+      <pre class="col_2 sh_algo">{Algorithmique}
+selon car faire
+  "0".."9": msg ⟵ "Chiffre"
+  "A".."Z": msg ⟵ "Lettre majuscule"
+  "a".."z": msg ⟵ "Lettre miniscule"
+sinon
+  msg ⟵ "Symbole"
+fin si</pre>
+      <pre class="col_2 sh_pascal">{Pascal}
+case car of
+  '0'..'9': msg := 'Chiffre';
+  'A'..'Z': msg := 'Lettre majuscule';
+  'a'..'z': msg := 'Lettre miniscule';
+else
+  msg := 'Symbole';
+end;</pre>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="scripts/jquery.js"></script>
+  <script src="scripts/sh.min.js"></script>
+  <script src="scripts/sh_pascal.min.js"></script>
+  <script src="scripts/sh_algo.js"></script>
+  <script src="scripts/sommaire.js"></script>
+</body>
+
+</html>

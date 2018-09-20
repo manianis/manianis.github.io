@@ -1,7 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="fr">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Structures de données</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="scripts/sh.css">
@@ -554,7 +556,7 @@ end.</pre>
   <table class="normal">
     <tbody>
       <tr>
-        <td class="center borderless">te</td>
+        <td class="center borderless" width="80">te</td>
         <script>
           for (var i = 1; i <= 10; i++) {
             document.writeln('<td class="center border" width="9%">' + Math.floor(Math.random() * 100) + '</td>');
@@ -575,7 +577,7 @@ end.</pre>
   <table class="normal">
     <tbody>
       <tr>
-        <td class="center borderless">tr</td>
+        <td class="center borderless" width="80">tr</td>
         <script>
           for (var i = -3; i <= 3; i++) {
             document.writeln('<td class="center border" width="12.5%">' + Math.floor(Math.random() * 100) / 10.0 + '</td>');
@@ -596,7 +598,7 @@ end.</pre>
   <table class="normal">
     <tbody>
       <tr>
-        <td class="center borderless">tb</td>
+        <td class="center borderless" width="80">tb</td>
         <script>
           for (var i = 0; i < 6; i++) {
             document.writeln('<td class="center border" width="10%">' + (Math.random() >= 0.5 ? 'True' : 'False') + '</td>');
@@ -611,11 +613,11 @@ end.</pre>
         <td>&nbsp;</td>
         <script>
           for (var i = 0; i < 6; i++) {
-            document.writeln('<td class="center small borderless">"' + String.fromCharCode(65+i) + '"</td>');
+            document.writeln('<td class="center small borderless">"' + String.fromCharCode(65 + i) + '"</td>');
           }
           document.writeln('<td class="center small borderless">...</td>');
           for (var i = 24; i < 26; i++) {
-            document.writeln('<td class="center small borderless">"' + String.fromCharCode(65+i) + '"</td>');
+            document.writeln('<td class="center small borderless">"' + String.fromCharCode(65 + i) + '"</td>');
           }
         </script>
       </tr>
@@ -625,7 +627,7 @@ end.</pre>
   <table class="normal">
     <tbody>
       <tr>
-        <td class="center borderless" width="12.5%">tc</td>
+        <td class="center borderless" width="80">tc</td>
         <td class="center border" width="12.5%">Ahmed</td>
         <td class="center border" width="12.5%">Youssef</td>
         <td class="center border" width="12.5%">Karim</td>
@@ -654,32 +656,17 @@ end.</pre>
   tab_r = array [-3..3] of real;
   tab_b = array ['A'..'Z'] of boolean;
   jours= (Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche);
-  tab_c = array [Lundi..Dimanche] of string;</pre>
+  tab_c = array [Lundi..Dimanche] of string;
+var 
+  te : tab_e;
+  tr : tab_r;
+  tb : tab_b;
+  tc : tab_c;</pre>
 
   <script type="text/javascript" src="scripts/jquery.js"></script>
   <script src="scripts/sh.min.js"></script>
   <script src="scripts/sh_pascal.min.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $('.btn_solution').click(function (e) {
-        e.preventDefault();
-        var href = $(this).attr('href');
-        $(href).toggle();
-      });
-
-      const sommaire = $('#sommaire');
-      const ul = $('<ul>').appendTo(sommaire);
-      $('h2').each((idx, el) => {
-        el.id = 'h2_titre_' + idx;
-        const text = $(el).text();
-        const li = $('<li>').appendTo(ul);
-        const a = $(`<a>`)
-          .attr('href', '#h2_titre_' + idx)
-          .text(text)
-          .appendTo(li);
-      });
-    });
-  </script>
+  <script src="scripts/sommaire.js"></script>
 </body>
 
 </html>
