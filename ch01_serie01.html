@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="scripts/sh.css">
+
+  <style>
+    .texte_choix {
+      display: inline-block;
+      width: 80%;
+    }
+
+    .choix {
+      display: inline-block;
+      text-align: right;
+      width: 19%;
+    }
+
+    input[type=text] {
+      width: 40em;
+      display: inline-block;
+      padding: 4px;
+      margin: 4px;
+      font-size: 14pt;
+    }
+
+    .navigation {
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    .navigation button {
+      display: inline-block;
+      width: 8em;
+      height: 3em;
+      background-color: #E91E63;
+      color: #fff;
+      padding: 5px 15px;
+      border-radius: 10px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    .navigation button[disabled] {
+      display: inline-block;
+      width: 8em;
+      height: 3em;
+      background-color: #ffb6ce;
+      color: #000;
+      padding: 5px 15px;
+      border-radius: 10px;
+      border: none;
+      cursor: initial;
+    }
+
+    .navigation span {
+      display: inline-block;
+      width: 3em;
+    }
+
+    .answer {
+      display: inline-block;
+      padding: 5px;
+      border: 2px solid #333;
+      border-radius: 5px;
+    }
+
+    .exercice, #liste_sauvegardes {
+      display: none;
+    }
+
+    .exercice ul>li {
+      width: 100%;
+    }
+
+    #progression {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      border: 1px solid #F44336;
+      background-color: #fff;
+    }
+
+    #done {
+      background-color: #F44336;
+      width: 0%;
+      height: 100%;
+    }
+
+    @media print {
+      form {
+        page-break-inside: auto;
+      }
+      .exercice {
+        display: block !important;
+        page-break-inside: initial;
+      }
+
+      .navigation, #toolbar, #progression {
+        display: none !important;
+      }
+
+      .answer {
+        display: initial;
+        padding: initial;
+        border: none;
+        border-radius: initial;
+      }
+    }
+  </style>
+</head>
+
+<body onload="sh_highlightDocument();">
+  <h1>Série d’exercices (Structures de données)</h1>
+
+  <form>
+    <div>
+      <p>Nom & Prénom : <input type="text"> - Classe :
+        <select>
+          <option value="">-<option>
+          <option>4ème Techniques</option>
+          <option>4ème Sciences</option>
+        </select>
+
+        <input type="text">
+      </p>
+    </div>
+
+    <div id="progression">
+      <div id="done"></div>
+    </div>
+
+    <div id="exercice1" class="exercice">
+      <h2>Exercice 1 (Bac 2016)</h2>
+
+      <ol>
+        <li>L’identificateur d’une variable :
+          <ul>
+            <li>
+              <span class="texte_choix">Ne doit pas commencer par un chiffre</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">Peut contenir un espace</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">Peut contenir le caractère souligné « _ » </span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+          </ul>
+        </li>
+        <li>L’instruction qui permet d’affecter à une variable X, une valeur aléatoire de l’intervalle [2, 10] est :
+          <ul>
+            <li>
+              <span class="texte_choix">X ⟵ 2 + Aléa(10)</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">X ⟵ 2 + Aléa(9)</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">X ⟵ Aléa(2 + 10)</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+          </ul>
+        </li>
+        <li>Une structure de données tableau peut :
+          <ul>
+            <li>
+              <span class="texte_choix">Contenir des éléments de types différents</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">Etre déclarée avec une taille maximale variable</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">Avoir des indices de cases de type caractère </span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+          </ul>
+        </li>
+        <li>Pour le type scalaire énuméré :
+          <ul>
+            <li>
+              <span class="texte_choix">Les valeurs énumérées peuvent appartenir à un type prédéfini</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">Une valeur énumérée peut être affectée à une variable de même type</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">Les opérateurs relationnels « &lt; », « &gt; » et « = » peuvent être appliqués</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+
+    <div id="exercice2" class="exercice">
+      <h2>Exercice 2 (Bac 2014)</h2>
+
+      <p>Soient les tableaux de déclarations suivants :</p>
+
+      <table class="normal">
+        <thead>
+          <tr>
+            <td>Tableau de déclaration de nouveaux types</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="border center">Types</th>
+          </tr>
+          <tr>
+            <td class="border">
+              Jour_semaine = (Dimanche, Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche)<br>
+              Jour_travail = Lundi .. Vendredi<br>
+              Phrase = Chaine[10]<br>
+              Tab = Tableau [Lundi..Vendredi] de Phrase
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="normal">
+        <thead>
+          <tr>
+            <td>TDO</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="border">Objet</th>
+            <th class="border">Type/Nature</th>
+          </tr>
+          <tr>
+            <td class="border">
+              A<br>
+              T<br>
+              Ch<br>
+              i, j<br>
+            </td>
+            <td class="border">
+              Entier<br>
+              Tab<br>
+              Phrase<br>
+              Jour_Travail
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Valider chacune des propositions suivantes. Justifier la réponse en cas d’instruction jugée invalide.</p>
+
+      <p>
+        <span class="texte_choix">1. a ⟵ ord(succ(Vendredi))</span>
+        <span class="choix">
+          <select>
+            <option value="">-<option>
+            <option>Valide</option>
+            <option>Invalide</option>
+          </select>
+        </span>
+      </p>
+      <p>Justification : <input type="text"></p>
+
+      <p>
+        <span class="texte_choix">2. T[Vendredi] ⟵ "Bonjour"</span>
+        <span class="choix">
+          <select>
+            <option value="">-<option>
+            <option>Valide</option>
+            <option>Invalide</option>
+          </select>
+        </span>
+      </p>
+      <p>Justification : <input type="text"></p>
+
+      <p>
+        <span class="texte_choix">3. Ch[15] ⟵ Sous_chaine("Bac", 1, 1)</span>
+        <span class="choix">
+          <select>
+            <option value="">-<option>
+            <option>Valide</option>
+            <option>Invalide</option>
+          </select>
+        </span>
+      </p>
+      <p>Justification : <input type="text"></p>
+
+      <p>
+        <span class="texte_choix">4. Lire(j)</span>
+        <span class="choix">
+          <select>
+            <option value="">-<option>
+            <option>Valide</option>
+            <option>Invalide</option>
+          </select>
+        </span>
+      </p>
+      <p>Justification : <input type="text"></p>
+
+      <p>
+        <span class="texte_choix">5. Pour i de Lundi à Vendredi Faire<br>
+          &nbsp;&nbsp;Ecrire(T[i])<br>
+          Fin Pour
+        </span>
+        <span class="choix">
+          <select>
+            <option value="">-<option>
+            <option>Valide</option>
+            <option>Invalide</option>
+          </select>
+        </span>
+      </p>
+      <p>Justification : <input type="text"></p>
+    </div>
+
+    <div id="exercice3" class="exercice">
+      <h2>Exercice 3 (Bac 2013)</h2>
+
+      <p>Valider chacune des propositions suivantes en mettant (V) si elle est correcte ou (F) sinon.</p>
+
+      <ol>
+        <li>Soit l’instruction C ⟵ Sous_chaine("Baccalauréat", 4, 1) :
+          <ul>
+            <li>
+              <span class="texte_choix">Elle permet d’affecter le caractère "c" à la variable C</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">La variable C doit être déclarée de type caractère</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">La variable C doit être déclarée de type chaine</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+          </ul>
+        </li>
+        <li>L’instruction X ⟵ Aléa(6) + 4 permet d’affecter à la variable X une valeur aléatoire de l’intervalle :
+          <ul>
+            <li>
+              <span class="texte_choix">[4, 6]</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">[4, 10]</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">[4, 9]</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+          </ul>
+        </li>
+        <li>L’instruction R ⟵ Arrondi(12.5) permet d’affecter à la variable R :
+          <ul>
+            <li>
+              <span class="texte_choix">L’entier 12</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">L’entier 13</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">Le réel 13.0</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+          </ul>
+        </li>
+        <li>Soit l’affectation C ⟵ majus("?") :
+          <ul>
+            <li>
+              <span class="texte_choix">Elle permet d’affecter à la variable C le caractère "?" en gras</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">Elle permet d’affecter à la variable C le caractère "?"</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+            <li>
+              <span class="texte_choix">La variable C doit être de type caractère</span>
+              <span class="choix">
+                <select>
+                  <option value="">-<option>
+                  <option>V</option>
+                  <option>F</option>
+                </select>
+              </span>
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+
+    <div id="exercice4" class="exercice">
+      <h2>Exercice 4 (Bac 2013)</h2>
+
+      <p>Soit la partie déclarative suivante d’un programme Pascal :</p>
+
+      <pre class="sh_pascal">Program composer ;
+Const mot1 = 'Informatique'; mot2 = '3D';
+Var mot3, mot4 : String; n, m : integer;</pre>
+
+
+      <p>En utilisant des procédures et des fonctions prédéfinies, donner les instructions Pascal permettant de
+        réaliser
+        les traitements suivants :</p>
+
+      <ol type="a">
+        <li>A partir de la constante mot1, mettre dans la variable mot3 le terme 'format'<br><input type="text"></li>
+        <li>A partir de mot3 et mot2, mettre dans la variable mot4 le terme 'format 3D'<br><input type="text"></li>
+        <li>Mettre dans n la longueur de la chaine mot4<br><input type="text"></li>
+        <li>A partir de la constante mot2, mettre dans m la valeur 3<br><input type="text"></li>
+      </ol>
+    </div>
+
+    <div id="exercice5" class="exercice">
+      <h2>Exercice 5 (Bac 2013)</h2>
+
+      <p>Soit le type Examen contenant les valeurs suivantes : Math, Anglais, Physique et Informatique</p>
+
+      <ol>
+        <li>Qu’appelle-t-on le type Examen décrit ci-dessus.<br><input type="text"></li>
+        <li>Proposer la déclaration pascal du type examen.<br><input type="text"></li>
+        <li>Compléter le tableau ci-dessous par les types et les valeurs des variables A, B et C après exécution des
+          instructions Pascal suivantes :<br>
+          <pre class="sh_pascal">A := pred(Informatique);
+B := ord(Anglais) + 8 div 4;
+C := (Math &lt; Physique);</pre>
+        </li>
+      </ol>
+
+      <table class="normal">
+        <tr>
+          <th width="20%">Variable</th>
+          <th width="20%">Type</th>
+          <th width="60%">Valeur</th>
+        </tr>
+        <tr>
+          <td class="center border">A</td>
+          <td class="border">
+            <select>
+              <option value="">-<option>
+              <option>entier</option>
+              <option>booléen</option>
+              <option>Examen</option>
+              <option>réel</option>
+            </select>
+          </td>
+          <td class="border"><input type="text"></td>
+        </tr>
+        <tr>
+          <td class="center border">B</td>
+          <td class="border">
+            <select>
+              <option value="">-<option>
+              <option>entier</option>
+              <option>booléen</option>
+              <option>Examen</option>
+              <option>réel</option>
+            </select>
+          </td>
+          <td class="border"><input type="text"></td>
+        </tr>
+        <tr>
+          <td class="center border">C</td>
+          <td class="border">
+            <select>
+              <option value="">-<option>
+              <option>entier</option>
+              <option>booléen</option>
+              <option>Examen</option>
+              <option>réel</option>
+            </select>
+          </td>
+          <td class="border"><input type="text"></td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="exercice6" class="exercice">
+      <h2>Exercice 6 (Bac 2012)</h2>
+
+      <p>Compléter le tableau suivant par les valeurs des variables indiquées sachant que toutes les instructions sont
+        correctes.</p>
+
+      <table class="normal">
+        <tr>
+          <th width="50%">Instructions</th>
+          <th width="50%">Valeurs</th>
+        </tr>
+        <tr>
+          <td class="border">
+            <pre class="sh_algo borderless">X ⟵ Tronc(11.8)
+Y ⟵ Arrondi(11.8)</pre>
+          </td>
+          <td class="border">
+            X = <input type="text"> -
+            Y = <input type="text">
+          </td>
+        </tr>
+        <tr>
+          <td class="border">
+            <pre class="sh_algo borderless">Valeur("138.5", N, E)</pre>
+          </td>
+          <td class="border">
+            N = <input type="text"> -
+            E = <input type="text">
+          </td>
+        </tr>
+        <tr>
+          <td class="border">
+            <pre class="sh_algo borderless">Convch(138.25, Ch)</pre>
+          </td>
+          <td class="border">
+            Ch = <input type="text">
+          </td>
+        </tr>
+        <tr>
+          <td class="border">
+            <pre class="sh_algo borderless">Ch1 ⟵ "Information"
+Efface(Ch1, 3, 6)</pre>
+          </td>
+          <td class="border">
+            Ch1 = <input type="text">
+          </td>
+        </tr>
+        <tr>
+          <td class="border">
+            <pre class="sh_algo borderless">Ch1 ⟵ "Information"
+Ch2 ⟵ Sous_chaine(ch1, 3, 6)</pre>
+          </td>
+          <td class="border">
+            Ch1 = <input type="text"> -
+            Ch2 = <input type="text">
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="exercice7" class="exercice">
+      <h2>Exercice 7 (Bac 2011)</h2>
+
+      <p>Répondre par Vrai si la proposition est correcte ou par faux sinon.</p>
+
+      <table class="normal">
+        <tr>
+          <th>Proposition</th>
+          <th>Réponse</th>
+        </tr>
+        <tr>
+          <td class="border">Un tableau de réels peut être rempli d'entiers</td>
+          <td class="border">
+            <select>
+              <option value="">-<option>
+              <option>Vrai</option>
+              <option>Faux</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="border">Un compteur d'une structure répétitive doit être de type scalaire</td>
+          <td class="border">
+            <select>
+              <option value="">-<option>
+              <option>Vrai</option>
+              <option>Faux</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="border">Les opérateurs div et mod ne peuvent pas être appliqués sur les nombres réels</td>
+          <td class="border">
+            <select>
+              <option value="">-<option>
+              <option>Vrai</option>
+              <option>Faux</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="border">Efface(Ch, Long(Ch)-1, 2) efface les deux premiers caractères de la chaine Ch</td>
+          <td class="border">
+            <select>
+              <option value="">-<option>
+              <option>Vrai</option>
+              <option>Faux</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="exercice8" class="exercice">
+      <h2>Exercice 8 (Bac 2011)</h2>
+
+      <p>Soit l'algorithme traitement suivant :</p>
+
+      <pre class="sh_algo">0) Algorithme Traitement
+1) Lire(n)
+2) r ⟵ 0
+Répéter
+  r ⟵ r + n mod 10
+  n ⟵ n div 10
+Jusqu'à (n = 0)
+3) Ecrire(r)
+4) Fin Traitement</pre>
+
+      <p><strong>Questions:</strong></p>
+
+      <ol>
+        <li>Quelle est la valeur affichée par ce programme lorsque n = 125 ?<br><input type="text"></li>
+        <li>Quelle est la valeur affichée par ce programme lorsque n = 458 ?<br><input type="text"></li>
+        <li>Que fait ce programme ?<br><input type="text"></li>
+      </ol>
+    </div>
+
+    <div id="exercice9" class="exercice">
+      <h2>Exercice 9 (Bac 2007)</h2>
+
+      <p>Dans le tableau ci-dessous remplir les colonnes résultat et type par le résultat et le type correspondant à
+        chacune des expressions de la première colonne.</p>
+
+      <table class="normal">
+        <tr>
+          <th>Expression</th>
+          <th>Résultat</th>
+          <th>Type</th>
+        </tr>
+        <tr>
+          <td>
+            <pre class="sh_algo borderless">Concat(Sous_chaine("Baccalauréat", 1, 3), " 2007")</pre>
+          </td>
+          <td><input type="text"></td>
+          <td>
+            <select>
+              <option value="">-<option>
+              <option>entier</option>
+              <option>booléen</option>
+              <option>Examen</option>
+              <option>réel</option>
+              <option>chaine</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <pre class="sh_algo borderless">(("D" &lt; "A" ) et (ABS(-1) &gt; 0))</pre>
+          </td>
+          <td><input type="text"></td>
+          <td>
+            <select>
+              <option value="">-<option>
+              <option>entier</option>
+              <option>booléen</option>
+              <option>Examen</option>
+              <option>réel</option>
+              <option>chaine</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <pre class="sh_algo borderless">(15 div 3) MOD 2</pre>
+          </td>
+          <td><input type="text"></td>
+          <td>
+            <select>
+              <option value="">-<option>
+              <option>entier</option>
+              <option>booléen</option>
+              <option>Examen</option>
+              <option>réel</option>
+              <option>chaine</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <pre class="sh_algo borderless">Tronc(7.25) + Arrondi(7.25)</pre>
+          </td>
+          <td><input type="text"></td>
+          <td>
+            <select>
+              <option value="">-<option>
+              <option>entier</option>
+              <option>booléen</option>
+              <option>Examen</option>
+              <option>réel</option>
+              <option>chaine</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="exercice10" class="exercice">
+      <h2>Exercice 10 (Bac 2007)</h2>
+
+      <p>Soit l'algorithme suivant :</p>
+
+      <pre class="sh_algo">1. Début Algo
+2. Lire(Ch, c)
+3. [i ⟵ 0, tr ⟵ (1 = 0)]
+Répéter
+  i ⟵ i +1
+  tr ⟵ (c = ch[i])
+Jusqu'à (tr) ou (Long(ch) = i)
+4. Fin algo</pre>
+
+      <p>Questions</p>
+
+      <ol>
+        <li>Quel est le rôle de cet algorithme ?<br><input type="text"></li>
+        <li>Compléter le tableau ci-dessous par le type ou la nature des objets qui ont figuré dans l'algorithme
+          précédent.</li>
+      </ol>
+
+      <table class="normal">
+        <tr>
+          <th>Objet</th>
+          <th>Type/Nature</th>
+        </tr>
+        <tr>
+          <td class="border">i<br>
+            c<br>
+            tr<br>
+            ch</td>
+          <td class="border">
+            <input type="text"><br>
+            <input type="text"><br>
+            <input type="text"><br>
+            <input type="text">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <input type="hidden" name="op">
+  </form>
+
+  <div class="navigation">
+    <button class="prev">Précédent</button>
+    <span class="position"></span>
+    /
+    <span class="count"></span>
+    <button class="next">Suivant</button>
+  </div>
+
+  <div id="toolbar"></div>
+
+  <div id="liste_sauvegardes"></div>
+
+  <script type="text/javascript" src="scripts/jquery.js"></script>
+  <script src="scripts/sh.min.js"></script>
+  <script src="scripts/sh_pascal.min.js"></script>
+  <script src="scripts/sh_algo.js"></script>
+  <script src="scripts/idb.js"></script>
+  <script src="scripts/md5.js"></script>
+  <script src="scripts/rep_app.js"></script>
+
+  <script>
+
+    var currentExercice = 0;
+    var exercicesEl;
+    var navEl;
+    var initialFormValue = {};
+    var globReponse;
+    /**
+     * 
+     */
+    function initForm(reponse) {
+      var keys = Object.keys(reponse.data);
+      for (var i in keys) {
+        if (keys[i].startsWith('ctrl_')) {
+          updateSpan(keys[i], reponse.data[keys[i]]);
+        }
+      }
+      show_exercice(reponse.exercice);
+      updateNavigation();
+    }
+    function resetForm() {
+      initForm(initialFormValue);
+      show_exercice(0);
+      updateNavigation();
+      saveData();
+    }
+    function loadData() {
+      getLastReponse()
+        .then(reponse => {
+          if (reponse == null) {
+            reponse = new Reponse();
+            putReponse(reponse);
+          }
+          return reponse;
+        })
+        .then(reponse => {
+          globReponse = reponse;
+          initForm(reponse);
+          updateProgress();
+        });
+    }
+    function saveData() {
+      globReponse.exercice = currentExercice;
+      for (var i = 0; i < globReponse.count; i++) {
+        const name = 'ctrl_' + i;
+        globReponse.data[name] = $('#' + name).val();
+      }
+      putReponse(globReponse)
+        .then(() => {
+          updateProgress();
+        });
+    }
+    function show_exercice(n) {
+      if (n < 0 || n > exercicesEl.length) {
+        return;
+      }
+      exercicesEl
+        .hide()
+        .eq(n)
+        .show();
+      currentExercice = n;
+    }
+    function initToolbar() {
+      var toolbar = $('#toolbar');
+      $('<button>')
+        .attr('type', 'button')
+        .text('Nouveau...')
+        .click(function (e) {
+          getLastReponse()
+            .then(reponse => {
+              const diff = Math.floor((new Date().getTime() - reponse.timestamp) / 60000);
+              if (diff < 30) {
+                alert('Cette série nécessite au moins trente minutes. Opération possible dans ' + (30 - diff) + ' minutes.');
+                return;
+              }
+
+              if (confirm('Vous allez supprimer toute votre progression.\nVoulez-vous continuer ?')) {
+                return;
+              }
+
+              globReponse = new Reponse();
+              putReponse(globReponse)
+                .then(() => {
+                  initForm(globReponse);
+                });
+            });
+        })
+        .appendTo(toolbar);
+
+      $('<button>')
+        .attr('type', 'button')
+        .text('Ouvrir...')
+        .click(function (e) {
+          // todo
+          fillSauvegardes();
+        })
+        .appendTo(toolbar);
+    }
+    function initNavigation() {
+      navEl.find('.next')
+        .click(function (e) {
+          e.preventDefault();
+          show_exercice(currentExercice + 1);
+          updateNavigation();
+          saveData();
+        });
+      navEl.find('.prev')
+        .click(function (e) {
+          e.preventDefault();
+          show_exercice(currentExercice - 1);
+          updateNavigation();
+          saveData();
+        });
+      $('form').submit(function (e) {
+        e.preventDefault();
+        saveData();
+      })
+      updateNavigation();
+    }
+    function updateNavigation() {
+      var exCount = exercicesEl.length;
+      navEl.find('.count').text(exCount);
+      navEl.find('.position').text(currentExercice + 1);
+
+      navEl.find('.prev').prop('disabled', currentExercice == 0);
+      navEl.find('.next').prop('disabled', currentExercice == exCount - 1);
+    }
+    function updateProgress() {
+      if (globReponse instanceof Reponse) {
+        $('#done').width(globReponse.progression()[1] * 100 / globReponse.count + '%');
+      }
+    }
+    function fillSauvegardes() {
+      getTopReponses()
+        .then(reponses => {
+          const el = $('#liste_sauvegardes');
+          el.html('Aucune sauvegarde enregistrée...');
+
+          const ul = $('<ul>');
+          let visibleCount = 0;
+          for (let i = 0; i < reponses.length; i++) {
+            const reponse = reponses[i];
+            if (reponse.timestamp == globReponse.timestamp) {
+              continue;
+            }
+            visibleCount++;
+            const date = new Date(reponse.timestamp);
+            const li = $('<li>')
+              .html('Sauvegarde par <b>' + ((reponse.data.ctrl_0) ? reponse.data.ctrl_0 : 'Inconnu') + '</b> du <small>' + formatDateTime(date) + '</small>')
+              .appendTo(ul);
+
+            const a = $('<a>')
+              .attr('href', '#')
+              .click(function (e) {
+                e.preventDefault();
+                globReponse = reponse;
+                initForm(globReponse);
+                show_exercice(globReponse.exercice);
+                updateNavigation();
+                updateProgress();
+                el.html('').hide();
+              })
+              .text('Charger')
+              .appendTo(li);
+          }
+          if (el.is(':visible')) {
+            el.hide();
+          } else {
+            el.show();
+          }
+          if (visibleCount == 0) {
+            return;
+          }
+          ul.appendTo(el.html(''));
+        });
+    }
+    function updateSpan(ctrlId, value) {
+      var ctrl = $('#' + ctrlId);
+      if (arguments.length == 1) {
+        value = ctrl.val();
+      } else if (arguments.length >= 2) {
+        ctrl.val(value);
+      }
+      var span = $('#' + ctrlId + '_span');
+      span.text((value == '' || value == '-') ? 'éditer' : value);
+    }
+    function initCtrls() {
+      var ctrls = $('input[type=text],select');
+      ctrls.hide();
+      ctrls.each(function (index, ctrl) {
+        var thisCtrl = $(ctrl);
+        ctrl.id = 'ctrl_' + index;
+        ctrl.name = 'ctrl_' + index;
+        initialFormValue[ctrl.id] = ctrl.value;
+        var showCtrl = function (e) {
+          span.hide();
+          var ctrl = $('#' + span.attr('data-id'));
+          ctrl.show();
+          ctrl.focus();
+        };
+        var hideCtrl = function (e) {
+          thisCtrl.hide();
+          span
+            .text((ctrl.value == '' || ctrl.value == '-') ? 'éditer' : ctrl.value)
+            .show();
+          saveData();
+        };
+        var span = $('<span>')
+          .text((ctrl.value == '' || ctrl.value == '-') ? 'éditer' : ctrl.value)
+          .attr('id', ctrl.name + '_span')
+          .attr('data-id', ctrl.name)
+          .addClass('answer')
+          .click(showCtrl)
+          .insertAfter(thisCtrl);
+        thisCtrl
+          .blur(hideCtrl)
+          .keydown(function (e) {
+            if (e.keyCode == 13) {
+              hideCtrl();
+            }
+          });
+      });
+    }
+    $(function () {
+      exercicesEl = $('.exercice');
+      navEl = $('.navigation');
+      initNavigation();
+      initToolbar();
+      // show_exercice(currentExercice);
+      initCtrls();
+      loadData();
+    });
+  </script>
+</body>
+
+</html>

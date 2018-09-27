@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structures de controles itératives</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="scripts/sh.css">
+
+</head>
+
+<body onload="sh_highlightDocument();">
+
+  <div id="sommaire">
+    <h3>Sommaire</h3>
+  </div>
+
+  <h1>Les structures de contrôles itératives</h1>
+
+  <h2>1. Complète</h2>
+
+  <h3>Définition</h3>
+  <p>Une <strong>structure itérative complète</strong> est utilisée pour répéter une suite d'instructions, un nombre
+    fini de fois connu à l'avance.</p>
+
+  <h3>Activité 1</h3>
+
+  <p>Ecrire un programme qui calcule la somme de n entiers saisis au clavier.</p>
+
+  <div id="activite_1">
+    <div class="flex">
+      <pre class="col_2 sh_algo">{Algorithmique}
+s ⟵ 0
+pour i de 1 à n faire
+  Ecrire("Donner un nombre : ")
+  Lire(v)
+  s ⟵ s + v
+fin pour</pre>
+      <pre class="col_2 sh_pascal">{Pascal}
+s := 0;
+for i := 1 to n do
+begin
+  Write('Donner un nombre : '); Readln(v);
+  s := s + v;
+end;</pre>
+    </div>
+  </div>
+
+  <h3>Activité 2</h3>
+
+  <p>Ecrire un programme qui permet d'inverser une chaine.</p>
+
+  <p><strong>Exemple : </strong>pour ch = "sami" le programme affiche "imas"</p>
+
+  <div id="activite_1">
+    <div class="flex">
+      <pre class="col_2 sh_algo">{Algorithmique}
+ch1 ⟵ ""
+pour i de Long(ch) à 1 faire
+  ch1 ⟵ ch1 + ch[i]
+fin pour</pre>
+      <pre class="col_2 sh_pascal">{Pascal}
+ch1 := '';
+for i := Length(ch) downto 1 do
+  ch1 := ch1 + ch[i];</pre>
+    </div>
+  </div>
+
+  <div class="a_retenir">
+    <p class="titre">Faute fréquente</p>
+
+    <p>L'élève croit que la boucle suivante va afficher toutes les valeurs de 1 à n, mais <u>le programme affiche
+        uniquement une
+        seule valeur</u> <b>(n+1)</b>.</p>
+    <p><b>Correction :</b> enlever le point virgule (;) devant <b>do</b>.</p>
+    <div class="flex">
+      <pre class="col_2 sh_pascal"> { Version incorrecte }
+for i:=1 to n do; { <-- notez bien le point virgule ici }
+Write(n);</pre>
+      <pre class="col_2 sh_pascal"> { Version corrigée }
+for i:=1 to n do
+    Write(n);</pre>
+    </div>
+  </div>
+
+  <div class="a_retenir">
+    <p class="titre">Faute fréquente</p>
+    <p>L'élève croit que la boucle suivante permet de remplir le tableau t. Cependant, la boucle affiche le message <b>Donner
+        t[1]
+        : Donner t[2] : ...</b>, et permet de saisir <b>une seule</b> valeur dans t[n+1].</p>
+    <p><b>Correction :</b> Sans <b>begin</b> et <b>end;</b> la boucle concerne uniquement la première instruction qui
+      suit la boucle. Pour corriger, il faudra ajouter <b>begin</b> et <b>end;</b>.</p>
+    <div class="flex">
+      <pre class="col_2 sh_pascal"> { Version incorrecte }
+for i:=1 to n do
+Write('Donner t[', i, '] : ');
+Readln(t[i]);</pre>
+      <pre class="col_2 sh_pascal"> { Version corrigée }
+for i:=1 to n do
+begin
+  Write('Donner t[', i, '] : ');
+  Readln(t[i]);
+end;</pre>
+    </div>
+  </div>
+
+  <div class="a_retenir">
+    <p class="titre">Faute fréquente</p>
+    <p>L'élève croit que la boucle suivante permet d'afficher les valeurs de 0 à (-5), hors <b>la boucle n'affiche rien</b>.</p>
+    <p><b>Correction :</b> <u>Rappelez-vous que 0 &gt; (-5)</u>. Dans ce cas, on doit utiliser <b>downto</b> au lieu de
+      <b>to</b>.</p>
+    <div class="flex">
+      <pre class="col_2 sh_pascal"> { Version incorrecte }
+for i:=0 to -5 do
+  Writeln(i);</pre>
+      <pre class="col_2 sh_pascal"> { Version corrigée }
+for i:=0 downto -5 do
+  Writeln(i);</pre>
+    </div>
+
+  </div>
+
+  <h2>2. Structure à condition d'arrêt : Répéter ... jusqu'à</h2>
+
+  <h3>Définition</h3>
+
+  <p>Une <b>structure à condition d'arrêt</b> est utilisée pour répéter une suite d'actions <u><b>jusqu'à</b></u> ce
+    qu'une <u><b>condition</b></u> soit vraie.</p>
+
+  <h3>Activité 3</h3>
+
+  <p>Ecrire un programme qui permet de retrouver si une lettre <b>c</b> existe dans une chaine <b>ch</b> sans utiliser
+    la fonction prédéfinie <b>pos</b>.</p>
+
+  <div class="flex">
+    <pre class="col_2 sh_algo">{Algorithmique}
+i ⟵ 1
+répéter
+  tr ⟵ (ch[i] = c)
+  i ⟵ i + 1
+jusqu'à (i > long(ch)) ou (tr)</pre>
+    <pre class="col_2 sh_pascal">{Pascal}
+i := 1;
+repeat
+  tr := ch[i] = c;
+  i := i + 1;
+until (i > Length(ch)) or (tr);</pre>
+  </div>
+
+  <h3>Activité 4</h3>
+
+  <p>Ecrire un programme qui permet de saisir un entier n (2 &le; n &le; 100).</p>
+
+  <div class="flex">
+    <pre class="col_2 sh_algo">{Algorithmique}
+répéter
+  Ecrire("Donner n [2, 100] : ")
+  Lire(n)
+jusqu'à (n dans [2..100])</pre>
+    <pre class="col_2 sh_pascal">{Pascal}
+repeat
+  Write('Donner n [2, 100] : ');
+  Readln(n);
+until (n in [2..100]);</pre>
+  </div>
+
+  <h2>3. Structure à condition de marche : Tantque ... Faire</h2>
+
+  <h3>Définition</h3>
+
+  <p>Une <b>structure itérative à condition de marche</b> est utilisée pour répéter une suite d'actions <u><b>tant que</b></u>
+    une <u><b>condition</b></u> est vraie.</p>
+
+  <h3>Activité 5</h3>
+
+  <p>Ecrire un programme qui permet de déterminer si un mot <b>ch</b> est palindrôme.</p>
+
+  <p><b>Exemple : </b> <u>RADAR</u>, <u>AZIZA</u> se lisent de la même façon de gauche à droite ou de droite à gauche.</p>
+
+  <div class="flex">
+    <pre class="col_2 sh_algo">{Algorithmique}
+palin ⟵ Vrai
+i ⟵ 1
+j ⟵ Long(ch)
+Tantque (j &gt; i) et (palin) Faire
+  palin ⟵ ch[i] = ch[j]
+  i ⟵ i + 1
+  j ⟵ j - 1
+Fin Tantque</pre>
+    <pre class="col_2 sh_pascal">{Pascal}
+palin := True;
+i := 1;
+j := Length(ch);
+While (j &gt; i) and (palin) do
+begin
+  palin := ch[i] = ch[j];
+  i := i + 1;
+  j := j - 1;
+end;</pre>
+  </div>
+
+  <div class="a_retenir">
+    <p class="titre">Faute fréquente</p>
+    <p>L'élève croit que la boucle suivante va calculer le <b>PGCD(a, b)</b> en utilisant la méthode de soustraction.
+      Mais, elle résulte en <u>une boucle infinie</u> comme a est toujours différent de b puisque l'instruction <b>if</b>
+      n'est jamais atteinte.</p>
+    <p><b>Correction :</b> enlever le point virgule (;) devant <b>do</b>.</p>
+    <div class="flex">
+      <pre class="col_2 sh_pascal">{ Version incorrecte }
+a := 100;
+b := 120;
+while (a &lt;&gt; b) do; { <-- notez bien le point virgule ici }
+  if (a > b) then
+    a := a - b
+  else
+    b := b - a;</pre>
+      <pre class="col_2 sh_pascal">{ Version corrigée }
+a := 100;
+b := 120;
+while (a &lt;&gt; b) do
+  if (a > b) then
+    a := a - b
+  else
+    b := b - a;</pre>
+    </div>
+  </div>
+
+  <div class="a_retenir">
+    <p class="titre">Faute fréquente</p>
+    <p>L'élève croit que la boucle suivante permet de calculer le <b>PGCD(a, b)</b> en utilisant la méthode d'euclide.
+      Mais, lors de l'exécution le programme se bloque puisque b est toujours différent de 0.</p>
+    <p><b>Correction :</b> Sans <b>begin</b> et <b>end;</b> la boucle concerne uniquement la première instruction qui
+      suit la boucle. Pour corriger, il faudra ajouter <b>begin</b> et <b>end;</b>.</p>
+    <div class="flex">
+      <pre class="col_2 sh_pascal">{ Version incorrecte }
+while (b &lt;&gt; 0) do
+  r := a mod b;
+  a := b;
+  b := r;</pre>
+      <pre class="col_2 sh_pascal">{ Version corrigée }
+while (b &lt;&gt; 0) do
+begin
+  r := a mod b;
+  a := b;
+  b := r;
+end;</pre>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="scripts/jquery.js"></script>
+  <script src="scripts/sh.min.js"></script>
+  <script src="scripts/sh_pascal.min.js"></script>
+  <script src="scripts/sh_algo.js"></script>
+  <script src="scripts/sommaire.js"></script>
+</body>
+
+</html>

@@ -4,7 +4,7 @@ if (! this.sh_languages) {
 sh_languages['algo'] = [
   [
     [
-      /\b(?:alfa|et|tableau|début|selon|const|div|faire|downto|sinon|fin|faux|fichier|pour|fonction|get|goto|si|dans|label|mod|new|non|de|ou|pack|packed|page|programme|put|procedure|lire|lirenl|enregistrement|repeter|ouvrir|recreer|ensemble|texte|alors|à|vrai|type|unpack|jusqu'à|var|tantque|avec|ecrirenl|ecrire)\b/gi,
+      /\b(?:alfa|et|tableau|début|selon|const|div|faire|downto|sinon|fin|faux|fichier|pour|fonction|get|goto|si|dans|label|mod|new|non|de|ou|pack|packed|page|programme|put|procedure|lire|lirenl|enregistrement|répéter|repeter|ouvrir|recreer|ensemble|texte|alors|à|vrai|type|unpack|jusqu|var|tantque|avec|ecrirenl|ecrire)\b/gi,
       'sh_keyword',
       -1
     ],
@@ -28,11 +28,11 @@ sh_languages['algo'] = [
       'sh_string',
       3
     ],
-    [
-      /'/g,
-      'sh_string',
-      4
-    ],
+    // [
+    //   /'/g,
+    //   'sh_string',
+    //   4
+    // ],
     [
       /\b(?:booleen|octet|caractere|entier|maxint|reel|chaine|entier_long|extended|mot|double|simple)\b/gi,
       'sh_type',
@@ -101,10 +101,10 @@ sh_languages['algo'] = [
       null,
       -1
     ],
-    [
-      /'/g,
-      'sh_string',
-      -2
-    ]
+    // [
+    //   /'/g,
+    //   'sh_string',
+    //   -2
+    // ]
   ]
 ];

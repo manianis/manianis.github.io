@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expérimenter les structures itératives</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="scripts/sh.css">
+
+  <style>
+    .animation {
+      /* height: 200px; */
+      position: relative;
+      overflow: hidden;
+    }
+
+    .robot {
+      position: absolute;
+      bottom: 15px;
+      left: 10px;
+      width: 64px;
+      height: 64px;
+      border: 1px solid #000;
+    }
+
+    .car_img {
+      background: transparent url(Images/car.png) no-repeat center center;
+      width: 140px;
+      height: 80px;
+    }
+
+    .route {
+      background-color: #333;
+      height: 10px;
+      position: relative;
+      /* animation: scroll_div 7s linear 1s; */
+      width: 2400px;
+      margin-bottom: 20px;
+    }
+
+    @keyframes scroll_div {
+      from { transform: translateX(0);}
+      to {transform: translateX(-2100px);}
+    }
+
+    .barriere {
+      position: absolute;
+      bottom: 10px;
+      width: 15px;
+      height: 30px;
+      background-color: chartreuse;
+    }
+
+    .barriere0 {
+      left: 0px;
+      background-color: #E91E63;
+    }
+
+    .barriere0::after {
+      display: block;
+      position: absolute;
+      content: "Départ";
+      top: 38px;
+      font-weight: bold;
+      color: #E91E63;
+    }
+
+    .barriere1 {
+      left: 300px;
+    }
+
+    .barriere2 {
+      left: 600px;
+    }
+
+    .barriere3 {
+      left: 900px;
+    }
+
+    .barriere4 {
+      left: 1200px;
+    }
+
+    .barriere5 {
+      left: 1500px;
+    }
+
+    .barriere6 {
+      left: 1800px;
+    }
+
+    .barriere7 {
+      left: 2100px;
+      background-color: #E91E63;
+    }
+
+    .barriere7::after {
+      display: block;
+      position: absolute;
+      content: "Arrivée";
+      top: 38px;
+      font-weight: bold;
+      color: #E91E63;
+    }
+
+    .mur {
+      position: absolute;
+      bottom: 10px;
+      width: 100px;
+      height: 80px;
+      background-color: #795548;
+      color: #fff;
+      font-weight: bold;
+      left: 2250px;
+      text-align: center;
+    }
+
+    .car_img.crashed {
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      line-height: 84px;
+    }
+
+    .obstacle {
+      display: inline-block;
+      background-color: green;
+      color: #fff;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .obstacle.vrai {
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body onload="sh_highlightDocument();">
+  <div id="sommaire">
+    <h3>Sommaire</h3>
+  </div>
+
+  <h2>1. Structure Pour</h2>
+
+  <img id="car_image" src="Images/car.png" style="display: none;"></div>
+
+  <canvas id="animation1" width="750" height="200"></canvas>
+
+  <pre class="sh_algo">pour i de 1 à 10 faire
+  Avancer()
+fin pour</pre>
+
+  <script>
+    var c = document.getElementById("animation1");
+    var ctx = c.getContext("2d");
+
+    console.log(ctx);
+
+    function update(ctx, pos) {
+      ctx.clearRect(0, 0, 750, 200);
+      ctx.fillStyle = "#FF0000";
+      ctx.fillRect(15, 126, 725, 4);
+
+      var startX = 80, endX = 670;
+      var w = endX - startX;
+      var x = startX, y = 128;
+      var xStep = w / 10;
+
+      var tw = ctx.measureText('Départ').width;
+      ctx.fillText('Départ', startX - tw / 2, 160);
+      tw = ctx.measureText('Arrivée').width;
+      ctx.fillText('Arrivée', endX - tw / 2, 160);
+      for (var i = 0; i <= 10; i++) {
+        ctx.beginPath();
+        if (i == 0 || i == 10) {
+          ctx.fillStyle = "#FF0000";
+          ctx.arc(x, y, 15, 0, 360);
+        } else {
+          ctx.fillStyle = "#800080";
+          ctx.arc(x, y, 10, 0, 360);
+        }
+        ctx.fill();
+
+        ctx.font = "20px Georgia";
+        ctx.fillText(i + "", x - 5, 110);
+
+        x += xStep;
+      }
+
+      var car = document.getElementById('car_image');
+      ctx.drawImage(car, 10 + pos * xStep, 20);
+    }
+
+    var pos = 0;
+    function animateFor() {
+      update(ctx, pos++);
+      if (pos <= 10) {
+        setTimeout(function () {
+          animateFor();
+        }, 1000);
+      }
+    }
+    animateFor();
+  </script>
+
+  <div id="animation2" class="animation">
+    <div class="car_img"></div>
+    <div class="route">
+      <div class="barriere barriere0"></div>
+      <div class="barriere barriere1"></div>
+      <div class="barriere barriere2"></div>
+      <div class="barriere barriere3"></div>
+      <div class="barriere barriere4"></div>
+      <div class="barriere barriere5"></div>
+      <div class="barriere barriere6"></div>
+      <div class="barriere barriere7"></div>
+      <div class="mur">Obstacle</div>
+    </div>
+    <div class="obstacle"></div>
+  </div>
+
+
+  <div class="flex">
+    <div class="col_2">
+      <pre class="sh_algo">Répéter
+  Avancer()
+Jusqu'à (obsctacle = Vrai)</pre>
+      <div>
+        <button onclick="placeAtStart()">Position initiale</button>
+        <button onclick="placeAtEnd()">Placer près de l'obstacle</button>
+        <button onclick="animateRepeat()">Exécuter la boucle</button>
+      </div>
+    </div>
+
+    <div class="col_2">
+      <pre class="sh_algo">Tantque (obstacle = Faux) Faire
+  Avancer()
+Fin Tantque</pre>
+      <div>
+        <button onclick="placeAtStart()">Position initiale</button>
+        <button onclick="placeAtEnd()">Placer près de l'obstacle</button>
+        <button onclick="animateWhile()">Exécuter la boucle</button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <script type="text/javascript" src="scripts/jquery.js"></script>
+  <script src="scripts/sh.min.js"></script>
+  <script src="scripts/sh_pascal.min.js"></script>
+  <script src="scripts/sh_algo.js"></script>
+  <script src="scripts/sommaire.js"></script>
+
+
+
+  <script>
+    function Animation2() {
+      this.route = $('#animation2 .route');
+      this.car = $('#animation2 .car_img');
+      this.obstacle = $('#animation2 .obstacle');
+      this.isMoving = false;
+      this.init();
+    }
+
+    Animation2.prototype.init = function () {
+      this.route.offset({ left: 8 });
+      this.car.text('').removeClass('crashed');
+      this.isMoving = false;
+      this.hasObstacle();
+    };
+
+    Animation2.prototype.avancer = function (handler) {
+      if (this.isMoving) {
+        return;
+      }
+      var thisObj = this;
+      var offset = this.route.offset();
+      if (offset.left > -2092) {
+        this.isMoving = true;
+        this.route.animate({ left: '+=-300' }, 1000, function () {
+          thisObj.isMoving = false;
+          handler();
+        });
+      } else {
+        this.car
+          .text('car crashed')
+          .addClass('crashed');
+        this.route.animate({ left: '+=-20' }, 100, function () {
+          thisObj.route.animate({ left: '-=-20' }, 100, function () {
+            thisObj.isMoving = false;
+          });
+        });
+      }
+    };
+
+    Animation2.prototype.hasObstacle = function () {
+      var offset = this.route.offset();
+      var res = offset.left <= -2092;
+      if (res) {
+        this.obstacle.text('Vrai').addClass('vrai');
+      } else {
+        this.obstacle.text('Faux').removeClass('vrai');
+      }
+      return res;
+    }
+
+    Animation2.prototype.placeAt = function (pos) {
+      this.route.offset({ left: pos });
+      this.hasObstacle();
+    };
+
+    Animation2.prototype.placeAtLimit = function () {
+      this.placeAt(-2092);
+    };
+
+    var animation2 = new Animation2();
+    function animateRepeat() {
+      var handler = function () {
+        if (!animation2.hasObstacle()) {
+          animation2.avancer(handler);
+        }
+      };
+      animation2.avancer(handler);
+    }
+
+    function animateWhile() {
+      var handler = function () {
+        if (!animation2.hasObstacle()) {
+          animation2.avancer(handler);
+        }
+      };
+      if (!animation2.hasObstacle()) {
+        animation2.avancer(handler);
+      }
+    }
+
+    function placeAtStart() {
+      animation2.init();
+    }
+
+    function placeAtEnd() {
+      animation2.init();
+      animation2.placeAtLimit();
+    }
+  </script>
+</body>
+
+</html>
