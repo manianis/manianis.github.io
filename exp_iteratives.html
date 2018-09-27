@@ -135,6 +135,20 @@
     .obstacle.vrai {
       background-color: red;
     }
+
+    .urne {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border: 2px solid #000;     
+    }
+
+    .bille {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
   </style>
 </head>
 
@@ -346,6 +360,34 @@ Fin Tantque</pre>
       animation2.init();
       animation2.placeAtLimit();
     }
+  </script>
+
+  <div id="animation3">
+    <div class="urne"></div>
+  </div>
+
+  <script>
+
+    function Bille(urneEl, posX, posY, color) {
+      this.urne = urneEl;
+      this.bille = $('<div>')
+        .addClass('bille')
+        .css({ 'background-color': color, 'top': posY, 'left': posX })
+        .appendTo(this.urne);
+    }
+
+    $(function () {
+      var urne = $('#animation3 .urne');
+
+      var n = Math.floor(59 * Math.random() + 5);
+      for (var i = 0; i < n; i++) {
+        var posX = 3 + Math.floor((100 - 23) * Math.random());
+        var posY = 3 + Math.floor((100 - 23) * Math.random());
+        var color = 'rgb(' + (Math.floor(i / 8) * 32) +', 0, 0)';
+        new Bille(urne, posX, posY, color);
+      }
+
+    });
   </script>
 </body>
 
