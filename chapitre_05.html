@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les algorithmes avancés</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="scripts/sh.css">
+
+</head>
+
+<body onload="sh_highlightDocument();">
+
+  <div id="sommaire">
+    <h3>Sommaire</h3>
+  </div>
+
+  <h1>Les algorithmes avancés</h1>
+
+  <h2>1. Les algorithmes de tri</h2>
+
+  <h3>a. Définition</h3>
+
+  <p>L’opération de tri permet d’ordonner les éléments d’un tableau en ordre croissant ou en ordre décroissant.</p>
+
+  <h3>b. Tri par sélection</h3>
+
+  <p>Soit le tableau T1 suivant, on demande de trier ses éléments en ordre croissant.</p>
+
+  <table class="normal">
+    <tbody>
+      <tr class="center">
+        <td>880</td>
+        <td>894</td>
+        <td>381</td>
+        <td>586</td>
+        <td>497</td>
+        <td>416</td>
+      </tr>
+      <tr class="borderless center">
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>Principe</h4>
+
+  <p>Le tri par sélection consiste à :</p>
+
+  <ol>
+    <li>Chercher la valeur minimale à partir de la ième position</li>
+    <li>Permuter la valeur minimale trouvée avec la ième valeur du tableau</li>
+    <li>Refaire les étapes 2 et 3 pour i de 1 à n-1</li>
+  </ol>
+
+  <h4>Algorithme</h4>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">DEF PROC Tri_Selection(var t : tab ; n:entier)
+  Pour i de 1 à (n-1) Faire
+    indmin ⟵ Fn Minimum(t, i, n)
+    Si indmin &ne; i Alors
+      Proc Permuter(t[i], t[indmin])
+    Fin Si
+  Fin Pour
+Fin Tri_Selection</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>i, indmin</td>
+            <td>entier</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">DEF FN Minimum(var t : tab ; d, f :entier):entier
+  m ⟵ d
+  Pour i de (d+1) à f Faire
+    Si t[i] &lt; t[m] Alors
+      m ⟵ i
+    Fin Si
+  Fin Pour
+  Minimum ⟵ m
+Fin Minimum</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>i, m</td>
+            <td>entier</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">DEF PROC Permuter(var a, b : entier)
+  t ⟵ a
+  a ⟵ b
+  b ⟵ t
+Fin Permuter</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>t</td>
+            <td>entier</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3>Activité 1</h3>
+
+  <p>Écrire un programme qui saisit un tableau de N réels (avec 3 ≤ N ≤ 20). Il permet par la suite de mettre les
+    éléments du tableau en ordre croissant en utilisant la méthode de tri par sélection, puis affiche le tableau.</p>
+
+  <h4>P.P</h4>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">Début PP
+  Proc Saisir(n)
+  Proc Remplir(t, n)
+  Proc Tri_Selection(t, n)
+  Proc Afficher(t, n)
+Fin PP</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th>T.D.N.T</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>tab = tableau [1..20] de entier</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>n</td>
+            <td>entier</td>
+          </tr>
+          <tr>
+            <td>t</td>
+            <td>tab</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h4>Procédure Saisir</h4>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">DEF Proc Saisir(var n : entier)
+  Répéter
+    Ecrire("Donner n [3, 20] : ")
+    Lire(n)
+  Jusqu’à (n dans [3..20])
+Fin Saisir</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h4>Procédure Remplir</h4>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">DEF Proc Remplir(var t : tab ; n : entier)
+  Pour i de 1 à n Faire
+    Ecrire("Donner t[", i, "] : ")
+    Lire(t[i])
+  Fin Pour
+Fin Remplir</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>i</td>
+            <td>entier</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h4>Procédure Afficher</h4>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">DEF Proc Afficher(t : tab ; n : entier)
+  Pour i de 1 à n Faire
+    Ecrire(t[i])
+  Fin Pour
+Fin Remplir</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>i</td>
+            <td>entier</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3>c. Tri à bulles</h3>
+
+  <h4>Principe</h4>
+
+  <ol>
+    <li>Comparer deux éléments successifs du tableau</li>
+    <li>Permuter si les deux éléments ne sont pas dans le bon ordre</li>
+    <li>Refaire les étapes 1 et 2 (n-1) fois pour tous les éléments du tableau</li>
+  </ol>
+
+  <h4>Algorithme</h4>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">DEF PROC Tri_Bulles(var t : tab ; n:entier)
+  { étape 3 }
+  Pour i de 1 à (n-1) Faire
+    Pour j de 1 à (n-1) Faire
+      { étape 1 }
+      Si t[j] > t[j+1] Alors
+        { étape 2 }
+        Proc Permuter(t[j], t[j+1])
+      Fin Si
+    Fin Pour
+  Fin Pour
+Fin Tri_Bulles</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>i, j</td>
+            <td>entier</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3>d. Tri par insertion</h3>
+
+  <h4>Principe</h4>
+
+  <ol>
+    <li>Supposer que la première partie du tableau (pour les indices inférieurs à i) est triée</li>
+    <li>Sortir l’élément n° i du tableau (nommé <b>k ⟵ t[i]</b>)</li>
+    <li>Comparer cet éléments <b>k</b> avec les éléments d’indices inférieur (j &jukcy; [1, i-1])</li>
+    <li>Décaler toutes les valeurs supérieures à l’élément k (t[j] > k)</li>
+    <li>Insérer <b>k</b> après le première valeur qui lui est inférieure.</li>
+  </ol>
+
+  <h4>Algorithme</h4>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">DEF PROC Tri_Insertion(var t : tab ; n:entier)
+  { étape 1 }
+  Pour i de 2 à n Faire
+    { étape 2 }
+    k ⟵ t[i]
+
+    { étape 3 }
+    j ⟵ i – 1
+    Tantque (j > 0) et (t[j] > k) Faire
+      { étape 5 }
+      t[j+1] ⟵ t[j]
+      j ⟵ j – 1
+    Fin Tantque
+
+    { étape 5 }
+    t[j + 1] ⟵ k
+  Fin Pour
+Fin Tri_Insertion</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>i, j, k</td>
+            <td>entier</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>2. Les algorithmes de recherche</h2>
+
+  <h3>a. Définition</h3>
+
+  <p>Les algorithmes de recherche sont utilisés pour retrouver une valeur dans un tableau, le tableau peut être ordonné
+    ou non.</p>
+
+  <h3>b. Recherche Séquentielle</h3>
+
+  <h4>Principe</h4>
+
+  <p>Parcourir le tableau à partir de la première valeur jusqu’à trouver la valeur recherchée ou parcourir tout le
+    tableau. Si la valeur est retrouvée on retourne son indice dans le tableau ou on peut aussi retourner un booléen
+    pour vérifier l’existence de l’élément.</p>
+
+  <h4>Algorithme Recherche</h4>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">DEF FN Recherche(val : entier ; t : tab ; n:entier):entier
+  pos ⟵ -1
+  i ⟵ 1
+  Tantque (pos = -1) et (i ≤ n) Faire
+    Si t[i] = val Alors
+      pos ⟵ i
+    Fin Si
+    i ⟵ i + 1
+  Fin Tantque
+  Recherche ⟵ pos
+Fin Recherche</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>i, pos</td>
+            <td>entier</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h4>Algorithme Existe</h4>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">DEF FN Existe(val : entier ; t : tab ; n:entier):booléen
+  trouve ⟵ faux
+  i ⟵ 1
+  Tantque (non trouve) et (i ≤ n) Faire
+    trouve ⟵  t[i] = val 
+    i ⟵ i + 1
+  Fin Tantque
+  Existe ⟵ trouve
+Fin Existe</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>i</td>
+            <td>entier</td>
+          </tr>
+          <tr>
+            <td>trouve</td>
+            <td>booléen</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3>c. Recherche Dichotomique</h3>
+
+  <h4>Principe</h4>
+
+  <p>La recherche dichotomique est opérée sur un tableau trié (ordonné), par exemple en ordre croissant.</p>
+  <p>On suppose que la variable d indique l’indice du premier élément du tableau et que f indique l’indice du dernier
+    élément du tableau.</p>
+
+  <ol>
+    <li>Calculer l’indice de l’élément m au centre : m ⟵ (d + f) div 2</li>
+    <li>Si t[m] est égale à la valeur recherchée l’algorithme se termine</li>
+    <li>Si t[m] est inférieur à la valeur recherchée on recherche dans la partie droite du tableau c’est-à-dire d ⟵ m +
+      1</li>
+    <li>Si t[m] est supérieur à la valeur recherchée on recherche dans la partie droite du tableau c’est-à-dire f ⟵ m –
+      1</li>
+  </ol>
+
+  <h4>Algorithme</h4>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">DEF FN RechercheDicho(val : entier ; t : tab ; n:entier):entier
+  pos ⟵ -1
+  d ⟵ 1
+  f ⟵ n
+  Répéter
+    m ⟵ (d + f) div 2
+    Si t[m] = val Alors Pos ⟵ m
+    Sinon Si t[m] &lt; val Alors d ⟵ m + 1
+    Sinon f ⟵ m – 1
+    Fin Si
+  Jusqu’à (pos ≠ 0) ou (f &lt; d)
+  Recherche ⟵ pos
+Fin Recherche</pre>
+<div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>i, d, f, m, pos</td>
+            <td>entier</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="scripts/jquery.js"></script>
+  <script src="scripts/sh.min.js"></script>
+  <script src="scripts/sh_pascal.min.js"></script>
+  <script src="scripts/sh_algo.js"></script>
+  <script src="scripts/sommaire.js"></script>
+</body>
+
+</html>

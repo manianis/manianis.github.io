@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les sous-programmes</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="scripts/sh.css">
+
+</head>
+
+<body onload="sh_highlightDocument();">
+
+  <div id="sommaire">
+    <h3>Sommaire</h3>
+  </div>
+
+  <h1>Les sous-programmes</h1>
+
+  <h2>1. Introduction</h2>
+
+  <h3>Problème</h3>
+
+  <p>Nous disposons d'une urne contenant <b>n billes</b> numérotées et nous souhaitons effectuer <b>p tirages</b> sans
+    remise depuis cette urne.</p>
+
+  <p>Le nombre de combinaisons possibles est calculé à l'aide de la formule : </p>
+
+  <p><img src="Images/img21.png" alt="C(n, p)"></p>
+
+  <p>On demande d'écrire un programme en pascal qui saisit deux entiers n et p, avec (0 &le; p &le; n &le; 12), puis
+    calcule et affiche le nombre de combinaisons de p parmi n.</p>
+
+  <h3>Solution</h3>
+
+  <pre class="sh_algo">Début combinaisons
+Répéter
+  Ecrire("Donner n [0, 12] : ")
+  Lire(n)
+Jusqu'à (n dans [0..12])
+
+Répéter
+  Ecrire("Donner p [0, ", n, "] : ")
+  Lire(p)
+Jusqu'à (p &ge; 0) et (p &le; n)
+
+{ Calcul de n! }
+fn ⟵ 1
+Pour i de 1 à n Faire
+  fn ⟵ fn * i
+Fin pour
+
+{ Calcul de p! }
+fp ⟵ 1
+Pour i de 1 à p Faire
+  fp ⟵ fp * i
+Fin pour
+
+{ Calcul de (n-p)! }
+fnp ⟵ 1
+Pour i de 1 à (n-p) Faire
+  fnp ⟵ fnp * i
+Fin pour
+
+cnp ⟵ fn div (fp * fnp)
+
+Ecrire("C(", n, ", ", p, ") = ", cnp)
+
+Fin combinaisons</pre>
+
+  <h3>Remarques</h3>
+
+  <p>La solution donnée présente quelques inconvénients :</p>
+
+  <ul>
+    <li>
+      <p><b>Répétition :</b> Certaines parties du code ont été répétées plusieurs fois.</p>
+      <p><b><i>Cette répétition devient vite une source d’erreurs non détectables facilement, à force de copier/coller
+            certaines portions de code.</i></b></p>
+    </li>
+    <li>
+      <p><b>Lisibilité :</b> Le programme principal devient de plus en plus long et illisible au fur et à mesure que le
+        problème devienne plus compliqué.</p>
+      <p><b><i>D’une part, La longueur du programme influe mal sur sa <u>lisibilité</u>, surtout si on omet
+            l’indentation du code. D’autre part, on ne sait plus quelle est la fonction de certaines portions du
+            programme.</i></b></p>
+    </li>
+  </ul>
+
+  <h3>Une autre idée de solution</h3>
+
+  <p>La solution donnée peut être améliorée en utilisant des <b>modules</b> pour <u>éviter les répétitions</u> dans
+    certaines portions de code et, du même coup, <u>améliorer la lisibilité</u> du programme.</p>
+
+  <p>Les <b>modules</b> sont, aussi, le moyen recommandé pour la <b>décomposition d’un problème</b> compliqué en des <b>sous-problèmes</b>
+    plus facile à résoudre.</p>
+
+  <p>Les <b>modules</b> sont aussi appelés <b>sous-programmes</b>. En <u>algorithmique</u> et en <u>Pascal</u> on
+    distingue deux types de <u>sous-programmes</u> : <b>les procédures</b> et <b>les fonctions</b>.</p>
+
+  <p>Dans la suite de ce chapitre nous commencerons par présenter les fonctions et les procédures. Nous continuerons,
+    la suite du chapitre, avec le type des paramètres et leurs modes de passage. Et nous terminerons par présenter un
+    exemple d’analyse modulaire.</p>
+
+  <h2>2. Les fonctions</h2>
+
+  <h3>a. Définition</h3>
+
+  <p>Une <b>fonction</b> est un sous-programme qui <b>renvoie un seul résultat</b> en fonction de ses paramètres. Les
+    <b>paramètres d’une fonction sont</b>, généralement, <b><u>transmis par valeur</u></b>.</p>
+
+  <h3>Activité 1</h3>
+
+  <p>Écrire une fonction qui renvoie la valeur de f(x) pour la fonction : f(x) = 3.x²-4.x+1</p>
+
+  <div class="flex">
+    <pre class="col_2 sh_algo">{En algorithmique}
+DEF FN f(x:réel):réel
+f ⟵ 3*x*x-4*x+1
+Fin f</pre>
+    <pre class="col_2 sh_pascal">{En Pascal}
+function f(x:real):real;
+begin
+  f := 3*x*x-4*x+1;
+end;</pre>
+  </div>
+
+  <h2>3. Les procédures</h2>
+
+  <h3>a. Définition</h3>
+
+  <p>Une <b>procédure</b> est un sous-programme qui <b>ne renvoie aucun résultat</b>. Les <b>paramètres d’une procédure
+      sont transmis soit <u>par valeur</u>, soit <u>par variable</u></b>.</p>
+
+  <p>Lorsque <b>les paramètres d’une procédure</b> sont <b>passés par variable</b>, elle <b><u>peut les changer</u></b>.</p>
+
+  <p><i>Il est, donc, possible d’exploiter cette propriété pour <b>renvoyer un ou plusieurs résultats</b> au programme
+      appelant.</i></p>
+
+  <h3>Activité 2</h3>
+
+  <p>Écrire une procédure permettant de saisir une valeur comprise entre 20 et 30.</p>
+
+  <div class="flex">
+    <pre class="col_2 sh_algo">{En algorithmique}
+DEF PROC SaisieValeur(var n: entier)
+Répéter 
+  Ecrire("Donner n [20, 30] :")
+  Lire(n)
+Jusqu’à (n ≥ 20) et (n ≤ 30)
+Fin SaisieIntervalle</pre>
+    <pre class="col_2 sh_pascal">{En Pascal}
+Procedure SaisieValeur(var n : integer);
+begin
+  Repeat 
+    Write('Donner n [20, 30] :');
+    Readln(n);
+  Until (n &gt;= 20) and (n &lt;= 30);
+end;</pre>
+  </div>
+
+  <h2>4. Paramètres et Modes de passage</h2>
+
+  <p>Un sous-programme défini réellement un ensemble de traitements effectués sur des données. Ces données doivent être
+    passées au sous-programme dans ses paramètres.</p>
+
+  <h3>a. Types de paramètres</h3>
+
+  <p>On distingue deux types de paramètres :</p>
+
+  <ul>
+    <li><b>Les paramètres formels :</b> utilisés lors de <u>la définition</u> d’un sous-programme.</li>
+    <li><b>Les paramètres effectifs :</b> utilisés lors de l’utilisation (<u>l’appel</u>) d’un sous-programme.</li>
+  </ul>
+
+  <h4>Exemples</h4>
+
+  <div class="flex">
+    <pre class="col_2 sh_algo">{Paramètres formels}
+DEF PROC Permuter(<span style="background-color:#fff176">var a, b : entier</span>)
+aux ⟵ a
+a ⟵ b
+b ⟵ aux
+FIN Permuter</pre>
+    <pre class="col_2 sh_algo">{Paramètres effectifs}
+Pour i de 1 à n-1 Faire
+  Pour j de 1 à n-1 Faire
+    Si t[i]>t[i+1] Alors
+      Proc Permuter(<span style="background-color:#fff176">t[i], t[i+1]</span>)
+    Fin Si
+  Fin Pour
+Fin Pour</pre>
+  </div>
+
+  <h3>b. Modes de passages des paramètres</h3>
+
+  <p>Il existent deux modes de passage des paramètres : <u>par variable</u> ou <u>par valeur</u>.</p>
+
+  <h3>c. Passage par valeur</h3>
+
+  <p>Lors d’un <b>passage par valeur</b>, <u>la valeur de l'expression passée en paramètre est copiée dans une variable
+      locale</u>.
+    C'est cette variable qui est utilisée pour faire les traitements dans le sous-programme appelé.</p>
+
+  <h4>Exemples</h4>
+
+  <div class="flex">
+    <pre class="col_2 sh_algo">{Dans une fonction}
+DEF FN U(n:entier):réel
+U ⟵ n*(n+1)/2
+Fin U</pre>
+    <pre class="col_2 sh_algo">{Dans une procédure}
+DEF PROC Afficher(a, b : entier)
+ Ecrire(a, "+", b, "=", (a+b))
+Fin Afficher</pre>
+  </div>
+
+  <h3>d. Passage par variable</h3>
+
+  <p>Le <b>passage par variable</b> consiste à <b><u></u>passer les variables elles-mêmes</b>. Toute modification du
+    paramètre dans la fonction appelée entraîne, alors, la modification de la variable passée en paramètre.</p>
+
+  <p><b>Remarque : </b>Bien qu’il soit possible d’utiliser le mode de passage de paramètres par variable avec les
+    fonctions, <u>il est fortement recommandé de l’éviter</u> et ce pour des raisons pédagogiques.</p>
+
+  <h4>Exemples</h4>
+
+  <div class="flex">
+    <pre class="col_2 sh_algo">DEF PROC Incrementer(var n:entier;
+                     pas:entier)
+  n ⟵ n + pas
+Fin U</pre>
+    <pre class="col_2 sh_algo">DEF PROC Remplir(n : entier; 
+                 var t : tab)
+  Pour i de 1 à n Faire
+    t[i] ⟵ Alea(50) + 1
+  Fin Pour
+Fin Afficher</pre>
+  </div>
+
+  <h2>5. Décomposition Modulaire</h2>
+
+  <h3>a. Problème</h3>
+
+  <p>Nous disposons d'une urne contenant <b>n billes</b> numérotées et nous souhaitons effectuer <b>p tirages</b> sans
+    remise depuis cette urne.</p>
+
+  <p>Le nombre de combinaisons possibles est calculé à l'aide de la formule : </p>
+
+  <p><img src="Images/img21.png" alt="C(n, p)"></p>
+
+  <p>On demande d'écrire un programme en pascal qui saisit deux entiers n et p, avec (0 &le; p &le; n &le; 12), puis
+    calcule et affiche le nombre de combinaisons de p parmi n, en <b><u>utilisant une approche modulaire</u></b>.</p>
+
+  <h3>b. Pré-analyse</h3>
+
+  <p>Le problème peut être décomposé comme suit :</p>
+
+  <p><img src="Images/img23.png" alt="Préanalyse"></p>
+
+  <p>La résolution du problème se réduit, maintenant, à l’écriture des sous-programmes présentés dans la figure
+    ci-dessus.</p>
+
+  <h3>c. Solution</h3>
+
+  <h4>Programme principal</h4>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">{P.P}
+Résultat = Ecrire("C(", n, ", ", p, ") = ", c)
+c ⟵ fn cnp(n, p)
+n = Proc Saisie(n, 12)
+p = Proc Saisie(p, n)
+Fin PP</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>n, p, c</td>
+            <td>entier</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h4>Procédure Saisie</h4>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">DEF PROC saisie(var n : entier; max : entier)
+  Répéter
+    Ecrire("Donner un entier [0, ", max, "] : ")
+    Lire(n)
+  Jusqu'à (n &ge; 0) et (n &le; max)
+Fin Saisie</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h4>Fonction cnp</h4>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">DEF FN cnp(n, p : entier): entier
+  cnp ⟵ fn fact(n) div (fn fact(p) * fn fact(n-p))
+Fin cnp</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h4>Fonction fact</h4>
+
+  <div class="flex">
+    <pre class="col_70 sh_algo">DEF FN fact(n : entier): entier
+  f ⟵ 1
+  Pour i de 2 à n faire
+    f ⟵ f * i
+  Fin Pour
+  fact ⟵ f
+Fin cnp</pre>
+    <div class="col_30">
+      <table class="normal">
+        <thead>
+          <tr>
+            <th colspan="2">TDO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Objet</th>
+            <th>Type/Nature</th>
+          </tr>
+          <tr>
+            <td>f, i</td>
+            <td>entier</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p><b>Remarque :</b> Les variables utilisées dans un sous-programme sont appelées des <b>variables locales</b>,
+    elles sont définies uniquement à l’intérieur du sous-programme.</p>
+
+  <h4>Traduction en Pascal</h4>
+
+  <pre class="sh_pascal">program combinaisons;
+
+procedure Saisie(var n : integer; max : integer);
+begin
+  repeat
+    Write('Donner un entier [0, ', max, '] : ');
+    Readln(n);
+  until (n &gt;= 0) and (n &lt;= max);
+end;
+
+function fact(n : integer):longint;
+var i : integer;
+    f : longint;
+begin
+  f := 1;
+  for i:=2 to n do f := f * i;
+  fact := f;
+end;
+
+function cnp(n, p : integer):longint;
+begin
+  cnp := fact(n) div (fact(p) * fact(n-p));
+end;
+
+var n, p : integer; c : longint;
+begin
+  Saisie(n, 12);
+  Saisie(p, n);
+  c := cnp(n, p);
+  Writeln('C(', n, ', ', p, ') = ', c);
+  Readln;
+end.</pre>
+
+  <script type="text/javascript" src="scripts/jquery.js"></script>
+  <script src="scripts/sh.min.js"></script>
+  <script src="scripts/sh_pascal.min.js"></script>
+  <script src="scripts/sh_algo.js"></script>
+  <script src="scripts/sommaire.js"></script>
+</body>
+
+</html>

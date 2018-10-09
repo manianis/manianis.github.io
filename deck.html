@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .carte {
+      display: inline-block;
+      background: url(Images/deck.png);
+      width: 141px;
+      height: 211px;
+      border-radius: 12px;
+      border: 2px solid #000;
+      cursor: pointer;
+    }
+
+    .carte1_t1 {
+      background-position: -15px -12px;
+    }
+
+    .carte2_t1 {
+      background-position: -168px -12px;
+    }
+
+    .carte3_t1 {
+      background-position: -321px -12px;
+    }
+
+    .carte4_t1 {
+      background-position: -473px -12px;
+    }
+
+    .carte5_t1 {
+      background-position: -626px -12px;
+    }
+
+    .carte6_t1 {
+      background-position: -779px -12px;
+    }
+
+    .carte7_t1 {
+      background-position: -931px -12px;
+    }
+
+    .carte8_t1 {
+      background-position: -1084px -12px;
+    }
+
+    .carte9_t1 {
+      background-position: -1237px -12px;
+    }
+
+    .carte10_t1 {
+      background-position: -1389px -12px;
+    }
+
+    .carte11_t1 {
+      background-position: -1542px -12px;
+    }
+
+    .carte12_t1 {
+      background-position: -1695px -12px;
+    }
+
+    .carte13_t1 {
+      background-position: -1847px -12px;
+    }
+
+    .carte1_t2 {
+      background-position: -15px -235px;
+    }
+
+    .carte2_t2 {
+      background-position: -168px -235px;
+    }
+
+    .carte3_t2 {
+      background-position: -321px -235px;
+    }
+
+    .carte4_t2 {
+      background-position: -473px -235px;
+    }
+
+    .carte5_t2 {
+      background-position: -626px -235px;
+    }
+
+    .carte6_t2 {
+      background-position: -779px -235px;
+    }
+
+    .carte7_t2 {
+      background-position: -931px -235px;
+    }
+
+    .carte8_t2 {
+      background-position: -1084px -235px;
+    }
+
+    .carte9_t2 {
+      background-position: -1237px -235px;
+    }
+
+    .carte10_t2 {
+      background-position: -1389px -235px;
+    }
+
+    .carte11_t2 {
+      background-position: -1542px -235px;
+    }
+
+    .carte12_t2 {
+      background-position: -1695px -235px;
+    }
+
+    .carte13_t2 {
+      background-position: -1847px -235px;
+    }
+
+    .carte1_t3 {
+      background-position: -15px -458px;
+    }
+
+    .carte2_t3 {
+      background-position: -168px -458px;
+    }
+
+    .carte3_t3 {
+      background-position: -321px -458px;
+    }
+
+    .carte4_t3 {
+      background-position: -473px -458px;
+    }
+
+    .carte5_t3 {
+      background-position: -626px -458px;
+    }
+
+    .carte6_t3 {
+      background-position: -779px -458px;
+    }
+
+    .carte7_t3 {
+      background-position: -931px -458px;
+    }
+
+    .carte8_t3 {
+      background-position: -1084px -458px;
+    }
+
+    .carte9_t3 {
+      background-position: -1237px -458px;
+    }
+
+    .carte10_t3 {
+      background-position: -1389px -458px;
+    }
+
+    .carte11_t3 {
+      background-position: -1542px -458px;
+    }
+
+    .carte12_t3 {
+      background-position: -1695px -458px;
+    }
+
+    .carte13_t3 {
+      background-position: -1847px -458px;
+    }
+
+    .carte1_t4 {
+      background-position: -15px -682px;
+    }
+
+    .carte2_t4 {
+      background-position: -168px -682px;
+    }
+
+    .carte3_t4 {
+      background-position: -321px -682px;
+    }
+
+    .carte4_t4 {
+      background-position: -473px -682px;
+    }
+
+    .carte5_t4 {
+      background-position: -626px -682px;
+    }
+
+    .carte6_t4 {
+      background-position: -779px -682px;
+    }
+
+    .carte7_t4 {
+      background-position: -931px -682px;
+    }
+
+    .carte8_t4 {
+      background-position: -1084px -682px;
+    }
+
+    .carte9_t4 {
+      background-position: -1237px -682px;
+    }
+
+    .carte10_t4 {
+      background-position: -1389px -682px;
+    }
+
+    .carte11_t4 {
+      background-position: -1542px -682px;
+    }
+
+    .carte12_t4 {
+      background-position: -1695px -682px;
+    }
+
+    .carte13_t4 {
+      background-position: -1847px -682px;
+    }
+
+    .arriere {
+      background-position: -627px -905px;
+    }
+
+    .deck {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="deck1" class="deck">
+    <h2>Titre</h2>
+    <div class="jeu">
+    </div>
+    <div class="message"></div>
+    <button class="start">Commencer</button>
+  </div>
+
+  <div id="deck2" class="deck">
+    <h2>Titre</h2>
+    <div class="jeu">
+    </div>
+    <div class="message"></div>
+    <button class="start">Commencer</button>
+  </div>
+
+  <div id="deck3" class="deck">
+    <h2>Titre</h2>
+    <div class="jeu">
+    </div>
+    <div class="message"></div>
+    <button class="start">Commencer</button>
+  </div>
+
+  <div id="deck4" class="deck">
+    <h2>Titre</h2>
+    <div class="jeu">
+    </div>
+    <div class="message"></div>
+    <button class="start">Commencer</button>
+  </div>
+
+  <script>
+    function Carte(el, num, type, visible) {
+      if (typeof el === 'string') {
+        this.el = document.querySelector(el);
+      } else {
+        this.el = el;
+      }
+      this.num = num || Math.ceil(Math.random() * 13);
+      this.type = type || Math.ceil(Math.random() * 4);
+      this.visible = (visible != undefined) ? visible : true;
+      this.setCarteNumAndType(this.num, this.type);
+      this.show(this.visible);
+    }
+
+    Carte.prototype.show = function (visible) {
+      this.visible = (visible != undefined) ? visible : true;
+      this.el.classList = 'carte ' + ((this.visible) ? this.classe : 'arriere');
+    };
+
+    Carte.prototype.hide = function () {
+      this.show(false);
+    };
+
+    Carte.prototype.setCarteNum = function (num) {
+      this.setCarteNumAndType(num, this.type);
+    };
+
+    Carte.prototype.getCarteNum = function () {
+      return this.num;
+    };
+
+    Carte.prototype.setCarteType = function (type) {
+      this.setCarteNumAndType(this.num, type);
+    };
+
+    Carte.prototype.getCarteType = function () {
+      return this.type;
+    };
+
+    Carte.prototype.setCarteNumAndType = function (num, type) {
+      this.num = num;
+      this.type = type;
+      this.classe = 'carte' + this.num + '_t' + type;
+    };
+
+    Carte.prototype.flipCard = function () {
+      this.show(!this.visible);
+    };
+
+    Carte.prototype.click = function (handler) {
+      this.el.onclick = handler;
+    };
+
+    Carte.prototype.resetClick = function () {
+      this.el.onclick = function () { };
+    };
+
+    function initDeck(types) {
+      var d = [];
+      if (!types) {
+        types = 4;
+      }
+      for (var n = 1; n <= 13; n++) {
+        for (var t = 1; t <= types; t++) {
+          d.push([n, t]);
+        }
+      }
+      return d;
+    }
+
+    function randomSelect(deck) {
+      var pos = Math.floor(deck.length * Math.random());
+      var select = deck[pos];
+      deck.splice(pos, 1);
+      return select;
+    }
+
+    function shuffle(deck) {
+      for (var i = 0; i < deck.length - 1; i++) {
+        var f = Math.floor(Math.random() * deck.length);
+        var s = Math.floor(Math.random() * deck.length);
+        var aux = deck[f];
+        deck[f] = deck[s];
+        deck[s] = aux;
+      }
+    }
+
+    function JeuDevinette(el, nbcartes, titre) {
+      this.el = document.querySelector(el);
+      this.count = nbcartes;
+      this.jeuDiv = this.el.querySelector('.jeu');
+      this.titreEl = this.el.querySelector('h2');
+      this.bouton = this.el.querySelector('.start');
+      this.msgDiv = this.el.querySelector('.message');
+      this.titreEl.innerHTML = titre;
+      this.essais = this.count - 1;
+      this.init();
+    }
+
+    JeuDevinette.prototype.init = function () {
+      this.createCards();
+      this.start();
+    };
+
+    JeuDevinette.prototype.createCards = function () {
+      this.jeuDiv.innerHTML = '';
+      this.cartes = [];
+      for (var i = 0; i < this.count; i++) {
+        var cardDiv = document.createElement('div');
+        this.jeuDiv.appendChild(cardDiv);
+        this.cartes.push(new Carte(cardDiv, 1, 1, false));
+      }
+    };
+
+    JeuDevinette.prototype.initRandomValues = function () {
+      var deck = initDeck(1);
+      this.cardsValues = [];
+      this.newArrange = [];
+      for (var i = 0; i < this.count; i++) {
+        var cardVal = randomSelect(deck);
+        this.cardsValues.push(cardVal[0]);
+        this.newArrange.push(cardVal[0]);
+      }
+      this.hiddenCard = this.cardsValues[Math.floor(Math.random() * this.cardsValues.length)];
+      shuffle(this.newArrange);
+    };
+
+    JeuDevinette.prototype.setCardValues = function (arr) {
+      for (var i = 0; i < this.count; i++) {
+        this.cartes[i].setCarteNum(arr[i]);
+      }
+    };
+
+    JeuDevinette.prototype.showAll = function () {
+      for (var i = 0; i < this.count; i++) {
+        this.cartes[i].show();
+      }
+    };
+
+    JeuDevinette.prototype.hideAll = function () {
+      for (var i = 0; i < this.count; i++) {
+        this.cartes[i].hide();
+      }
+    };
+
+    JeuDevinette.prototype.click = function (handler) {
+      if (!handler) {
+        handler = function () { };
+      }
+      for (var i = 0; i < this.count; i++) {
+        this.cartes[i].click(handler.bind(this.cartes[i]));
+      }
+    };
+
+    JeuDevinette.prototype.start = function () {
+      var thisObj = this;
+
+      this.bouton.onclick = function () {
+        thisObj.initRandomValues();
+        thisObj.setCardValues(thisObj.cardsValues);
+
+        thisObj.msgDiv.innerHTML = 'Observez ces cartes pendant 2 secondes.';
+        thisObj.bouton.style.display = 'none';
+        thisObj.showAll();
+        thisObj.essais = thisObj.count - 1;
+        setTimeout(function () {
+          thisObj.hideAll();
+          thisObj.setCardValues(thisObj.newArrange);
+          thisObj.msgDiv.innerHTML = 'Devinez laquelle de ces carte contient la valeur ' + thisObj.hiddenCard + ' en ' + thisObj.essais + ' coups maximum.';
+          thisObj.click(function () {
+            this.resetClick();
+            this.show();
+            thisObj.essais--;
+            if (this.getCarteNum() == thisObj.hiddenCard) {
+              thisObj.msgDiv.innerHTML = 'Gagné!';
+              thisObj.click();
+              thisObj.bouton.style.display = 'initial';
+            } else if (thisObj.essais > 0) {
+              thisObj.msgDiv.innerHTML = 'Devinez laquelle de ces carte contient la valeur ' + thisObj.hiddenCard + '. Il vous reste ' + thisObj.essais + ' coups maximum.';
+            } else {
+              thisObj.msgDiv.innerHTML = 'Perdu! Laquelle est ' + thisObj.hiddenCard;
+              thisObj.click();
+              thisObj.bouton.style.display = 'initial';
+            }
+          });
+        }, 2000);
+      };
+      // this.msgDiv.innerHTML = 'Essayez de deviner laquelle des cartes est : ' + this.hiddenCard + ' en ' + this.essais + ' coups.';
+    };
+
+    var jeu1 = new JeuDevinette('#deck1', 1, 'Forme simple');
+    var jeu2 = new JeuDevinette('#deck2', 2, 'Forme alternative');
+    var jeu3 = new JeuDevinette('#deck3', 3, 'Forme généralisée');
+    var jeu4 = new JeuDevinette('#deck4', 4, 'Forme généralisée');
+
+  </script>
+</body>
+
+</html>

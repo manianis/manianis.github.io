@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Unicode</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    td {
+      font-size: 22pt;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <button id="previous" onclick="showPrev()">Précédent</button>
+    <input id="page" name="page" value="0" size="3" onchange="navigatePage()"> / 255
+    <button id="next" onclick="showNext()">Suivant</button>
+  </div>
+
+  <table>
+    <tbody>
+    </tbody>
+  </table>
+
+  <script>
+    const tbody = document.getElementsByTagName('tbody')[0];
+    const pageInput = document.getElementById('page');
+    let page = 0;
+    const nCols = 16;
+    const nRows = 16;
+    function display(page) {
+      tbody.innerHTML = '';
+      pageInput.value = page;
+      let code = page * 256;
+      for (let j = 0; j < nRows; j++) {
+        const tr = document.createElement('tr');
+        for (let i = 0; i < nCols; i++) {
+          const td = document.createElement('td');
+          td.innerHTML = String.fromCharCode(code);
+          code++;
+          tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+      }
+    }
+    function showNext() {
+      if (page < 256) {
+        page++;
+      }
+      display(page);
+    }
+    function showPrev() {
+      if (page > 0) {
+        page--;
+      }
+      display(page);
+    }
+    function navigatePage() {
+      const npage = parseInt(pageInput.value);
+      if (npage >= 0 && npage < 256) {
+        page = npage;
+        display(npage);
+      }
+    }
+    display(page);
+
+  </script>
+</body>
+
+</html>
