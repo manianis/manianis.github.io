@@ -42,6 +42,72 @@ if x < 0 then
     </div>
   </div>
 
+  <div class="a_retenir">
+    <p class="titre">Faute fréquente</p>
+    <div class="flex">
+      <pre class="col_33 sh_algo">{ Instruction à traduire }
+si a &lt; 0 alors
+  a ⟵ -a
+fin si</pre>
+      <pre class="col_33 sh_pascal">{ Erreur }
+if a &lt; 0 then
+  a := -a;
+<span style="text-decoration: line-through;background-color: yellow;">end;</span></pre>
+      <pre class="col_33 sh_pascal">{ Correction }
+if a &lt; 0 then
+  a := -a;</pre>
+    </div>
+    <p>L'élève a procédé à une traduction mot par mot de l'algorithme. Pour cette raison il pense que <b>fin si</b>
+      doit être toujours traduite en <b>end</b>. La règle est : <b><u>puisqu'il n'y a pas de begin il n'y aura pas de
+          end</u></b>.</p>
+  </div>
+
+  <div class="a_retenir">
+    <p class="titre">Faute fréquente</p>
+    <div class="flex">
+      <pre class="col_33 sh_algo">{ Instruction à traduire }
+si a &lt; b alors
+  aux ⟵ a
+  a ⟵ b
+  b ⟵ aux
+fin si</pre>
+      <pre class="col_33 sh_pascal">{ Erreur }
+if a &lt; b then
+  aux := a;
+  a := b;
+  b := aux;</pre>
+      <pre class="col_33 sh_pascal">{ Correction }
+if a &lt; b then
+<span style="background-color: yellow;">begin</span>
+  aux := a;
+  a := b;
+  b := aux;
+<span style="background-color: yellow;">end;</span></pre>
+    </div>
+    <p>Comme nous avons mentionné que l'utilisation de <b>end</b> doit être précédée par une utilisation du mot clé <b>begin</b>
+      l'élève a suivi le conseil et il est tombé dans le piège. Si la <b>condition est correcte</b> il faudra exécuter
+      <b>plusieurs traitements</b> (ici 3 traitements). La règle est : <b><u>puisqu'il y a plusieurs traitements : il
+          faudra ajouter begin au début et end à la fin des traitements.</u></b></p>
+  </div>
+
+  <div class="a_retenir">
+    <p class="titre">Faute fréquente</p>
+    <div class="flex">
+      <pre class="col_33 sh_algo">{ Instruction à traduire }
+si a &lt; b et a &lt; c alors
+  min ⟵ a
+fin si</pre>
+      <pre class="col_33 sh_pascal">{ Erreur }
+if a &lt; b and a &lt; c then
+  min := a;</pre>
+      <pre class="col_33 sh_pascal">{ Correction }
+if <span style="background-color: yellow;">(</span>a &lt; b<span style="background-color: yellow;">)</span> and <span style="background-color: yellow;">(</span>a &lt; c<span style="background-color: yellow;">)</span> then
+  min := a;</pre>
+    </div>
+    <p>Dans le cas d'une traduction systémique, l'élève oublie d'ajouter les parenthèses. La règle est : <b><u>Les
+          parenthèses sont obligatoires en Pascal lorsqu'il y a plus d'une condition.</u></b></p>
+  </div>
+
   <h2>2. Forme alternative</h2>
 
   <h3>Définition</h3>
@@ -164,6 +230,72 @@ else if (AB*AB+AC*AC=BC*BC) or
 else
   Writeln('triangle quelconque');</pre>
     </div>
+  </div>
+
+  <div class="a_retenir">
+    <p class="titre">Faute fréquente</p>
+    <div class="flex">
+      <pre class="col_33 sh_algo">{ Instruction à traduire }
+si a &lt; b alors
+  Ecrire("a &lt; b")
+sinon si a &gt; b alors
+  Ecrire("a &gt; b")
+sinon
+  Ecrire("a = b")
+fin si</pre>
+      <pre class="col_33 sh_pascal">{ Erreur }
+if a &lt; b then
+  Writeln('a &lt; b')<span style="text-decoration: line-through;background-color: yellow;">;</span>
+else if a &gt; b then
+  Writeln('a &gt; b')<span style="text-decoration: line-through;background-color: yellow;">;</span>
+else
+  Writeln('a = b');
+</pre>
+      <pre class="col_33 sh_pascal">{ Correction }
+if a &lt; b then
+  Writeln('a &lt; b')
+else if a > b then
+  Writeln('a > b')
+else
+  Writeln('a = b');</pre>
+    </div>
+    <p>Les élèves prennent l'habitude d'ajouter un point-virgule (;) à la fin de chaque instruction en Pascal. Or la
+      règle est : <b><u>Il ne faut jamais précéder else par un point-virgule.</u></b></p>
+  </div>
+
+  <div class="a_retenir">
+    <p class="titre">Faute fréquente</p>
+    <div class="flex">
+      <pre class="col_33 sh_algo">{ Instruction à traduire }
+si a &lt; b alors
+  min ⟵ a
+  max ⟵ b
+sinon
+  min ⟵ b
+  max ⟵ a
+fin si</pre>
+      <pre class="col_33 sh_pascal">{ Erreur }
+if a &lt; b then
+  min := a
+  max := b
+else 
+  max := a
+  min := b</pre>
+      <pre class="col_33 sh_pascal">{ Correction }
+if a &lt; b then
+<span style="background-color: yellow;">begin</span>
+  min := a<span style="background-color: yellow;">;</span>
+  max := b<span style="background-color: yellow;">;</span>
+<span style="background-color: yellow;">end</span>
+else 
+<span style="background-color: yellow;">begin</span>
+  max := a<span style="background-color: yellow;">;</span>
+  min := b<span style="background-color: yellow;">;</span>
+<span style="background-color: yellow;">end;</span></pre>
+    </div>
+    <p>Pas de point-virgule (;) avant <b>else</b>. L'élève ne sait plus où les mettre, il les a ôté. La règle : <b><u>Comme
+          il y a plusieurs traitements après then, il faudra utiliser begin et end sans mettre de (;) après le end qui
+          précède une instruction else.</u></b></p>
   </div>
 
   <h2>4. Structure à choix</h2>

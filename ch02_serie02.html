@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Série Structures Conditionnelles</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="scripts/sh.css">
+</head>
+
+<body>
+  <div id="container">
+    <nav>
+      <h1>Exercices</h1>
+      <ul></ul>
+      <div id="modes">
+        <div class="titre">Affichage</div>
+        <div id="select_mode">
+          <a id="mode_all" href="#">Tout</a>
+          <a id="mode_one" href="#">Un seul</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div id="breadcrumb"><a href="#">☰</a> Série d'exercices</div>
+
+      <h1>Série 2 : Structures conditionnelles</h1>
+
+      <div class="bloc">
+        <h3>Méthode de travail</h3>
+        <small>
+          <p>Cette série doit être travaillée par groupe. Pour cela, veuillez créer des groupes de <b>deux à quatre
+              personnes</b> au <u>maximum</u>.</p>
+
+          <p><b>Directives</b></p>
+
+          <ul>
+            <li>Chaque <b>groupe</b> doit résoudre <b>quatre exercices différents</b> au <u>minimum</u>,</li>
+            <li>Chaque <b>membre du groupe</b> doit résoudre <b>un exercice</b> parmi les exercices disponibles au <u>minimum</u>,</li>
+            <li>Chaque groupe doit remettre les solutions <b>manuscites</b> sur <u><b>une/des double feuilles</b></u>,
+              les feuilles volantes ne seront pas acceptées ou seront sanctionnées,</li>
+            <li>Le travail sera réparti de la façon suivante : <ul>
+                <li>un élève essaye d'écrire l'algorithme d'un programme,</li>
+                <li>pendant que l'autre s'occupe de sa traduction,</li>
+              </ul>
+              puis on inverse les tâches.</li>
+            <li>La série doit être essentiellement <b>travaillée en classe</b>, trois heures sont prévues pour réaliser
+              la tâche. En cas de besoin, le groupe peut terminer son travail à la maison.</li>
+          </ul>
+
+          <p><b>Notation</b></p>
+
+          <ul>
+            <li>Le travail sera noté par groupe,</li>
+            <li>Le cumul des notes sera compté sur 10 points dans le devoir de contrôle,</li>
+            <li>Un devoir de contrôle (avec un travail individuel) sera planifié sur 10,</li>
+            <li>En cas d'absences continue dans les séances de TP, la note de TP ne sera pas comptée et le devoir de
+              contrôle sera comptabilisé sur 20,</li>
+          </ul>
+        </small>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 1</h3>
+
+        <p>Ecrire un programme qui saisit trois entiers a, b et c, puis affiche s'ils sont ordonnés ou pas.</p>
+
+        <p><b>Exemple :</b></p>
+
+        <div class="printer_hidden">
+          <p>Modifier les valeurs des champs suivants :</p>
+          <table class="normal">
+            <tbody>
+              <tr>
+                <td>a</td>
+                <td>b</td>
+                <td>c</td>
+              </tr>
+              <tr>
+                <td><input type="text" id="ex01_a" value="6" size="3"></td>
+                <td><input type="text" id="ex01_b" value="8" size="3"></td>
+                <td><input type="text" id="ex01_c" value="9" size="3"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p><b>Générer des valeurs aléatoires</b></p>
+          <p><button id="ex01_btn1">Ordonnées</button> <button id="ex01_btn2">Quelconques</button></p>
+
+          <p><b>Résultat du programme</b></p>
+          <p id="ex01_res"></p>
+        </div>
+
+        <div class="printer_visible">
+          <p>Pour les valeurs : a ⟵ 3, b ⟵ 4, c ⟵ 5. Le programme affiche : <b>Les valeurs sont ordonnées</b></p>
+          <p>Pour les valeurs : a ⟵ 51, b ⟵ 37, c ⟵ 35. Le programme affiche : <b>Les valeurs sont ordonnées</b></p>
+          <p>Pour les valeurs : a ⟵ 48, b ⟵ 8, c ⟵ 72. Le programme affiche : <b>Les valeurs ne sont pas ordonnées</b></p>
+        </div>
+
+        <script>
+          var ex01_a = document.querySelector('#ex01_a');
+          var ex01_b = document.querySelector('#ex01_b');
+          var ex01_c = document.querySelector('#ex01_c');
+          var ex01_btn1 = document.querySelector('#ex01_btn1');
+          var ex01_btn2 = document.querySelector('#ex01_btn2');
+          var ex01_res = document.querySelector('#ex01_res');
+
+          ex01_btn1.onclick = function (e) {
+            e.preventDefault();
+            var asc = Math.random() >= 0.5;
+            var val = Math.floor(Math.random() * (asc ? 25 : 75));
+            ex01_a.value = val;
+            val += (asc ? 1 : -1) * Math.floor(Math.random() * 25 + 1);
+            ex01_b.value = val;
+            val += (asc ? 1 : -1) * Math.floor(Math.random() * 25 + 1);
+            ex01_c.value = val;
+
+            ex01_verif();
+          };
+
+          ex01_btn2.onclick = function (e) {
+            e.preventDefault();
+            var asc = Math.random() >= 0.5;
+            var val = Math.floor(Math.random() * 75);
+            ex01_a.value = val;
+            val = Math.floor(Math.random() * 75);
+            ex01_b.value = val;
+            val = Math.floor(Math.random() * 75);
+            ex01_c.value = val;
+
+            ex01_verif();
+          };
+
+          var ex01_verif = function () {
+            var a = parseInt(ex01_a.value);
+            var b = parseInt(ex01_b.value);
+            var c = parseInt(ex01_c.value);
+            if ((a > b && b > c) || (a < b && b < c)) {
+              ex01_res.innerHTML = "Les valeurs sont ordonnées";
+            } else {
+              ex01_res.innerHTML = "Les valeurs ne sont pas ordonnées";
+            }
+          };
+
+          ex01_verif();
+
+          ex01_a.onblur = ex01_verif;
+          ex01_b.onblur = ex01_verif;
+          ex01_c.onblur = ex01_verif;
+        </script>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 2</h3>
+
+        <p>Ecrire un programme qui saisit une date sous la forme d'une chaine au format "jj/mm" puis calcule le nombre
+          de jours écoulés depuis le jour de l'an "01/01". On suppose que Février est 28 jours.</p>
+
+        <table class="normal">
+          <tbody>
+            <tr>
+              <td>Mois</td>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+              <td>11</td>
+              <td>12</td>
+            </tr>
+            <tr>
+              <td>Nbj</td>
+              <td>31</td>
+              <td>28</td>
+              <td>31</td>
+              <td>30</td>
+              <td>31</td>
+              <td>30</td>
+              <td>31</td>
+              <td>31</td>
+              <td>30</td>
+              <td>31</td>
+              <td>30</td>
+              <td>31</td>
+            </tr>
+            <tr>
+              <td>Ecoulés</td>
+              <td>0</td>
+              <td>31</td>
+              <td>59</td>
+              <td>90</td>
+              <td>120</td>
+              <td>151</td>
+              <td>181</td>
+              <td>212</td>
+              <td>243</td>
+              <td>273</td>
+              <td>304</td>
+              <td>334</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><b>Exemple :</b></p>
+
+        <div class="printer_hidden">
+          <p>Modifier la valeurs du champ suivant :</p>
+
+          <table class="normal">
+            <tbody>
+              <tr>
+                <td>ch</td>
+              </tr>
+              <tr>
+                <td><input type="text" id="ex02_ch" value="08/09" size="5"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p><b>Résultat du programme</b></p>
+          <p id="ex02_res"></p>
+        </div>
+
+        <div class="printer_visible">
+          <p>Pour : dt ⟵ "01/03". Le programme affiche : <b>59 jours sont écoulés depuis le jour de l'an à 01/03</b></p>
+          <p>Pour : dt ⟵ "08/09". Le programme affiche : <b>250 jours sont écoulés depuis le jour de l'an à 08/09</b></p>
+          <p>Pour : dt ⟵ "17/10". Le programme affiche : <b>289 jours sont écoulés depuis le jour de l'an à 17/10</b></p>
+        </div>
+
+        <script>
+          var ex02_ch = document.querySelector('#ex02_ch');
+          var ex02_res = document.querySelector('#ex02_res');
+
+          var ex02_verif = function () {
+            var ch = ex02_ch.value;
+            var jj = parseInt(ch.substr(0, 2));
+            var mm = parseInt(ch.substr(3, 2));
+            var nbj = jj - 1;
+            switch (mm) {
+              case 1: nbj += 0; break;
+              case 2: nbj += 31; break;
+              case 3: nbj += 59; break;
+              case 4: nbj += 90; break;
+              case 5: nbj += 120; break;
+              case 6: nbj += 151; break;
+              case 7: nbj += 181; break;
+              case 8: nbj += 212; break;
+              case 9: nbj += 243; break;
+              case 10: nbj += 273; break;
+              case 11: nbj += 304; break;
+              case 12: nbj += 334; break;
+            }
+            ex02_res.innerHTML = nbj + " jours sont écoulés depuis le jour de l'an à " + ch;
+          };
+
+          ex02_verif();
+
+          ex02_ch.onblur = ex02_verif;
+        </script>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 3</h3>
+
+        <p>Ecrire un programme qui saisit les notes et les noms de trois élèves. Puis, affiche le nom de l'élève qui a
+          obtenu la meilleure note. On suppose que les notes sont distinctes deux à deux.</p>
+
+        <p><b>Exemple :</b></p>
+
+        <div class="printer_hidden">
+          <p>Modifier les valeurs des champs suivants :</p>
+
+          <table class="normal">
+            <tbody>
+              <tr>
+                <td>Elève 1</td>
+                <td><input type="text" id="ex03_nom1" value="Ahmed" size="5"></td>
+                <td><input type="text" id="ex03_note1" value="12.5" size="3"></td>
+              </tr>
+              <tr>
+                <td>Elève 2</td>
+                <td><input type="text" id="ex03_nom2" value="Israa" size="5"></td>
+                <td><input type="text" id="ex03_note2" value="15.5" size="3"></td>
+              </tr>
+              <tr>
+                <td>Elève 3</td>
+                <td><input type="text" id="ex03_nom3" value="Yassine" size="5"></td>
+                <td><input type="text" id="ex03_note3" value="14.5" size="3"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p><b>Générer des notes aléatoires</b></p>
+          <p><button id="ex03_btn">Quelconques</button></p>
+
+          <p><b>Résultat du programme</b></p>
+          <p id="ex03_res"></p>
+        </div>
+
+        <div class="printer_visible">
+          <p>Pour : <br>nom1 ⟵ "Salim", note1 ⟵ 10,<br> nom2 ⟵ "Sami", note2 ⟵ 15,<br> nom3 ⟵ "Kais", note3 ⟵ 13.</p>
+          <p>Le programme affiche : L'élève <b>Sami</b> a obtenu la meilleure note <b>15</b></p>
+        </div>
+
+        <script>
+          var ex03_nom1 = document.querySelector('#ex03_nom1');
+          var ex03_nom2 = document.querySelector('#ex03_nom2');
+          var ex03_nom3 = document.querySelector('#ex03_nom3');
+          var ex03_note1 = document.querySelector('#ex03_note1');
+          var ex03_note2 = document.querySelector('#ex03_note2');
+          var ex03_note3 = document.querySelector('#ex03_note3');
+          var ex03_btn = document.querySelector('#ex03_btn');
+
+          ex03_btn.onclick = function (e) {
+            e.preventDefault();
+            var val = Math.ceil(Math.random() * 20 / 0.25) * 0.25;
+            var val1 = val;
+            var val2 = val;
+            do {
+              val1 = Math.ceil(Math.random() * 20 / 0.25) * 0.25;
+            } while (val1 == val);
+
+            do {
+              val2 = Math.ceil(Math.random() * 20 / 0.25) * 0.25;
+            } while (val2 == val || val2 == val1);
+
+            ex03_note1.value = val;
+            ex03_note2.value = val1;
+            ex03_note3.value = val2;
+
+            ex03_verif();
+          };
+
+          var ex03_verif = function () {
+            var n1 = parseFloat(ex03_note1.value);
+            var n2 = parseFloat(ex03_note2.value);
+            var n3 = parseFloat(ex03_note3.value);
+            var note = n1;
+            var nom = ex03_nom1.value;
+            if (n2 > note) {
+              note = n2;
+              nom = ex03_nom2.value;
+            }
+            if (n3 > note) {
+              note = n3;
+              nom = ex03_nom3.value;
+            }
+            ex03_res.innerHTML = "L'élève <b>" + nom + "</b> a obtenu la meilleure note <b>" + note + "</b>";
+          };
+
+          ex03_verif();
+
+          ex03_nom1.onblur = ex03_verif;
+          ex03_nom2.onblur = ex03_verif;
+          ex03_nom3.onblur = ex03_verif;
+          ex03_note1.onblur = ex03_verif;
+          ex03_note2.onblur = ex03_verif;
+          ex03_note3.onblur = ex03_verif;
+        </script>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 4</h3>
+
+        <p>Ecrire un programme qui saisit le nom et le prénom d'une personne, puis affiche les initiales de cette
+          personne. On suppose que le nom contient entre deux et trois mots.</p>
+
+        <p><b>Remarque :</b> Les initiales d'une personne sont en MAJUSCULES.</p>
+
+        <p><b>Exemple :</b></p>
+
+        <div class="printer_hidden">
+          <p>Modifier la valeur du champ suivant :</p>
+
+          <table class="normal">
+            <tbody>
+              <tr>
+                <td>ch</td>
+              </tr>
+              <tr>
+                <td><input type="text" id="ex04_ch" value="amine ben khalifa" size="32"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p><b>Résultat du programme</b></p>
+          <p id="ex04_res"></p>
+        </div>
+
+        <div class="printer_visible">
+          <p>Pour : ch ⟵ "Ahmed Jammali", Le programme affiche : <b>AJ</b></p>
+          <p>Pour : ch ⟵ "Mohamed Farès Jedidi", Le programme affiche : <b>MFJ</b></p>
+        </div>
+
+        <script>
+          var ex04_ch = document.querySelector('#ex04_ch');
+          var ex04_res = document.querySelector('#ex04_res');
+
+          var ex04_verif = function () {
+            var ch = ex04_ch.value.toUpperCase();
+            var initiales = ch.substr(0, 1);
+            var pos = ch.indexOf(' ');
+            if (pos >= 0) {
+              initiales += ch.substr(pos + 1, 1);
+              pos = ch.indexOf(' ', pos + 1);
+              if (pos >= 0) {
+                initiales += ch.substr(pos + 1, 1);
+              }
+            }
+            ex04_res.innerHTML = initiales;
+          };
+
+          ex04_verif();
+
+          ex04_ch.onblur = ex04_verif;
+        </script>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 5</h3>
+
+        <p>Ecrire un programme qui saisit les noms et les dates de naissance de deux élèves, puis affiche le nom du
+          plus jeune.</p>
+
+        <p><b>Remarque :</b> Les dates sont des chaines de caractères au format "jj/mm/aaaa".</p>
+
+        <p><b>Exemple :</b></p>
+
+        <div class="printer_hidden">
+          <p>Modifier les valeurs des champs suivants :</p>
+
+          <table class="normal">
+            <tbody>
+              <tr>
+                <td>Elève 1</td>
+                <td><input type="text" id="ex05_nom1" value="Karim" size="32"></td>
+                <td><input type="text" id="ex05_dt1" value="05/08/1999" size="10"></td>
+              </tr>
+              <tr>
+                <td>Elève 2</td>
+                <td><input type="text" id="ex05_nom2" value="Yassine" size="32"></td>
+                <td><input type="text" id="ex05_dt2" value="03/01/2000" size="10"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p><b>Générer des dates aléatoires</b></p>
+          <p><button id="ex05_btn1">Même jour</button> <button id="ex05_btn2">Quelconques</button></p>
+
+          <p><b>Résultat du programme</b></p>
+          <p id="ex05_res"></p>
+        </div>
+
+        <div class="printer_visible">
+          <p>Pour : <br>nom1 ⟵ "Sarra", dt1 ⟵ "05/08/1999",<br> nom2 ⟵ "Sirine", dt2 ⟵ "03/01/2000".</p>
+          <p>Le programme affiche : <b>Sirine</b> est plus jeune que <b>Sarra</b></p>
+        </div>
+
+        <script>
+          var ex05_dt1 = document.querySelector('#ex05_dt1');
+          var ex05_dt2 = document.querySelector('#ex05_dt2');
+          var ex05_nom1 = document.querySelector('#ex05_nom1');
+          var ex05_nom2 = document.querySelector('#ex05_nom2');
+          var ex05_res = document.querySelector('#ex05_res');
+          var ex05_btn1 = document.querySelector('#ex05_btn1');
+          var ex05_btn2 = document.querySelector('#ex05_btn2');
+
+          function randomDate() {
+            var today = new Date();
+            var jj = Math.floor(Math.random() * 28 + 1);
+            var mm = Math.floor(Math.random() * 12 + 1);
+            var aaaa = Math.floor(today.getFullYear() - 21 + Math.random() * 4);
+            return (jj < 10 ? '0' + jj : jj) + '/' + (mm < 10 ? '0' + mm : mm) + '/' + aaaa;
+          }
+
+          function compareDates(dt1, dt2) {
+            if (dt1 == dt2) {
+              return 0;
+            }
+
+            if (dt1.substr(6, 4) > dt2.substr(6, 4)) {
+              return 1;
+            } else if (dt1.substr(6, 4) < dt2.substr(6, 4)) {
+              return -1;
+            }
+
+            if (dt1.substr(3, 2) > dt2.substr(3, 2)) {
+              return 1;
+            } else if (dt1.substr(3, 2) < dt2.substr(3, 2)) {
+              return -1;
+            }
+
+            if (dt1.substr(0, 2) > dt2.substr(0, 2)) {
+              return 1;
+            } else if (dt1.substr(0, 2) < dt2.substr(0, 2)) {
+              return -1;
+            }
+
+            return 0;
+          }
+
+          ex05_btn2.onclick = function (e) {
+            e.preventDefault();
+            var dt1, dt2;
+
+            dt1 = randomDate();
+            dt2 = randomDate();
+
+            ex05_dt1.value = dt1;
+            ex05_dt2.value = dt2;
+            ex05_verif();
+          };
+
+          ex05_btn1.onclick = function (e) {
+            e.preventDefault();
+            var dt1, dt2;
+
+            dt1 = randomDate();
+
+            ex05_dt1.value = dt1;
+            ex05_dt2.value = dt1;
+            ex05_verif();
+          };
+
+          var ex05_verif = function () {
+            var nom1 = ex05_nom1.value;
+            var nom2 = ex05_nom2.value;
+            var dt1 = ex05_dt1.value;
+            var dt2 = ex05_dt2.value;
+            var jeune = '';
+            var grand = '';
+            var cmp = compareDates(dt1, dt2);
+            if (cmp < 0) {
+              jeune = nom2;
+              grand = nom1;
+            } else if (cmp > 0) {
+              jeune = nom1;
+              grand = nom2;
+            }
+
+            if (jeune == '') {
+              ex05_res.innerHTML = nom1 + ' et ' + nom2 + ' sont né(e)s le même jour';
+            } else {
+              ex05_res.innerHTML = jeune + ' est plus jeune que ' + grand;
+            }
+          };
+
+          ex05_verif();
+
+          ex05_dt1.onblur = ex05_verif;
+          ex05_dt2.onblur = ex05_verif;
+          ex05_nom1.onblur = ex05_verif;
+          ex05_nom2.onblur = ex05_verif;
+        </script>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 6</h3>
+
+        <p>Écrire un programme DISTANCE qui permet de lire les coordonnées de deux points M et N, dans un repère
+          orthonormé (O, i, j), de calculer, de comparer et d’afficher leurs distances par rapport au point O(0, 0) et
+          d’afficher le point le plus proche.</p>
+
+        <p class="center"><img src="Images/img24.png" alt="Points dans un repère"></p>
+
+        <p><b>Remarque :</b> Les points peuvent être équidistants.</p>
+
+        <p><b>Exemple :</b></p>
+
+        <div class="printer_hidden">
+          <p>Modifier les valeurs des champs suivants :</p>
+
+          <table class="normal">
+            <tbody>
+              <tr>
+                <td>M(<input type="text" id="ex06_mx" value="-2" size="5">, <input type="text" id="ex06_my" value="-3"
+                    size="5">)</td>
+              </tr>
+              <tr>
+                <td>N(<input type="text" id="ex06_nx" value="3" size="5">, <input type="text" id="ex06_ny" value="3"
+                    size="5">)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p><b>Générer des points aléatoires</b></p>
+          <p><button id="ex06_btn">Quelconques</button></p>
+
+          <p><b>Résultat du programme</b></p>
+          <p id="ex06_res"></p>
+        </div>
+
+        <div class="printer_visible">
+          <p>Pour : <br>mx ⟵ -2, my ⟵ -3,<br> nx ⟵ 3, ny ⟵ 3</p>
+          <p>Le programme affiche : <br>OM = 3.61<br>ON = 4.24<br><b>M</b> est plus proche de l'origine</p>
+        </div>
+
+        <script>
+          var ex06_mx = document.querySelector('#ex06_mx');
+          var ex06_my = document.querySelector('#ex06_my');
+          var ex06_nx = document.querySelector('#ex06_nx');
+          var ex06_ny = document.querySelector('#ex06_ny');
+          var ex06_res = document.querySelector('#ex06_res');
+          var ex06_btn = document.querySelector('#ex06_btn');
+
+          function randomPt() {
+            var x = Math.floor(Math.random() * 11 + -5);
+            var y = Math.floor(Math.random() * 11 + -5);
+            return [x, y];
+          }
+
+          function distance(p1, p2) {
+            if (!p2) {
+              p2 = [0, 0];
+            }
+            return Math.sqrt((p1[0] - p2[0]) * (p1[0] - p2[0]) + (p1[1] - p2[1]) * (p1[1] - p2[1]));
+          }
+
+          ex06_btn.onclick = function (e) {
+            e.preventDefault();
+            var p1 = randomPt();
+            ex06_mx.value = p1[0];
+            ex06_my.value = p1[1];
+            var p2 = randomPt();
+            ex06_nx.value = p2[0];
+            ex06_ny.value = p2[1];
+            ex06_verif();
+          };
+
+          var ex06_verif = function () {
+            var p1 = [parseFloat(ex06_mx.value), parseFloat(ex06_my.value)];
+            var p2 = [parseFloat(ex06_nx.value), parseFloat(ex06_ny.value)];
+            var d1 = distance(p1);
+            var d2 = distance(p2);
+            var str = '<p><b>OM</b> = ' + d1.toFixed(2) + '</p>';
+            str += '<p><b>ON</b> = ' + d2.toFixed(2) + '</p>';
+            if (d1 < d2) {
+              str += "M est plus proche de l'origine";
+            } else if (d1 > d2) {
+              str += "N est plus proche de l'origine";
+            } else {
+              str += "M et N sont équidistants";
+            }
+            ex06_res.innerHTML = str;
+          };
+
+          ex06_verif();
+
+          ex06_mx.onblur = ex06_verif;
+          ex06_my.onblur = ex06_verif;
+          ex06_nx.onblur = ex06_verif;
+          ex06_ny.onblur = ex06_verif;
+        </script>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    const navlist = document.querySelector('nav>ul');
+    const blocs = Array.prototype.slice.apply(document.querySelectorAll('.bloc'));
+    let mode = 'one'; // 'all'
+    let currBloc = blocs[0];
+    const btnModeAll = document.querySelector('#mode_all');
+    const btnModeOne = document.querySelector('#mode_one');
+    const anchors = [];
+    const linkMenu = document.querySelector('#breadcrumb a');
+    const navBar = document.querySelector('nav');
+
+    btnModeAll.onclick = function (e) {
+      e.preventDefault();
+      setMode('all');
+    };
+
+    btnModeOne.onclick = function (e) {
+      e.preventDefault();
+      setMode('one');
+    };
+
+    function setMode(newMode) {
+      mode = newMode;
+      btnModeAll.className = (mode === 'all') ? 'selected' : '';
+      btnModeOne.className = (mode === 'one') ? 'selected' : '';
+      selectExercice(currBloc);
+    }
+
+    function selectExercice(bloc) {
+      let selectedAnchor = -1;
+      currBloc = bloc;
+      for (let i = 0; i < blocs.length; i++) {
+        if (blocs[i] == bloc) {
+          selectedAnchor = i;
+          anchors[i].className = 'selected';
+          blocs[i].style.display = 'block';
+        } else {
+          anchors[i].removeAttribute('class');
+          blocs[i].style.display = (mode === 'one') ? 'none' : 'block';
+        }
+      }
+      if (mode === 'all') {
+        document.location.href = anchors[selectedAnchor].href;
+      }
+      hideNavBar();
+    }
+
+    navlist.innerHTML = '';
+    for (let i = 0; i < blocs.length; i++) {
+      const bloc = blocs[i];
+      const head = bloc.querySelector('h3');
+      const title = head.innerText;
+      head.id = 'titre_' + i;
+
+      const li = document.createElement('li');
+      navlist.appendChild(li);
+
+      const anchor = document.createElement('a');
+      li.appendChild(anchor);
+
+      anchors.push(anchor);
+      anchor.innerText = title;
+      anchor.href = '#' + head.id;
+      anchor.onclick = function (e) {
+        selectExercice(bloc);
+        if (mode == 'one') {
+          e.preventDefault();
+        }
+      };
+    }
+
+    setMode('one');
+
+    linkMenu.onclick = function (e) {
+      e.preventDefault();
+      showNavbar();
+    };
+
+    function showNavbar() {
+      navBar.className = 'animate';
+    }
+
+    function hideNavBar() {
+      navBar.removeAttribute('class');
+    }
+  </script>
+
+</body>
+
+</html>

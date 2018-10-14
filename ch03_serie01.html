@@ -10,56 +10,596 @@
 </head>
 
 <body>
-  <h1>Série 1 : Structures itératives</h1>
-  
-  <h3>Exercice 1</h3>
+  <div id="container">
+    <nav>
+      <h1>Exercices</h1>
+      <ul></ul>
+      <div id="modes">
+        <div class="titre">Affichage</div>
+        <div id="select_mode">
+          <a id="mode_all" href="#">Tout</a>
+          <a id="mode_one" href="#">Un seul</a>
+        </div>
+      </div>
+    </nav>
 
-  <p>Ecrire un programme qui calcule et affiche la moyenne de n entiers saisis au clavier (sans utiliser un tableau).</p>
+    <main>
+      <div id="breadcrumb"><a href="#">☰</a> Série d'exercices</div>
 
-  <h3>Exercice 2</h3>
+      <h1>Série 1 : Structures itératives</h1>
 
-  <p>Ecrire un programme qui calcule et affiche la valeur de a<sup>b</sup>, a étant un réel non nul et b un entier.</p>
+      <div class="bloc">
+        <h3>Exercice 1</h3>
 
-  <p>On rappelle que : <img src="Images/img18.png" alt="Définition de a puissance b" height="170"></p>
+        <p>Ecrire un programme qui calcule et affiche la moyenne de n entiers (2 &le; n &le; 10) saisis au clavier
+          (sans utiliser de tableau).</p>
 
-  <h3>Exercice 3</h3>
+        <div class="printer_hidden">
+          <p><b>Exemple :</b></p>
 
-  <p>Ecrire un programme qui affiche le nombre d'occurence d'une lettre <b>c</b> dans une chaine de caractères <b>ch</b>
-    La lettre et la chaine sont saisis par l'utilisateur.</p>
+          <p>Modifier les valeurs des champs suivants :</p>
 
-  <p><b>Exemple :</b> Pour ch = "Je vais rèussir au bac" et c = "a", le programme affiche : "a est trouvée 3 fois"</p>
+          <p>n <input id="ex01_n" type="text" value="5" size="3"></p>
 
-  <h3>Exercice 4</h3>
+          <table class="normal">
+            <tbody>
+              <tr id="ex01_tl"></tr>
+              <tr id="ex01_ti"></tr>
+            </tbody>
+          </table>
 
-  <p>Ecrire un programme qui saisit les notes des n élèves d'une classe (3 &le; n &le; 30) dans un tableau t, puis
-    calcule et affiche la note maximale de la classe.</p>
+          <p><b>Générer des valeurs aléatoires</b></p>
 
-  <h3>Exercice 5</h3>
+          <p><button id="ex01_btn">Quelconques</button></p>
 
-  <p>Ecrire un programme qui lit un entier n (n &ge; 2), puis affiche s'il est premier ou non.</p>
-  <p>Un nombre premier n'est divisible que par lui même et par 1.</p>
+          <p id="ex01_res"></p>
+        </div>
 
-  <h3>Exercice 6</h3>
-  <p>Ecrire un programme qui supprime les espaces inutiles depuis une chaine ch saisie par l'utilisateur.</p>
+        <script>
+          var ex01_n = document.querySelector('#ex01_n');
+          var ex01_tl = document.querySelector('#ex01_tl');
+          var ex01_ti = document.querySelector('#ex01_ti');
+          var ex01_res = document.querySelector('#ex01_res');
+          var ex01_btn = document.querySelector('#ex01_btn');
+          var ex01_lastn = parseInt(ex01_n.value);
 
-  <p><b>Exemple :</b> pour ch = "Je.....suis......optimiste,.......j'accepte.......le......défi"<br>
-    le programme affiche : "Je.suis.optimiste,.j'accepte.le.défi"</p>
+          ex01_btn.onclick = function () {
+            var n = parseInt(ex01_n.value);
+            randomFillInt('ex01_v', n, 1, 20);
+            ex01_verif();
+          };
 
-  <p><b>Remarque:</b> il est possible, par exemple, d'utiliser la fonction <b>pos</b> et <b>Efface</b></p>
+          ex01_n.onchange = function () {
+            var n = parseInt(ex01_n.value);
+            if (n < 2 || n > 10) {
+              ex01_n.value = ex01_lastn;
+              return;
+            }
+            initTable();
+          };
 
-  <h3>Exercice 7</h3>
+          function initTable() {
+            var n = parseInt(ex01_n.value);
+            if (n < 2 || n > 10) {
+              return;
+            }
+            ex01_tl.innerHTML = '';
+            ex01_ti.innerHTML = '';
 
-  <p>Ecrire un programme qui caclule le PGCD de deux entiers a et b strictement positifs.</p>
-  <p>Utiliser la méthode d'euclide </p>
-  <p>(1) PGCD(a, b) = PGCD(b, a mod b)</p>
-  <p>(2) PGCD(a, 0) = a</p>
+            for (var i = 0; i < n; i++) {
+              var th = document.createElement('th');
+              ex01_tl.appendChild(th);
+              th.innerHTML = `${i + 1}<sup>${i == 0 ? 'ère' : 'ème'}</sup> valeur`;
 
-  <p><b>Exemple :</b> pour a = 30, b = 14<br>
-    D'après (1) :<br>
-    PGCD(30, 14) = PGCD(14, 30 mod 14) = PGCD(14, 2)<br>
-    PGCD(14, 2) = PGCD(2, 14 mod 2) = PGCD(2, 0)<br>
-    D'après (2) :<br>
-    PGCD(2, 0) = 2</p>
+              var td = document.createElement('td');
+              ex01_ti.appendChild(td);
+              var input = document.createElement('input');
+              input.type = 'text';
+              input.size = '3';
+              input.id = `ex01_v${i}`;
+              td.appendChild(input);
+            }
+
+            ex01_lastn = n;
+
+            randomFillInt('ex01_v', n, 1, 20);
+            onBlur('ex01_v', n, ex01_verif);
+            ex01_verif();
+          }
+
+          function randomFillInt(prefix, count, minVal, maxVal) {
+            for (var i = 0; i < count; i++) {
+              var input = document.querySelector(`#${prefix}${i}`);
+              input.value = Math.floor(Math.random() * (maxVal - minVal + 1) + minVal);
+            }
+          }
+
+          function randomFillFloat(prefix, count, minVal, maxVal) {
+            for (var i = 0; i < count; i++) {
+              var input = document.querySelector(`#${prefix}${i}`);
+              input.value = Math.floor((Math.random() * (maxVal * 100 - minVal * 100 + 1) + minVal * 100)) / 100;
+            }
+          }
+
+          function onBlur(prefix, count, handler) {
+            for (var i = 0; i < count; i++) {
+              var input = document.querySelector(`#${prefix}${i}`);
+              input.onblur = handler;
+            }
+          }
+
+          function ex01_verif() {
+            var s = 0;
+            var count = parseInt(ex01_n.value);
+            for (var i = 0; i < count; i++) {
+              var input = document.querySelector(`#ex01_v${i}`);
+              s += parseInt(input.value);
+            }
+            var moy = s / count;
+            ex01_res.innerHTML = `La moyenne est égale à : ${moy}`;
+          }
+
+          initTable();
+        </script>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 2</h3>
+
+        <p>Ecrire un programme qui calcule et affiche la valeur de a<sup>b</sup>, a étant un réel non nul et b un
+          entier.</p>
+
+        <p>On rappelle que : <img src="Images/img18.png" alt="Définition de a puissance b" height="170"></p>
+
+        <div class="printer_hidden">
+          <p><b>Exemple :</b></p>
+
+          <p>Modifier les valeurs des champs suivants :</p>
+
+          <p><input id="ex02_a" type="text" value="5" size="1" class="center"> <sup><input id="ex02_b" type="text"
+                value="3" size="1" class="center"></sup> = <span id="ex02_res"></span></p>
+
+          <p><b>Générer des valeurs aléatoires</b></p>
+
+          <p><button id="ex02_btn">Quelconques</button></p>
+        </div>
+        <script>
+          var ex02_a = document.querySelector('#ex02_a');
+          var ex02_b = document.querySelector('#ex02_b');
+          var ex02_res = document.querySelector('#ex02_res');
+          var ex02_btn = document.querySelector('#ex02_btn');
+
+          function ex02_verif() {
+            var a = parseFloat(ex02_a.value);
+            var b = parseInt(ex02_b.value);
+            if (b != ex02_b.value) {
+              ex02_b.value = b;
+            }
+            if (a == 0 && b == 0) {
+              ex02_res.innerHTML = 'Indéfinie';
+              return;
+            } else {
+              ex02_res.innerHTML = (b >= 0) ? `${a}^${b} = ${Math.pow(a, b)}` : `1/(${a}^${-b}) = 1/${Math.pow(a, -b)} = ${Math.pow(a, b)}`;
+            }
+          }
+
+          ex02_a.onblur = ex02_verif;
+          ex02_b.onblur = ex02_verif;
+          ex02_btn.onclick = function () {
+            ex02_a.value = Math.floor(Math.random() * 10 + 1);
+            ex02_b.value = Math.floor(Math.random() * 10 + -5);
+            ex02_verif();
+          };
+          ex02_verif();
+        </script>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 3</h3>
+
+        <p>Ecrire un programme qui affiche le nombre d'occurence d'une lettre <b>c</b> dans une chaine de caractères <b>ch</b>
+          La lettre et la chaine sont saisis par l'utilisateur.</p>
+
+        <div class="printer_visible">
+          <p><b>Exemple :</b> Pour ch = "Je vais réussir au bac" et c = "a", le programme affiche : "a est trouvée 3
+            fois"</p>
+        </div>
+
+        <div class="printer_hidden">
+          <p><b>Exemple : </b></p>
+
+          <p>Modifier les valeurs des champs suivants : </p>
+
+          <p>Pour : ch ⟵ "<input id="ex03_ch" type="text" value="Je vais réussir au bac" size="20" class="center">" et
+            c ⟵ "<input id="ex03_c" type="text" value="a" size="1" class="center">"</p>
+
+          <p id="ex03_res"></p>
+        </div>
+
+        <script>
+          var ex03_ch = document.querySelector('#ex03_ch');
+          var ex03_c = document.querySelector('#ex03_c');
+          var ex03_res = document.querySelector('#ex03_res');
+
+          function ex03_verif() {
+            var ch = ex03_ch.value;
+            var c = ex03_c.value;
+            if (c.length != 1) {
+              ex03_c.value = (c.length > 0) ? c.charAt(0) : String.fromCharCode(Math.floor(Math.random() * 26 + 97));
+              c = ex03_c.value;
+            }
+            var uch = ch.toUpperCase();
+            var uc = c.toUpperCase();
+            var times = 0;
+            for (var i = 0; i < uch.length; i++) {
+              if (uch.charAt(i) == uc) {
+                times++;
+              }
+            }
+            if (times > 0) {
+              ex03_res.innerHTML = `"${c}" est trouvé ${times} fois.`;
+            } else {
+              ex03_res.innerHTML = `"${c}" est introuvable.`;
+            }
+          }
+          ex03_ch.onblur = ex03_verif;
+          ex03_c.onblur = ex03_verif;
+          ex03_verif();
+        </script>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 4</h3>
+
+        <p>Ecrire un programme qui saisit les notes des n élèves d'une classe (3 &le; n &le; 30) dans un tableau t,
+          puis calcule et affiche la note maximale de la classe.</p>
+
+        <div class="printer_hidden">
+          <p><b>Exemple :</b></p>
+
+          <p>Modifier les valeurs des champs suivants : </p>
+
+          <p>n <input id="ex04_n" type="text" value="5" size="3"></p>
+
+          <table class="normal">
+            <tbody>
+              <tr id="ex04_tl"></tr>
+              <tr id="ex04_ti"></tr>
+            </tbody>
+          </table>
+
+          <p><b>Générer des valeurs aléatoires</b></p>
+
+          <p><button id="ex04_btn">Quelconques</button></p>
+
+          <p id="ex04_res"></p>
+        </div>
+
+        <script>
+          var ex04_n = document.querySelector('#ex04_n');
+          var ex04_tl = document.querySelector('#ex04_tl');
+          var ex04_ti = document.querySelector('#ex04_ti');
+          var ex04_res = document.querySelector('#ex04_res');
+          var ex04_btn = document.querySelector('#ex04_btn');
+          var ex04_lastn = parseInt(ex04_n.value);
+
+          ex04_btn.onclick = function () {
+            var n = parseInt(ex04_n.value);
+            randomFillFloat('ex04_v', n, 0, 20);
+            ex04_verif();
+          };
+
+          ex04_n.onchange = function () {
+            var n = parseInt(ex04_n.value);
+            if (n < 3 || n > 30) {
+              ex04_n.value = ex04_lastn;
+              return;
+            }
+            initTableEx04();
+          };
+
+          function initTableEx04() {
+            var n = parseInt(ex04_n.value);
+            if (n < 3 || n > 30) {
+              return;
+            }
+            ex04_tl.innerHTML = '';
+            ex04_ti.innerHTML = '';
+
+            for (var i = 0; i < n; i++) {
+              var th = document.createElement('th');
+              ex04_tl.appendChild(th);
+              th.innerHTML = `t[${i + 1}]`;
+
+              var td = document.createElement('td');
+              ex04_ti.appendChild(td);
+              var input = document.createElement('input');
+              input.type = 'text';
+              input.size = '3';
+              input.id = `ex04_v${i}`;
+              td.appendChild(input);
+            }
+
+            ex04_lastn = n;
+
+            randomFillFloat('ex04_v', n, 0, 20);
+            onBlur('ex04_v', n, ex04_verif);
+            ex04_verif();
+          }
+
+          function ex04_verif() {
+            var count = parseInt(ex04_n.value);
+            var max;
+            for (var i = 0; i < count; i++) {
+              var input = document.querySelector(`#ex04_v${i}`);
+              var v = parseFloat(input.value);
+              if (!max || v > max) {
+                max = v;
+              }
+            }
+            ex04_res.innerHTML = `La note maximale est : ${max}`;
+          }
+
+          initTableEx04();
+        </script>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 5</h3>
+
+        <p>Ecrire un programme qui lit un entier n (n &ge; 2), puis affiche s'il est premier ou non.</p>
+        <p>Un nombre premier n'est divisible que par lui même et par 1.</p>
+
+        <div class="printer_hidden">
+          <p><b>Exemple :</b></p>
+
+          <p>Modifier la valeur du champ suivant : </p>
+
+          <p>Pour : n ⟵ <input id="ex05_n" type="text" value="13" size="3" class="center"></p>
+
+          <p id="ex05_res"></p>
+
+          <p><b>Générer une valeur aléatoire</b></p>
+
+          <p><button id="ex05_btn">Quelconques</button></p>
+        </div>
+
+        <script>
+          var ex05_n = document.querySelector('#ex05_n');
+          var ex05_res = document.querySelector('#ex05_res');
+          var ex05_btn = document.querySelector('#ex05_btn');
+
+          function estPremier(n) {
+            if (n <= 1) return false;
+            if (n == 2 || n == 3) return true;
+            if (n % 2 == 0 || n % 3 == 0) return false;
+            var premier = true;
+            var i = 5;
+            var limit = Math.floor(Math.sqrt(n)) + 1;
+            while (premier && i < limit) {
+              premier = n % i != 0;
+              i += 2;
+            }
+            return premier;
+          }
+          function ex05_verif() {
+            var n = parseInt(ex05_n.value);
+            if (n != ex05_n.value) {
+              ex05_n.value = n;
+            }
+            ex05_res.innerHTML = estPremier(n) ? `${n} est un nombre premier` : `${n} n'est pas premier`;
+          }
+
+          ex05_n.onblur = ex05_verif;
+          ex05_btn.onclick = function () {
+            ex05_n.value = Math.floor(Math.random() * 100 + 1);
+            ex05_verif();
+          };
+          ex05_verif();
+        </script>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 6</h3>
+        <p>Ecrire un programme qui supprime les espaces inutiles depuis une chaine ch saisie par l'utilisateur.</p>
+
+        <p><b>Remarque:</b> il est possible, par exemple, d'utiliser la fonction <b>pos</b> et <b>Efface</b></p>
+
+        <div class="printer_visible">
+          <p><b>Exemple :</b> pour ch = "Je.....suis......optimiste,.......j'accepte.......le......défi"<br>
+            le programme affiche : "Je.suis.optimiste,.j'accepte.le.défi"</p>
+        </div>
+
+        <div class="printer_hidden">
+          <p><b>Exemple : </b></p>
+
+          <p>Modifier les valeurs des champs suivants : </p>
+
+          <p>Pour : ch ⟵ "<input id="ex06_ch" type="text" value="Je      suis     optimiste,      j'accepte      le        défi"
+              size="40" class="center">"</p>
+
+          <p id="ex06_res"></p>
+        </div>
+
+        <script>
+          var ex06_ch = document.querySelector('#ex06_ch');
+          var ex06_res = document.querySelector('#ex06_res');
+
+          function ex06_verif() {
+            var ch = ex06_ch.value;
+            var ch1 = '';
+
+            for (var i = 0; i < ch.length; i++) {
+              var car = ch.charAt(i);
+              if (i == 0 || car != ' ' || (car == ' ' && ch.charAt(i - 1) != ' ')) {
+                ch1 += car;
+              }
+            }
+            ex06_res.innerHTML = `Sans espaces superflus : ${ch1}`;
+          }
+          ex06_ch.onblur = ex06_verif;
+          ex06_verif();
+        </script>
+
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 7</h3>
+
+        <p>Ecrire un programme qui caclule le PGCD de deux entiers a et b strictement positifs.</p>
+        <p>Utiliser la méthode d'euclide </p>
+        <p>(1) PGCD(a, b) = PGCD(b, a mod b)</p>
+        <p>(2) PGCD(a, 0) = a</p>
+
+        <div class="printer_visible">
+          <p><b>Exemple :</b> pour a = 30, b = 14<br>
+            D'après (1) : PGCD(30, 14) = PGCD(14, 30 mod 14) = PGCD(14, 2)<br>
+            PGCD(14, 2) = PGCD(2, 14 mod 2) = PGCD(2, 0)<br>
+            D'après (2) : PGCD(2, 0) = 2</p>
+        </div>
+
+        <div class="printer_hidden">
+          <p><b>Exemple : </b></p>
+
+          <p>Modifier les valeurs des champs suivants : </p>
+
+          <p>Pour : a ⟵ <input id="ex07_a" type="text" value="30" size="3" class="center"> et b ⟵ <input id="ex07_b"
+              type="text" value="14" size="3" class="center"></p>
+
+          <p id="ex07_res"></p>
+
+          <p><b>Générer des valeurs aléatoires</b></p>
+
+          <p><button id="ex07_btn">Quelconques</button></p>
+        </div>
+
+        <script>
+          var ex07_a = document.querySelector('#ex07_a');
+          var ex07_b = document.querySelector('#ex07_b');
+          var ex07_res = document.querySelector('#ex07_res');
+          var ex07_btn = document.querySelector('#ex07_btn');
+
+          function ex07_verif() {
+            var a = parseInt(ex07_a.value);
+            var b = parseInt(ex07_b.value);
+            if (b != ex07_b.value) {
+              ex07_b.value = b;
+            }
+            if (a != ex07_a.value) {
+              ex07_a.value = a;
+            }
+            var ca = a, cb = b;
+            var ch = `PGCD(${ca}, ${cb})`;
+            while (cb != 0) {
+              ch += `<br> = PGCD(${cb}, ${ca} mod ${cb}) = PGCD(${cb}, ${ca % cb})`;
+              var r = ca % cb;
+              ca = cb;
+              cb = r;
+            }
+            ch += `<br> = ${ca}`;
+            ex07_res.innerHTML = ch;
+          }
+
+          ex07_a.onblur = ex07_verif;
+          ex07_b.onblur = ex07_verif;
+          ex07_btn.onclick = function () {
+            var divc = Math.random() > 0.25 ? Math.floor(Math.random() * 10 + 1) : 1;
+            ex07_a.value = divc * Math.floor(Math.random() * 11 + 1);
+            ex07_b.value = divc * Math.floor(Math.random() * 7 + 1);
+            ex07_verif();
+          };
+          ex07_verif();
+        </script>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const navlist = document.querySelector('nav>ul');
+    const blocs = Array.prototype.slice.apply(document.querySelectorAll('.bloc'));
+    let mode = 'one'; // 'all'
+    let currBloc = blocs[0];
+    const btnModeAll = document.querySelector('#mode_all');
+    const btnModeOne = document.querySelector('#mode_one');
+    const anchors = [];
+    const linkMenu = document.querySelector('#breadcrumb a');
+    const navBar = document.querySelector('nav');
+
+    btnModeAll.onclick = function (e) {
+      e.preventDefault();
+      setMode('all');
+    };
+
+    btnModeOne.onclick = function (e) {
+      e.preventDefault();
+      setMode('one');
+    };
+
+    function setMode(newMode) {
+      mode = newMode;
+      btnModeAll.className = (mode === 'all') ? 'selected' : '';
+      btnModeOne.className = (mode === 'one') ? 'selected' : '';
+      selectExercice(currBloc);
+    }
+
+    function selectExercice(bloc) {
+      let selectedAnchor = -1;
+      currBloc = bloc;
+      for (let i = 0; i < blocs.length; i++) {
+        if (blocs[i] == bloc) {
+          selectedAnchor = i;
+          anchors[i].className = 'selected';
+          blocs[i].style.display = 'block';
+        } else {
+          anchors[i].removeAttribute('class');
+          blocs[i].style.display = (mode === 'one') ? 'none' : 'block';
+        }
+      }
+      if (mode === 'all') {
+        document.location.href = anchors[selectedAnchor].href;
+      }
+      hideNavBar();
+    }
+
+    navlist.innerHTML = '';
+    for (let i = 0; i < blocs.length; i++) {
+      const bloc = blocs[i];
+      const head = bloc.querySelector('h3');
+      const title = head.innerText;
+      head.id = 'titre_' + i;
+
+      const li = document.createElement('li');
+      navlist.appendChild(li);
+
+      const anchor = document.createElement('a');
+      li.appendChild(anchor);
+
+      anchors.push(anchor);
+      anchor.innerText = title;
+      anchor.href = '#' + head.id;
+      anchor.onclick = function (e) {
+        selectExercice(bloc);
+        if (mode == 'one') {
+          e.preventDefault();
+        }
+      };
+    }
+
+    setMode('one');
+
+    linkMenu.onclick = function (e) {
+      e.preventDefault();
+      showNavbar();
+    };
+
+    function showNavbar() {
+      navBar.className = 'animate';
+    }
+
+    function hideNavBar() {
+      navBar.removeAttribute('class');
+    }
+  </script>
 </body>
 
 </html>

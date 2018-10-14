@@ -140,6 +140,14 @@ table.normal.border.center td {
 	width: calc(70% - 8px);
 }
 
+.col_33 {
+	width: calc(33.33% - 8px);
+}
+
+.col_66 {
+	width: calc(66.66% - 8px);
+}
+
 a.btn_solution {
 	display: inline-block;
 	padding: 10px 15px;
@@ -274,6 +282,10 @@ main {
 	color: #fff;
 }
 
+.printer_visible {
+	display: none;
+}
+
 @media screen and (min-width: 700px) {
 	#breadcrumb {
 		display: none;
@@ -315,5 +327,11 @@ main {
 	main {
 		margin-top: initial;
 		margin-left: initial;
+	}
+	.printer_hidden {
+		display: none !important;
+	}
+	.printer_visible {
+		display: block !important;
 	}
 }
