@@ -29,7 +29,7 @@
       <h1>Série 1 : Structures itératives</h1>
 
       <div class="bloc">
-        <h3>Exercice 1</h3>
+        <h3>Exercice 1 ★</h3>
 
         <p>Ecrire un programme qui calcule et affiche la moyenne de n entiers (2 &le; n &le; 10) saisis au clavier
           (sans utiliser de tableau).</p>
@@ -144,58 +144,7 @@
       </div>
 
       <div class="bloc">
-        <h3>Exercice 2</h3>
-
-        <p>Ecrire un programme qui calcule et affiche la valeur de a<sup>b</sup>, a étant un réel non nul et b un
-          entier.</p>
-
-        <p>On rappelle que : <img src="Images/img18.png" alt="Définition de a puissance b" height="170"></p>
-
-        <div class="printer_hidden">
-          <p><b>Exemple :</b></p>
-
-          <p>Modifier les valeurs des champs suivants :</p>
-
-          <p><input id="ex02_a" type="text" value="5" size="1" class="center"> <sup><input id="ex02_b" type="text"
-                value="3" size="1" class="center"></sup> = <span id="ex02_res"></span></p>
-
-          <p><b>Générer des valeurs aléatoires</b></p>
-
-          <p><button id="ex02_btn">Quelconques</button></p>
-        </div>
-        <script>
-          var ex02_a = document.querySelector('#ex02_a');
-          var ex02_b = document.querySelector('#ex02_b');
-          var ex02_res = document.querySelector('#ex02_res');
-          var ex02_btn = document.querySelector('#ex02_btn');
-
-          function ex02_verif() {
-            var a = parseFloat(ex02_a.value);
-            var b = parseInt(ex02_b.value);
-            if (b != ex02_b.value) {
-              ex02_b.value = b;
-            }
-            if (a == 0 && b == 0) {
-              ex02_res.innerHTML = 'Indéfinie';
-              return;
-            } else {
-              ex02_res.innerHTML = (b >= 0) ? `${a}^${b} = ${Math.pow(a, b)}` : `1/(${a}^${-b}) = 1/${Math.pow(a, -b)} = ${Math.pow(a, b)}`;
-            }
-          }
-
-          ex02_a.onblur = ex02_verif;
-          ex02_b.onblur = ex02_verif;
-          ex02_btn.onclick = function () {
-            ex02_a.value = Math.floor(Math.random() * 10 + 1);
-            ex02_b.value = Math.floor(Math.random() * 10 + -5);
-            ex02_verif();
-          };
-          ex02_verif();
-        </script>
-      </div>
-
-      <div class="bloc">
-        <h3>Exercice 3</h3>
+        <h3>Exercice 2 ★</h3>
 
         <p>Ecrire un programme qui affiche le nombre d'occurence d'une lettre <b>c</b> dans une chaine de caractères <b>ch</b>
           La lettre et la chaine sont saisis par l'utilisateur.</p>
@@ -249,7 +198,7 @@
       </div>
 
       <div class="bloc">
-        <h3>Exercice 4</h3>
+        <h3>Exercice 3 ★</h3>
 
         <p>Ecrire un programme qui saisit les notes des n élèves d'une classe (3 &le; n &le; 30) dans un tableau t,
           puis calcule et affiche la note maximale de la classe.</p>
@@ -345,7 +294,58 @@
       </div>
 
       <div class="bloc">
-        <h3>Exercice 5</h3>
+        <h3>Exercice 4 ★★</h3>
+
+        <p>Ecrire un programme qui calcule et affiche la valeur de a<sup>b</sup>, a étant un réel non nul et b un
+          entier.</p>
+
+        <p>On rappelle que : <img src="Images/img18.png" alt="Définition de a puissance b" height="170"></p>
+
+        <div class="printer_hidden">
+          <p><b>Exemple :</b></p>
+
+          <p>Modifier les valeurs des champs suivants :</p>
+
+          <p><input id="ex02_a" type="text" value="5" size="1" class="center"> <sup><input id="ex02_b" type="text"
+                value="3" size="1" class="center"></sup> = <span id="ex02_res"></span></p>
+
+          <p><b>Générer des valeurs aléatoires</b></p>
+
+          <p><button id="ex02_btn">Quelconques</button></p>
+        </div>
+        <script>
+          var ex02_a = document.querySelector('#ex02_a');
+          var ex02_b = document.querySelector('#ex02_b');
+          var ex02_res = document.querySelector('#ex02_res');
+          var ex02_btn = document.querySelector('#ex02_btn');
+
+          function ex02_verif() {
+            var a = parseFloat(ex02_a.value);
+            var b = parseInt(ex02_b.value);
+            if (b != ex02_b.value) {
+              ex02_b.value = b;
+            }
+            if (a == 0 && b == 0) {
+              ex02_res.innerHTML = 'Indéfinie';
+              return;
+            } else {
+              ex02_res.innerHTML = (b >= 0) ? `${a}^${b} = ${Math.pow(a, b)}` : `1/(${a}^${-b}) = 1/${Math.pow(a, -b)} = ${Math.pow(a, b)}`;
+            }
+          }
+
+          ex02_a.onblur = ex02_verif;
+          ex02_b.onblur = ex02_verif;
+          ex02_btn.onclick = function () {
+            ex02_a.value = Math.floor(Math.random() * 10 + 1);
+            ex02_b.value = Math.floor(Math.random() * 10 + -5);
+            ex02_verif();
+          };
+          ex02_verif();
+        </script>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 5 ★★</h3>
 
         <p>Ecrire un programme qui lit un entier n (n &ge; 2), puis affiche s'il est premier ou non.</p>
         <p>Un nombre premier n'est divisible que par lui même et par 1.</p>
@@ -400,7 +400,7 @@
       </div>
 
       <div class="bloc">
-        <h3>Exercice 6</h3>
+        <h3>Exercice 6 ★★</h3>
         <p>Ecrire un programme qui supprime les espaces inutiles depuis une chaine ch saisie par l'utilisateur.</p>
 
         <p><b>Remarque:</b> il est possible, par exemple, d'utiliser la fonction <b>pos</b> et <b>Efface</b></p>
@@ -444,7 +444,7 @@
       </div>
 
       <div class="bloc">
-        <h3>Exercice 7</h3>
+        <h3>Exercice 7 ★★</h3>
 
         <p>Ecrire un programme qui caclule le PGCD de deux entiers a et b strictement positifs.</p>
         <p>Utiliser la méthode d'euclide </p>

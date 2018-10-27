@@ -11,19 +11,34 @@
     }
 
     td {
-      font-size: 22pt;
+      font-size: calc(98vw / 20);
+      border: 1px solid gray;
+      text-align: center;
+      width: calc(98vw / 20);
+      cursor: pointer;
+    }
+
+    td.normal {
+      font-size: 1em;
+      border: 0;
+    }
+
+    td.selected {
+      background-color: aquamarine;
     }
   </style>
 </head>
 
 <body>
-  <div>
+  <div style="text-align: center; margin: 0.25em auto;">
     <button id="previous" onclick="showPrev()">Précédent</button>
     <input id="page" name="page" value="0" size="3" onchange="navigatePage()"> / 255
     <button id="next" onclick="showNext()">Suivant</button>
+    <br>
+    Code : <span id="code"></span>
   </div>
 
-  <table>
+  <table align="center">
     <tbody>
     </tbody>
   </table>
@@ -31,18 +46,28 @@
   <script>
     const tbody = document.getElementsByTagName('tbody')[0];
     const pageInput = document.getElementById('page');
+    const codeSpan = document.getElementById('code');
     let page = 0;
     const nCols = 16;
-    const nRows = 16;
+    const nRows = 8;
     function display(page) {
       tbody.innerHTML = '';
+      codeSpan.innerHTML = '';
       pageInput.value = page;
-      let code = page * 256;
+      let code = page * nCols * nRows;
       for (let j = 0; j < nRows; j++) {
         const tr = document.createElement('tr');
         for (let i = 0; i < nCols; i++) {
           const td = document.createElement('td');
           td.innerHTML = String.fromCharCode(code);
+          td.onclick = function() {
+            var selTd = Array.prototype.slice.apply(document.querySelectorAll('.selected'));
+            for (let std of selTd) {
+              std.removeAttribute('class');
+            }
+            td.className = 'selected';
+            codeSpan.innerHTML = td.innerHTML.charCodeAt(0);
+          };
           code++;
           tr.appendChild(td);
         }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeu</title>
+  <style>
+    #de {
+      font-size: 5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="de"></div>
+
+  <script>
+    const de = document.querySelector('#de');
+    const diceFaces = '⚀⚁⚂⚃⚄⚅';
+    var diceLaunched = false;
+
+    function launchDice() {
+      const val = Math.floor(Math.random() * 6) + 1;
+      de.innerHTML = diceFaces.charAt(val - 1);
+      return val;
+    }
+
+    de.onclick = function () {
+      if (diceLaunched) {
+        return;
+      }
+      diceLaunched = true;
+      let count = Math.floor(Math.random() * 10) + 11;
+      function launchTry() {
+        launchDice();
+        count--;
+        if (count > 0) {
+          setTimeout(launchTry, 50);
+        } else {
+          diceLaunched = false;
+        }
+      }
+      launchTry();
+    };
+    de.onclick();
+  </script>
+</body>
+
+</html>

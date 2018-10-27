@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Série sous-programmes et algorithmes avancés</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="scripts/sh.css">
+</head>
+
+<body onload="sh_highlightDocument();">
+  <div id="container">
+    <nav>
+      <h1>Exercices</h1>
+      <ul></ul>
+      <div id="modes">
+        <div class="titre">Affichage</div>
+        <div id="select_mode">
+          <a id="mode_all" href="#">Tout</a>
+          <a id="mode_one" href="#">Un seul</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div id="breadcrumb"><a href="#">☰</a> Série d'exercices</div>
+
+      <h1>Série 1 : Sous-Programmes (Bac TP 2016)</h1>
+
+      <div class="bloc">
+        <h3>Exercice 1</h3>
+
+        <p>Dans un tableau d’entiers, l’existence d’au minimum de deux éléments pairs d’une façon consécutive forme ce
+          qu’on appelle une <b>séquence paire</b>.</p>
+        <p>On se propose d’écrire un programme intitulé <b>Occ_Pair</b> qui permet de remplir un tableau <b>T</b> par
+          <b>N</b> entiers (avec 3≤N≤20) et d’afficher le nombre de séquences paires de ce tableau ainsi que les
+          entiers de chacune de ces séquences.</p>
+
+        <p><b>Exemple :</b></p>
+
+        <p>Pour N=15 et le tableau T suivant :</p>
+
+        <table class="normal">
+          <tbody>
+            <tr class="center">
+              <td width="6.66%">3</td>
+              <td width="6.66%" style="background-color: lightgrey">18</td>
+              <td width="6.66%" style="background-color: lightgrey">6</td>
+              <td width="6.66%">5</td>
+              <td width="6.66%">3</td>
+              <td width="6.66%" style="background-color: lightgrey">4</td>
+              <td width="6.66%" style="background-color: lightgrey">32</td>
+              <td width="6.66%" style="background-color: lightgrey">8</td>
+              <td width="6.66%">9</td>
+              <td width="6.66%">12</td>
+              <td width="6.66%">5</td>
+              <td width="6.66%" style="background-color: lightgrey">10</td>
+              <td width="6.66%" style="background-color: lightgrey">2</td>
+              <td width="6.66%">1</td>
+              <td width="6.66%">8</td>
+            </tr>
+            <tr class="center borderless">
+              <td><small>1</small></td>
+              <td><small>2</small></td>
+              <td><small>3</small></td>
+              <td><small>4</small></td>
+              <td><small>5</small></td>
+              <td><small>6</small></td>
+              <td><small>7</small></td>
+              <td><small>8</small></td>
+              <td><small>9</small></td>
+              <td><small>10</small></td>
+              <td><small>11</small></td>
+              <td><small>12</small></td>
+              <td><small>13</small></td>
+              <td><small>14</small></td>
+              <td><small>15</small></td>
+            </tr>
+            <tr class="center borderless">
+              <td>&nbsp;</td>
+              <td colspan="2" style="border: 1px solid #000 !important; border-top: 0 !important;">Séquence 1</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td colspan="3" style="border: 1px solid #000 !important; border-top: 0 !important;">Séquence 2</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td colspan="2" style="border: 1px solid #000 !important; border-top: 0 !important;">Séquence 3</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Le programme affiche :</p>
+
+        <pre>Le nombre de séquences paires est 3.
+Les séquences d’entiers pairs sont :
+18, 6
+4, 32, 8
+10, 2</pre>
+
+        <p>Pour cela, on donne l’algorithme du programme principal suivant :</p>
+
+        <pre class="sh_algo">0) Début Occ_Pair
+1) Ecrire ("Donner la taille du tableau :"), Lire(N)
+2) PROC Remplir(T,N)
+3) PROC Afficher(T,N)
+4) Fin Occ_Pair</pre>
+
+        <h4>Travail Demandé</h4>
+
+        <ol type="a">
+          <li>Traduire l’algorithme <b>Occ_Pair</b> en un programme Pascal et ajouter les déclarations nécessaires.</li>
+          <li>Transformer la séquence n°1 en un module en ajoutant les contraintes nécessaires et apporter les
+            modifications nécessaires dans le programme principal.</li>
+          <li>Développer le module <b>Remplir</b> qui permet de remplir le tableau <b>T</b> par <b>N</b> entiers
+            strictement positifs.</li>
+          <li>Développer le module <b>Afficher</b> qui permet d’afficher le nombre de séquences d’entiers pairs du
+            tableau T ainsi que les entiers de chacune de ces séquences.</li>
+        </ol>
+
+        <p><b>Exemple d'exécution du programme</b></p>
+
+        <pre id="ex01_res"></pre>
+
+        <div class="printer_hidden">
+          <p><button id="ex01_btn1">Simulation</button></p>
+
+          <script>
+            var ex01_btn1 = document.querySelector('#ex01_btn1');
+            var ex01_res = document.querySelector('#ex01_res');
+
+            const MININT = -0x80000000;
+            const MAXINT = 0x7fffffff;
+
+            function clear_screen(resEl) {
+              return new Promise((resolve) => { resEl.innerHTML = ''; setTimeout(resolve, 0); });
+            }
+
+            function println(resEl, ch) {
+              return new Promise((resolve) => { resEl.innerHTML += ch + '\n'; setTimeout(resolve, 0); });
+            }
+
+            function print(resEl, ch) {
+              return new Promise((resolve) => { resEl.innerHTML += ch; setTimeout(resolve, 0); });
+            }
+
+            function inputInt(resEl, message, def, ask, rangeMin, rangeMax) {
+              var n;
+              if (rangeMin == null && rangeMax == null) {
+                rangeMin = 0;
+                rangeMax = 20;
+              } else if (rangeMin != null) {
+                rangeMax = MAXINT;
+              } else if (rangeMax != null) {
+                rangeMin = MININT;
+              }
+              do {
+                print(resEl, message);
+                if (ask) {
+                  n = parseInt(prompt(message, def));
+                } else {
+                  n = def;
+                }
+                println(resEl, n);
+              } while (n < rangeMin || n > rangeMax);
+              return n;
+            }
+
+            function inputAndVerifString(resEl, message, def, ask, verif_fn) {
+              var ch;
+              do {
+                print(resEl, message);
+                if (ask) {
+                  ch = prompt(message, def);
+                } else {
+                  ch = def;
+                }
+                println(resEl, ch);
+              } while (!verif_fn(ch));
+              return ch;
+            }
+
+            ex01_btn1.onclick = function () {
+              clear_screen(ex01_res);
+              var n = saisieN(true, true);
+              var t = remplir(n, true, true);
+              afficher(t);
+            };
+
+            function ex01_default() {
+              clear_screen(ex01_res);
+              var n = saisieN(true, false);
+              var t = remplir(n, true, false);
+              afficher(t);
+            }
+
+            function randomInt(count, exemple) {
+              var arr = (exemple) ? [3, 18, 6, 5, 3, 4, 32, 8, 9, 12, 5, 10, 2, 1, 8] : [];
+              for (var i = arr.length; i < count; i++) {
+                arr.push(Math.floor(Math.random() * 50 + 1));
+              }
+              if (arr.length > count) {
+                arr = arr.slice(0, count);
+              }
+              return arr;
+            }
+
+            function saisieN(exemple, ask) {
+              var n;
+              return inputInt(ex01_res, 'Donner la taille du tableau : ', (exemple) ? 15 : Math.floor(Math.random() * 18 + 3), ask, 3, 20);
+            }
+
+            function remplir(count, exemple, ask) {
+              var t = randomInt(count, exemple);
+              for (var i = 0; i < count; i++) {
+                t[i] = inputInt(ex01_res, `Donner t[${i + 1}] > 0 : `, t[i], ask, 0, null);
+              }
+              return t;
+            }
+
+            function afficher(arr) {
+              var t = [];
+              var i = 1;
+              while (i < arr.length) {
+                if (arr[i] % 2 == 0 && arr[i - 1] % 2 == 0) {
+                  var seq = [arr[i - 1], arr[i]];
+                  do {
+                    i++;
+                    if (arr[i] % 2 == 0) seq.push(arr[i]);
+                  } while (arr[i] % 2 == 0);
+                  t.push(seq);
+                }
+                i++;
+              }
+
+              println(ex01_res, `Le nombre de séquences paires est ${t.length}.`);
+              if (t.length > 0) {
+                println(ex01_res, 'Les séquences d’entiers pairs sont :');
+                for (var i = 0; i < t.length; i++) {
+                  println(ex01_res, t[i].join(', '));
+                }
+              }
+            }
+
+            ex01_default();
+          </script>
+        </div>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 2</h3>
+
+        <p>Le jeu <b>Numbermind</b> est un jeu à deux qui consiste à deviner un numéro de téléphone.</p>
+
+        <p>Le principe du jeu est le suivant :</p>
+
+        <ul>
+          <li>Le premier joueur propose une combinaison de 8 chiffres représentant le numéro à deviner.</li>
+          <li>Le deuxième joueur annonce une proposition de 8 chiffres, si cette proposition correspond au numéro à
+            deviner, ce joueur est gagnant sinon on lui affiche sa proposition à laquelle on garde tous les chiffres
+            bien placés et on remplace le reste par des tirets tout en mentionnant les chiffres corrects mais mal
+            placés dans la proposition.</li>
+          <li>On répète l’étape précédente jusqu’à trouver le numéro cherché ou atteindre un nombre d’essais égal à 8.</li>
+        </ul>
+
+        <p>Pour simuler ce jeu, on donne l’algorithme du programme principal suivant :</p>
+
+        <pre class="sh_algo">0) Début Numbermind
+1) Répéter
+    Ecrire("Saisir le numéro de téléphone à deviner : ")
+    Lire (num)
+  Jusqu’à (FN Verif(num))
+2) Efface_ecran()
+3) Deviner(num)
+4) Fin Numbermind</pre>
+
+        <p><b>NB :</b> Efface_ecran est une procédure prédéfinie qui permet d’effacer l’écran. Son équivalent en Pascal
+          est: <b>CLRSCR</b> ;</p>
+
+        <h4>Travail demandé</h4>
+
+        <ol type="a">
+          <li>Traduire l’algorithme <b>Numbermind</b> en un programme Pascal et ajouter les déclarations nécessaires.</li>
+          <li>Développer le module <b>Verif</b> qui permet de vérifier si le numéro de téléphone proposé est composé
+            uniquement par 8 chiffres.</li>
+          <li>Développer le module <b>Deviner</b> qui consiste à :<ul>
+              <li>vérifier chaque numéro proposé par le deuxième joueur, en gardant les chiffres bien placés et en
+                remplaçant le reste par des tirets tout en mentionnant ceux qui sont correctes mais mal placés dans la
+                proposition et le nombre d’essais qui lui restent.</li>
+              <li>arrêter le jeu une fois que le deuxième joueur propose un numéro identique au numéro à deviner ou
+                bien on atteint un nombre d’essai égal à 8.</li>
+              <li>afficher le message "Bravo, vous avez gagné" si le joueur 2 réussit à deviner le numéro et le message
+                "Désolé, vous avez perdu" s’il ne devine pas le numéro après 8 essais.</li>
+            </ul>
+          </li>
+        </ol>
+
+        <p><b>Exemple :</b></p>
+        <p>Pour le numéro de téléphone à deviner <b id="ex02_hidden">68456231</b>, le programme affiche :</p>
+
+        <!-- <p class="center"><img src="Images/img25.png" alt="Sortie du programme Numbermind"></p> -->
+
+        <pre id="ex02_res"></pre>
+
+        <div class="printer_hidden">
+          <p><button id="ex02_btn">Simulation</button></p>
+
+          <script>
+            var ex02_res = document.querySelector('#ex02_res');
+            var ex02_btn = document.querySelector('#ex02_btn');
+            var ex02_hidden = document.querySelector('#ex02_hidden');
+
+            ex02_btn.onclick = function () {
+              var num;
+              clear_screen(ex02_res)
+                .then(() => {
+                  num = inputAndVerifString(ex02_res, 'Saisir le numéro de téléphone à deviner : ', '68456231', true, ex02_verif);
+                  ex02_hidden.innerHTML = num;
+                })
+                .then(() => { clear_screen(ex02_res); })
+                .then(() => { deviner(num, true); })
+                .catch(err => console.log(err, ' erreur'));
+            };
+
+            function ex02_default() {
+              clear_screen(ex02_res);
+              var num = inputAndVerifString(ex02_res, 'Saisir le numéro de téléphone à deviner : ', '68456231', false, ex02_verif);
+              ex02_hidden.innerHTML = num;
+              deviner(num, false);
+            }
+
+            function ex02_verif(num) {
+              if (num.length != 8) {
+                return false;
+              }
+
+              for (var i = 0; i < num.length; i++) {
+                var car = num.charAt(i);
+                if (car < '0' || car > '9') {
+                  return false;
+                }
+              }
+
+              return true;
+            }
+
+            function deviner(num, ask) {
+              var essais = 8;
+              var i = -1;
+              var t = ['56426179', '63456331', (!ask) ? num : '12345678'];
+              var ch1, nt = '';
+
+              new Promise((resolve) => { println(ex02_res, `Vous avez ${essais} essais`); setTimeout(resolve, 0); })
+                .then(function tryonce(resolve) {
+                  essais--;
+                  i++;
+                  nt = inputAndVerifString(ex02_res, 'Proposer un numéro de téléphone : ', (i < t.length) ? t[i] : nt, ask, ex02_verif);
+                  ch1 = '';
+                  for (var j = 0; j < nt.length; j++) {
+                    var c1 = num.charAt(j);
+                    var c2 = nt.charAt(j);
+                    ch1 += (c1 == c2) ? c1 : ((num.indexOf(c2) >= 0) ? '*' : '-');
+                  }
+                  if (ch1 == num) {
+                    println(ex02_res, 'Bravo, vous avez gagné!');
+                  } else if (essais > 0) {
+                    println(ex02_res, `Il vous reste ${essais} essais.`);
+                    println(ex02_res, ch1);
+                  }
+
+                  if (essais > 0 && ch1 != num) {
+                    location.href = '#ex02_btn';
+                    return new Promise(() => { setTimeout(tryonce, 0); });
+                  } else if (essais == 0 && ch1 != num) {
+                    println(ex02_res, 'Désolé, vous avez perdu!');
+                    println(ex02_res, `Le numéro recherché est ${num}`);
+                    location.href = '#ex02_btn';
+                    resolve();
+                  } else {
+                    // resolve();
+                  }
+                });
+            }
+
+            ex02_default();
+          </script>
+        </div>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 3</h3>
+
+        <p>Dans le but de sécuriser les messages à envoyer, on peut faire appel à une méthode de cryptage.</p>
+
+        <p>Une des méthodes utilisées consiste à remplacer chaque lettre du message à crypter par celle qui la suit de
+          <b>p</b> positions dans l'alphabet français, où <b>p</b> désigne le nombre de mots du message.</p>
+
+        <p><b>NB :</b></p>
+
+        <ul>
+          <li>On suppose que le caractère qui suit la lettre <b>"Z"</b> est le caractère <b>"A"</b> et celui qui suit
+            la lettre <b>"z"</b> est le caractère <b>"a"</b>.</li>
+          <li>Le caractère espace ne subit aucune modification.</li>
+          <li>Le code ASCII de la lettre <b>"a"</b> est égal à 97 et celui de la lettre <b>"A"</b> est égal à 65.</li>
+        </ul>
+
+        <p><b>Exemple :</b></p>
+
+        <p>Pour le message <b>"Examen Pratique En Informatique"</b></p>
+
+        <p>Etant donné que le message à crypter est formé de 4 mots, pour la lettre alphabétique "E" par exemple, elle
+          sera remplacée par "I" car en ajoutant au code Ascii de "E" qui est 69 la valeur 4, on obtient 73 qui est le
+          code Ascii de "I".</p>
+
+        <p>En continuant à appliquer ce principe de codage, le message crypté sera :</p>
+
+        <p><b>"Ibeqir Tvexmuyi Ir Mrjsvqexmuyi"</b></p>
+
+        <p>On se propose d’écrire un programme intitulé Cryptage qui permet de saisir un message M formé uniquement de
+          lettres et d’espaces puis de l’afficher crypté, en utilisant le principe cité ci-dessus.</p>
+
+        <p><b>NB :</b> Le message peut contenir des espaces superflus (inutiles).</p>
+
+        <p>Pour cela, on propose l’algorithme du programme principal suivant :</p>
+
+        <pre class="sh_algo">0) Début Cryptage
+1) Répéter
+    Ecrire("Donner le message à crypter:")
+    Lire(M)
+  Jusqu’à (FN Valide(M))
+2) p ⟵ FN Nbmot(M)
+3) Ecrire(FN Crypter(M,p))
+4) Fin Cryptage</pre>
+        <p><b>Travail demandé :</b></p>
+
+        <ol type="a">
+          <li>Traduire l’algorithme <b>Cryptage</b> en un programme Pascal et ajouter les déclarations nécessaires.</li>
+          <li>Transformer la séquence n°1 en un module et apporter les modifications nécessaires dans le
+            programme principal.</li>
+          <li> Développer le module <b>Valide</b> qui permet de vérifier si le message M est non vide et formé
+            uniquement par des lettres et des espaces.</li>
+          <li>Développer le module <b>Nbmot</b> qui permet de déterminer le nombre de mots dans le message M à
+            crypter en prenant en considération la possibilité d’existence des espaces superflus (inutiles).</li>
+          <li>Développer le module <b>Crypter</b> qui permet de crypter un message M en utilisant le principe décrit
+            précédemment.</li>
+        </ol>
+
+        <p><b>Exemple d'exécution du programme</b></p>
+        <pre id="ex03_res"></pre>
+
+        <div class="printer_hidden">
+          <button id="ex03_btn">Simulation</button>
+          <script>
+            var ex03_res = document.querySelector('#ex03_res');
+            var ex03_btn = document.querySelector('#ex03_btn');
+
+            ex03_btn.onclick = function () {
+              var m, p, mc;
+              clear_screen(ex03_res)
+                .then(() => {
+                  m = inputAndVerifString(ex03_res, 'Donner le message à crypter : ', 'Examen Pratique En Informatique', true, ex03_verif);
+                })
+                .then(() => p = ex03_nbmots(m))
+                .then(() => mc = ex03_crypter(p, m))
+                .then(() => println(ex03_res, 'Le message crypté : ' + mc));
+            };
+
+            function ex03_default() {
+              var m, p, mc;
+              clear_screen(ex03_res)
+                .then(() => {
+                  m = inputAndVerifString(ex03_res, 'Donner le message à crypter : ', 'Examen Pratique En Informatique', false, ex03_verif);
+                })
+                .then(() => p = ex03_nbmots(m))
+                .then(() => mc = ex03_crypter(p, m))
+                .then(() => println(ex03_res, 'Le message crypté : ' + mc));
+            }
+
+            function ex03_verif(ch) {
+              if (ch.length == 0) {
+                return false;
+              }
+
+              for (var i = 0; i < ch.length; i++) {
+                var car = ch.charAt(i);
+                var valid = (car >= 'A' && car <= 'Z') || (car >= 'a' && car <= 'z') || (car == ' ');
+                if (!valid) {
+                  return false;
+                }
+              }
+
+              return true;
+            }
+
+            function ex03_nbmots(ch) {
+              var nm = 0, i = 0;
+              do {
+
+                while (i < ch.length) {
+                  var car = ch.charAt(i);
+                  if (car == ' ') {
+                    i++;
+                  } else {
+                    nm++;
+                    break;
+                  }
+                }
+                while (i < ch.length) {
+                  var car = ch.charAt(i);
+                  if (car != ' ') {
+                    i++;
+                  } else {
+                    break;
+                  }
+                }
+              } while (i < ch.length);
+              return nm;
+            }
+
+            function ex03_crypter(p, ch) {
+              var ch1 = '';
+              for (var i = 0; i < ch.length; i++) {
+                var cc = ch.charCodeAt(i);
+                if (cc >= 65 && cc <= 90) {
+                  cc = (cc - 65 + p) % 26 + 65;
+                } else if (cc >= 97 && cc <= 122) {
+                  cc = (cc - 97 + p) % 26 + 97;
+                }
+                ch1 += String.fromCharCode(cc);
+              }
+              return ch1;
+            }
+
+            ex03_default();
+          </script>
+        </div>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 4</h3>
+
+        <p>Un <b>IBAN</b> ou numéro international de compte bancaire est une variété de caractères alphanumériques qui
+          identifie de façon distincte, le compte d'un client tenu dans une institution bancaire partout dans le monde.</p>
+
+        <p><b>Exemple :</b> <b>TU3830004015870002601171</b> est un numéro <b>IBAN</b> où :</p>
+
+        <p><b>TU</b> désigne les initiales du pays du client qui est la Tunisie,</p>
+
+        <p><b>38</b> est la clé IBAN</p>
+
+        <p>Le reste des chiffres représente le code <b>RIB</b> du client qui est de longueur constante relativement à
+          un pays donné (20 pour la Tunisie). Sachant que <b>RIB</b> désigne le <b>R</b>elevé d’<b>I</b>dentité <b>B</b>ancaire
+          qui permet au titulaire d'un compte bancaire de transmettre ses coordonnées bancaires pour des virements ou
+          des prélèvements.</p>
+
+        <p>La clé <b>IBAN</b> est obtenue en utilisant le procédé suivant :</p>
+
+        <ul>
+          <li>Former une chaine <b>ch</b> composée par les deux premières lettres en majuscules du nom du pays du
+            client
+            auxquelles on ajoute "00" à droite.</li>
+          <li>Former un nombre à partir de la chaîne <b>ch</b> en remplaçant chaque lettre par le nombre qui lui
+            correspond
+            selon le tableau suivant :
+            <table class="normal">
+              <tbody>
+                <tr class="center">
+                  <script>
+                    for (var i = 0; i < 26; i++) {
+                      document.writeln(`<td>${String.fromCharCode(i + 65)}</td>`);
+                    }
+                  </script>
+                </tr>
+                <tr class="center">
+                  <script>
+                    for (var i = 0; i < 26; i++) {
+                      document.writeln(`<td>${i + 10}</td>`);
+                    }
+                  </script>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+          <li>Calculer le reste de la division du nombre obtenu par <b>97</b></li>
+          <li>Soustraire de <b>98</b> le reste obtenu. Si le résultat comporte un seul chiffre, insérer un zéro à
+            gauche. Le nombre ainsi obtenu est la clé IBAN.</li>
+        </ul>
+
+        <p><b>Exemple :</b> Pour un client de la Tunisie, on obtient la chaîne suivante : <b>TU00</b></p>
+
+        <p>En remplaçant <b>T</b> par 29 et <u>U</u> par 30, on obtient le nombre suivant <b>293000</b>.</p>
+
+        <p>La clé IBAN correspondante à ce client est 38 obtenu comme suit : le reste de la division de <b>293000</b>
+          par <b>97</b> donne <b>60</b> en la retranchant de <b>98</b> on obtient <b>98-60=38</b> qui est la clé IBAN
+          de la Tunisie.</p>
+
+        <p>On se propose d’écrire un programme Pascal qui permet de générer un code <b>IBAN</b> à partir des deux
+          premières lettres du nom du pays d’un client et de son code <b>RIB</b>.</p>
+
+        <p>Pour cela on donne l’algorithme du programme principal suivant :</p>
+
+        <pre class="sh_algo">0) Début Generation
+1) PROC Saisir(Init, RIB)
+2) Cle ⟵ FN Cle_IBAN(Init)
+3) Ecrire("L’IBAN correspondant est : ", Init+Cle+RIB)
+4) Fin Generation</pre>
+
+        <p><b>Travail demandé :</b></p>
+
+        <ol type="a">
+          <li>Traduire l’algorithme <b>Generation</b> en un programme Pascal et ajouter les déclarations nécessaires.</li>
+          <li>Développer le module <b>Saisir</b> qui permet de saisir :
+            <ul>
+              <li>Deux lettres majuscules qui représentent les initiales du pays.</li>
+              <li>Le RIB qui doit être une suite de chiffres, correspondant au pays du client, de longueur L avec 10≤
+                L≤ 30.</li>
+            </ul>
+          </li>
+          <li>Développer le module <b>Cle_IBAN</b> qui permet de générer la clé IBAN d’un client en utilisant le
+            procédé
+            décrit précédemment.</li>
+          <li>Ajouter ce qui est nécessaire au programme de façon à ce qu’il puisse générer plusieurs codes IBAN
+            relativement à un groupe de clients dont le nombre est inconnu à l’avance.</li>
+        </ol>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const navlist = document.querySelector('nav>ul');
+    const blocs = Array.prototype.slice.apply(document.querySelectorAll('.bloc'));
+    let mode = 'one'; // 'all'
+    let currBloc = blocs[0];
+    const btnModeAll = document.querySelector('#mode_all');
+    const btnModeOne = document.querySelector('#mode_one');
+    const anchors = [];
+    const linkMenu = document.querySelector('#breadcrumb a');
+    const navBar = document.querySelector('nav');
+
+    btnModeAll.onclick = function (e) {
+      e.preventDefault();
+      setMode('all');
+    };
+
+    btnModeOne.onclick = function (e) {
+      e.preventDefault();
+      setMode('one');
+    };
+
+    function setMode(newMode) {
+      mode = newMode;
+      btnModeAll.className = (mode === 'all') ? 'selected' : '';
+      btnModeOne.className = (mode === 'one') ? 'selected' : '';
+      selectExercice(currBloc);
+    }
+
+    function selectExercice(bloc) {
+      let selectedAnchor = -1;
+      currBloc = bloc;
+      for (let i = 0; i < blocs.length; i++) {
+        if (blocs[i] == bloc) {
+          selectedAnchor = i;
+          anchors[i].className = 'selected';
+          blocs[i].style.display = 'block';
+        } else {
+          anchors[i].removeAttribute('class');
+          blocs[i].style.display = (mode === 'one') ? 'none' : 'block';
+        }
+      }
+      if (mode === 'all') {
+        document.location.href = anchors[selectedAnchor].href;
+      }
+      hideNavBar();
+    }
+
+    navlist.innerHTML = '';
+    for (let i = 0; i < blocs.length; i++) {
+      const bloc = blocs[i];
+      const head = bloc.querySelector('h3');
+      const title = head.innerText;
+      head.id = 'titre_' + i;
+
+      const li = document.createElement('li');
+      navlist.appendChild(li);
+
+      const anchor = document.createElement('a');
+      li.appendChild(anchor);
+
+      anchors.push(anchor);
+      anchor.innerText = title;
+      anchor.href = '#' + head.id;
+      anchor.onclick = function (e) {
+        selectExercice(bloc);
+        if (mode == 'one') {
+          e.preventDefault();
+        }
+      };
+    }
+
+    setMode('one');
+
+    linkMenu.onclick = function (e) {
+      e.preventDefault();
+      showNavbar();
+    };
+
+    function showNavbar() {
+      navBar.className = 'animate';
+    }
+
+    function hideNavBar() {
+      navBar.removeAttribute('class');
+    }
+  </script>
+  <script src="scripts/sh.min.js"></script>
+  <script src="scripts/sh_pascal.min.js"></script>
+  <script src="scripts/sh_algo.js"></script>
+</body>
+
+</html>
