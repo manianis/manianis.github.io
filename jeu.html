@@ -6,17 +6,110 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jeu</title>
   <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 11pt;
+    }
+
+    #board {
+      width: 800px;
+      height: 600px;
+      background: transparent url(Images/gameboard.png) no-repeat 50% 50%/contain;
+      margin: 0 auto;
+    }
+
+    #dice {
+      position: relative;
+      top: -80px;
+      left: 25px;
+      background-color: #fffc;
+      width: 128px;
+      height: 120px;
+      border-radius: 15px;
+      border: #2b3a90 solid medium;
+      padding: 0.25em;
+      text-align: center;
+      font-weight: bold;
+    }
+
     #de {
-      font-size: 5rem;
+      font-size: 7rem;
+      cursor: pointer;
+      text-align: center;
+      position: relative;
+      top: -37px;
+    }
+
+    #player {
+      position: relative;
+      top: 474px;
+      left: 26px;
+      font-size: 4.5em;
+    }
+
+    #controlpanel {
+      position: relative;
+      top: 280px;
+      left: 410px;
+      background-color: #fff9;
+      width: 360px;
+      height: 80px;
+      border-radius: 15px;
+      border: #2b3a90 solid medium;
+      padding: 0.25em;
+      text-align: center;
+    }
+
+    #controlpanel button {
+      display: inline-block;
+      padding: 15px;
+      background-color: #009688;
+      color: #fff;
+      border: 0;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+
+    #gagne {
+      position: relative;
+      text-align: center;
+      font-size: 4.5em;
+      color: #FF5722;
+      background-color: #fffc;
+      padding: 30px;
+      width: 85%;
+      margin: 0 auto;
+      top: -79px;
+      border-radius: 30px;
+      border: #FF5722 solid;
+      display: none;
     }
   </style>
 </head>
 
 <body>
-  <div id="de"></div>
+  <div id="board">
+    <div id="player">♞</div>
+    <div id="dice">
+      Cliquer sur le dé pour jouer
+      <div id="de"></div>
+    </div>
+    <div id="controlpanel">
+      <button id="restart">Recommencer...</button>
+    </div>
+    <div id="gagne">Bravo vous avez gagné</div>
+  </div>
+
 
   <script>
     const de = document.querySelector('#de');
+    const playerDiv = document.querySelector('#player');
+    const bravoDiv = document.querySelector('#gagne');
+    const restartBtn = document.querySelector('#restart');
+    const controlpanel = document.querySelector('#controlpanel');
+
     const diceFaces = '⚀⚁⚂⚃⚄⚅';
     var diceLaunched = false;
 
@@ -26,24 +119,90 @@
       return val;
     }
 
-    de.onclick = function () {
+    function diceClick() {
       if (diceLaunched) {
         return;
       }
       diceLaunched = true;
+      let lastDiceValue = 0;
       let count = Math.floor(Math.random() * 10) + 11;
       function launchTry() {
-        launchDice();
+        lastDiceValue = launchDice();
         count--;
         if (count > 0) {
           setTimeout(launchTry, 50);
         } else {
+          moveHorseBy(lastDiceValue);
           diceLaunched = false;
         }
       }
       launchTry();
+    }
+
+    de.onclick = diceClick;
+    restartBtn.onclick = function () {
+      if (currHorsePosition != 0 && currHorsePosition != horsePositions.length - 1) {
+        if (!confirm('Voulez-vous redémarrer le jeu ?')) {
+          return;
+        }
+      }
+      de.onclick = diceClick;
+      setHorsePosition(0);
+      bravoDiv.style.display = 'none';
     };
-    de.onclick();
+    launchDice();
+
+    const horsePositions = [
+      [474, 26],
+      [438, 86],
+      [400, 124],
+      [346, 149],
+      [300, 146],
+      [240, 146],
+      [213, 187],
+      [249, 232],
+      [299, 264],
+      [343, 303],
+      [379, 351],
+      [397, 415],
+      [384, 476],
+      [337, 527],
+      [278, 536],
+      [225, 506],
+      [176, 473],
+      [135, 520],
+      [137, 574],
+      [121, 621],
+      [86, 643],
+      [48, 647]
+    ];
+
+    let currHorsePosition = 0;
+    function setHorsePosition(position) {
+      currHorsePosition = position;
+      playerDiv.style.top = horsePositions[currHorsePosition][0] + 'px';
+      playerDiv.style.left = horsePositions[currHorsePosition][1] + 'px';
+      if (position == 0) {
+        controlpanel.style.display = 'none';
+      } else {
+        controlpanel.style.display = 'block';
+      }
+    }
+
+    function moveHorseBy(value) {
+      currHorsePosition += value;
+      if (currHorsePosition < horsePositions.length - 1) {
+        setHorsePosition(currHorsePosition);
+      } else if (currHorsePosition == horsePositions.length - 1){
+        setHorsePosition(currHorsePosition);
+        bravoDiv.style.display = 'block';
+        de.onclick = null;
+      } else {
+        currHorsePosition = horsePositions.length - 1 - (currHorsePosition - horsePositions.length + 1); 
+        setHorsePosition(currHorsePosition);
+      }
+    }
+    setHorsePosition(0);
   </script>
 </body>
 
