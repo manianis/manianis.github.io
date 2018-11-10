@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Série Structures de contrôle itératives</title>
+  <title>Série Structures Itératives</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="scripts/sh.css">
 </head>
 
-<body>
+<body onload="sh_highlightDocument();">
   <div id="container">
     <nav>
       <h1>Exercices</h1>
@@ -29,99 +29,119 @@
       <h1>Série 2 : Structures itératives</h1>
 
       <div class="bloc">
-        <h3>Exercice 1 ★★</h3>
+        <h3>Exercice 1 ★</h3>
 
-        <p>Écrire un programme qui détermine quels sont les chiffres utilisés dans la représentation d'un nombre n (n
-          &gt; 0)
-          donné.</p>
-        <p><b>Exemple :</b> Pour n = 12544, Le programme doit afficher : <b>12544 est composé par les chiffres : 1, 2,
-            4,
-            5</b></p>
+        <p>Soit l'algorithme suivant :</p>
+
+        <pre class="sh_algo">0) Début Act1
+1) Ecrire("Donner un entier : ")
+   Lire(n)
+2) ConvCh(n, ch)
+3) [ch1 ⟵ "" ; ch2 ⟵ ""]
+   Pour c de "0" à "9" Faire
+     Répéter
+       p ⟵ Pos(c, ch)
+       si p > 0 alors
+         ch1 ⟵ ch1 + c
+         ch2 ⟵ c + ch2
+         Effacer(ch, p, 1)
+       Fin si
+     Jusqu'à (p = 0)
+   Fin Pour
+4) Val(ch1, n1, e)
+5) Val(ch2, n2, e)
+6) diff ⟵ n2 - n1
+7) Ecrire(n1)
+   Ecrire(n2)
+   Ecrire(diff)
+8) Fin Act1</pre>
+        <p><b>Travail demandé</b></p>
+
+        <ol>
+          <li>Dessiner le TDO relatif à l'algorithme ci-dessus.</li>
+          <li>Traduire l'algorithme en Pascal.</li>
+          <li>Quelles sont les valeurs des variables <b>n1</b>, <b>n2</b> et <b>diff</b> pour n = 163, et pour n = 2317
+            ?</li>
+          <li>Déduire la valeur des variables <b>ch1</b>, <b>ch2</b> et <b>ch</b> pour n=391, et pour n=-170 ?</li>
+          <li>Modifier l'étape numéro 1 pour restreindre la valeur de n à (0 &lt; n &le; 9999).</li>
+        </ol>
       </div>
 
       <div class="bloc">
-        <h3>Exercice 2 ★★</h3>
+        <h3>Exercice 2 ★</h3>
 
-        <p>Écrire un programme qui calcule le terme de la suite suivante pour un ordre n donné :</p>
+        <p>Soit l'algorithme suivant :</p>
 
-        <p><img src="Images/img20.png" alt="Suite réelle"></p>
+        <pre class="sh_algo">0) Début Act2
+1) n ⟵ Aléa(999) + 1
+2) Ecrire("Donner une valeur [1, 999] : ")
+   Lire(v)
+3) si v = n alors
+     Ecrire("Bravo! vous avez gagné")
+   sinon si v > n alors
+     Ecrire("Nombre trop grand")
+   sinon 
+     Ecrire("Nombre trop petit")
+   fin si
+4) Fin Act2</pre>
+        <p><b>Travail demandé</b></p>
 
-        <p><b>Exemples :</b> U<sub>1</sub>=9 ; U<sub>2</sub>=69 ; U<sub>3</sub>=276 ; U<sub>4</sub> = 84 ; U<sub>5</sub>
-          = 1929</p>
+        <ol>
+          <li>Dessiner le TDO relatif à l'algorithme ci-dessus.</li>
+          <li>Traduire l'algorithme en Pascal.</li>
+          <li>Améliorer le programme :
+            <ul>
+              <li>Limiter <b>v</b> dans l'intervalle [1, 999] (controle de la saisie);</li>
+              <li>Offrir 10 tentatives (au maximum) à l'utilisateur pour deviner le nombre v;</li>
+              <li>Demander à l'utilisateur s'il veut rejouer encore ou non;</li>
+            </ul>
+          </li>
+        </ol>
       </div>
 
       <div class="bloc">
-        <h3>Exercice 3 ★★</h3>
+        <h3>Exercice 3 ★</h3>
 
-        <p>Écrire un programme qui convertit un nombre de la base 10 à la base 16 et affiche le résultat sur 4
-          chiffres.</p>
+        <p>Soit U<sub>n</sub> = (U<sub>n-1</sub> + x / U<sub>n-1</sub>) / 2, pour n > 0 et U<sub>0</sub> = x+1, x étant
+          un réel positif.</p>
 
-        <p><b>Exemple :</b> Pour n = 635, Le programme doit afficher : 635<sub>(10)</sub> = 027B<sub>(16)</sub></p>
+        <p>On démontre que la suite U<sub>n</sub> est convergente. Et on donne l'algorithme suivant : </p>
 
-        <p><img src="Images/img19.png" alt="Conversion de la base 16 à la base 10"></p>
+        <pre class="sh_algo">0) Début Act3
+1) Ecrire("Entrer un réel x &ge; 0 : ")
+   Lire(x)
+2) Ecrire("Entrer un réel n &gt; 0 : ")
+   Lire(n)
+3) Up ⟵ x + 1
+   Pour i de 1 à n Faire
+     Un ⟵ (Un + x / Un) / 2
+     diff ⟵ Un - Up
+     Up ⟵ Un
+   Fin Pour
+4) Ecrire(Un)
+   Ecrire(diff)
+5) Fin Act3</pre>
+
+        <p><b>Travail demandé</b></p>
+
+        <ol>
+          <li>Dessiner le TDO relatif à l'algorithme ci-dessus.</li>
+          <li>Traduire l'algorithme en Pascal.</li>
+          <li>Quelles sont les valeurs de <b>Un</b> et <b>diff</b> pour :
+            <ul>
+              <li>x = 2, n = 1</li>
+              <li>x = 2, n = 3</li>
+              <li>x = 2, n = 10</li>
+              <li>x = 25, n = 1</li>
+              <li>x = 25, n = 3</li>
+              <li>x = 25, n = 10</li>
+            </ul>
+          </li>
+          <li>Modifier les étapes 1 et 2 pour controler la saisie des variables <b>n</b> et <b>x</b>.</li>
+          <li>Que fais le programme ?</li>
+          <li>Modifier le programme pour afficher <b>Un</b> lorsque |U<sub>n</sub> - U<sub>n-1</sub>| &lt; 10<sup>-5</sup>, remarquez que diff = U<sub>n</sub> - U<sub>n-1</sub></li>
+        </ol>
       </div>
-
-      <div class="bloc">
-        <h3>Exercice 4 ★★</h3>
-
-        <p>Écrire un programme qui saisit un entier n (n &ge; 10) puis crée deux entiers :</p>
-
-        <ul>
-          <li>Le premier est formé par les chiffres d'ordre impair de n</li>
-          <li>Le second est formé par les chiffres d'ordre pair de n</li>
-        </ul>
-
-        <p><b>Exemple :</b> Pour n = 34152, Le programme doit afficher : <br>
-          Le nombre formé par les chiffres d'ordre impair de 34152 est : 312<br>
-          Le nombre formé par les chiffres d'ordre pair de 34152 est : 45<br>
-        </p>
-
-      </div>
-
-      <div class="bloc">
-        <h3>Exercice 5 ★★★</h3>
-
-        <p>Écrire un programme qui saisit deux mots puis détermine les lettres communes et les lettres spécifiques à
-          chaque
-          mot.</p>
-        <p><b>Exemple :</b> Pour mot1 = "Sami" et mot2 = "Sahbi", Le programme doit afficher :<br>
-          <b>Les caractères communs sont : A, I, S</b><br>
-          <b>Les caractères spécifiques de Sami : M</b><br>
-          <b>Les caractères spécifiques de Sahbi : B, H</b><br>
-        </p>
-      </div>
-
-      <div class="bloc">
-        <h3>Exercice 6 ★★★</h3>
-
-        <p>Écrire un programme qui saisit deux mots différents, puis détermine s'ils sont anagrammes ou non.</p>
-        <p>Deux mots anagrammes sont deux mots différents formés par les mêmes caractères dans un ordre différent.</p>
-        <p><b>Exemples :</b> cuve, vecu ; rail, lira ; chicane, caniche ; sujet, jutes</p>
-      </div>
-
-      <div class="bloc">
-        <h3>Exercice 7 ★★★</h3>
-        <p>Écrire un programme qui saisit une phrase et détermine s'il s'agit d'un <b>hétérogramme</b>. Un hétérogramme
-          est
-          une phrase comportant <u>chaque lettre au plus une fois</u>.</p>
-
-        <p><b>Exemples :</b><br>
-          Lampez un fort Whisky !<br>
-          Cinq thyms jugez par kob !<br>
-          Plombez vingt fuyards !</p>
-      </div>
-
-      <div class="bloc">
-        <h3>Exercice 8 ★★★</h3>
-
-        <p>Ecrire un programme qui saisit une phrase puis affiche le mot le plus long, s'il existe plusieurs mots il
-          doit
-          afficher uniquement le premier.</p>
-
-        <p><b>Exemple :</b> Pour Ch = "Je suis un tunisien, les tunisiens aiment leur pays."<br>
-          Le programme affiche : <b>Le mot le plus long est : tunisiens</b></p>
-      </div>
-
     </main>
   </div>
 
@@ -211,6 +231,11 @@
       navBar.removeAttribute('class');
     }
   </script>
+
+  <script type="text/javascript" src="scripts/jquery.js"></script>
+  <script src="scripts/sh.min.js"></script>
+  <script src="scripts/sh_pascal.min.js"></script>
+  <script src="scripts/sh_algo.js"></script>
 </body>
 
 </html>

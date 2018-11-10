@@ -32,7 +32,7 @@
 <body>
   <div style="text-align: center; margin: 0.25em auto;">
     <button id="previous" onclick="showPrev()">Précédent</button>
-    <input id="page" name="page" value="0" size="3" onchange="navigatePage()"> / 255
+    <input id="page" name="page" value="0" size="3" onchange="navigatePage()"> / 511
     <button id="next" onclick="showNext()">Suivant</button>
     <br>
     Code : <span id="code"></span>
@@ -75,7 +75,7 @@
       }
     }
     function showNext() {
-      if (page < 256) {
+      if (page < 512) {
         page++;
       }
       display(page);
@@ -88,7 +88,7 @@
     }
     function navigatePage() {
       const npage = parseInt(pageInput.value);
-      if (npage >= 0 && npage < 256) {
+      if (npage >= 0 && npage < 512) {
         page = npage;
         display(npage);
       }

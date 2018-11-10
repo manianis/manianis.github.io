@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Calendrier</title>
+
+  <style>
+    body {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      font-size: 10pt;
+    }
+
+    #calendar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .months_list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: stretch;
+    }
+
+    table.calendar {
+      border-collapse: collapse;
+    }
+
+    .calendar {
+      width: 13em;
+      display: inline-block;
+      margin-bottom: 0.5em;
+      border: 1px solid #03A9F4;
+      padding: 0.25em;
+      border-radius: 0.5em;
+    }
+
+    .calendar thead th {
+      font-size: 1.2em;
+      color: #e91e63;
+      padding: 0.2em 0;
+    }
+
+    .calendar tbody th {
+      border-bottom: 3px solid #000;
+      width: 2.5em;
+      font-size: 0.8em;
+    }
+
+    .calendar tbody td {
+      text-align: right;
+    }
+
+    .calendar tbody .end_of_week {
+      color: red;
+    }
+
+    #year, #month, #count {
+      width: 4em;
+      text-align: center;
+      border-radius: 5px;
+    }
+
+    #control_form {
+      display: flex;
+      flex-wrap: wrap;
+      text-align: center;
+      margin: 1em auto;
+      width: 20em;
+    }
+
+    #control_form > div {
+      width: calc(30% - 6px);
+      margin: 3px;
+    }
+
+    #control_form > div > label {
+      display: block;
+      font-weight: bold;
+      font-size: smaller;
+      color: #673AB7;
+    }
+
+    @media print {
+      #control_form {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="control_form">
+    <div>
+      <label for="year">Année</label>
+      <input type="text" name="year" id="year">
+    </div>
+
+    <div>
+      <label for="month">Mois</label>
+      <input type="text" name="month" id="month">
+    </div>
+
+    <div>
+      <label for="count">Nbre. Mois</label>
+      <input type="text" name="count" id="count">
+    </div>
+  </div>
+
+  <div id="calendar"></div>
+
+  <script>
+    const mois = [
+      { shortName: 'Jan', longName: 'Janvier' },
+      { shortName: 'Fév', longName: 'Février' },
+      { shortName: 'Mar', longName: 'Mars' },
+      { shortName: 'Avr', longName: 'Avril' },
+      { shortName: 'Mai', longName: 'Mai' },
+      { shortName: 'Juin', longName: 'Juin' },
+      { shortName: 'Juil', longName: 'Juillet' },
+      { shortName: 'Aoû', longName: 'Août' },
+      { shortName: 'Sep', longName: 'Septembre' },
+      { shortName: 'Oct', longName: 'Octobre' },
+      { shortName: 'Nov', longName: 'Novembre' },
+      { shortName: 'Déc', longName: 'Décembre' }
+    ];
+    const jours = [
+      { shortName: 'Dim', longName: 'Dimanche' },
+      { shortName: 'Lun', longName: 'Lundi' },
+      { shortName: 'Mar', longName: 'Mardi' },
+      { shortName: 'Mer', longName: 'Mercredi' },
+      { shortName: 'Jeu', longName: 'Jeudi' },
+      { shortName: 'Ven', longName: 'Vendredi' },
+      { shortName: 'Sam', longName: 'Samedi' },
+    ];
+
+    function displayMonth(year, month) {
+      const startMonth = new Date(year, month - 1, 1);
+      const nbJours = (new Date(year, month, 1).getTime() - startMonth.getTime()) / 86400000;
+      let dow = startMonth.getDay();
+
+      const table = document.createElement('table');
+      table.className = 'calendar';
+
+      const thead = document.createElement('thead');
+      table.appendChild(thead);
+
+      let tr = document.createElement('tr');
+      thead.appendChild(tr);
+
+      let th = document.createElement('th');
+      tr.appendChild(th);
+      th.setAttribute('colspan', 7);
+      th.innerHTML = mois[startMonth.getMonth()].longName + ' ' + year;
+
+      const tbody = document.createElement('tbody');
+      table.appendChild(tbody);
+
+      tr = document.createElement('tr');
+      tbody.appendChild(tr);
+
+      for (let i = 0; i < jours.length; i++) {
+        let th = document.createElement('th');
+        if (i == 0) th.className = 'end_of_week';
+        tr.appendChild(th);
+        th.innerHTML = jours[i].shortName;
+      }
+
+      for (let j = 0; j < 6; j++) {
+        let tr = document.createElement('tr');
+        tbody.appendChild(tr);
+        for (let i = 0; i < 7; i++) {
+          let td = document.createElement('td');
+          if (i == 0) td.className = 'end_of_week';
+          tr.appendChild(td);
+          let jour = (j * 7 + i) - dow + 1;
+          if (jour > 0 && jour <= nbJours) {
+            td.innerHTML = jour;
+          } else {
+            td.innerHTML = '&nbsp;';
+          }
+        }
+      }
+
+      return table;
+    }
+
+    function displayMonthes(year, month, count) {
+      const monthsList = document.createElement('div');
+      monthsList.classList = 'months_list';
+      for (var i = 0; i < count; i++ , month++) {
+        if (month > 12) {
+          month = 1;
+          year++;
+        }
+        monthsList.appendChild(displayMonth(year, month));
+      }
+      return monthsList;
+    }
+
+    function displayCalendar() {
+      const year = parseInt(yearInp.value);
+      const month = parseInt(monthInp.value);
+      const count = parseInt(countInp.value);
+      calDiv.innerHTML = '';
+      calDiv.appendChild(displayMonthes(year, month, count));
+    }
+
+    const calDiv = document.querySelector('#calendar');
+    const yearInp = document.querySelector('#year');
+    const monthInp = document.querySelector('#month');
+    const countInp = document.querySelector('#count');
+    const today = new Date();
+    const yearDefault = (today.getMonth() >= 8) ? today.getFullYear() : today.getFullYear() + 1;
+    yearInp.value = yearDefault;
+    monthInp.value = 9;
+    countInp.value = 10;
+
+    displayCalendar();
+    yearInp.onchange = displayCalendar;
+    monthInp.onchange = displayCalendar;
+    countInp.onchange = displayCalendar;
+  </script>
+</body>
+
+</html>

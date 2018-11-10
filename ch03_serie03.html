@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Série Structures de contrôle itératives</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="scripts/sh.css">
+</head>
+
+<body>
+  <div id="container">
+    <nav>
+      <h1>Exercices</h1>
+      <ul></ul>
+      <div id="modes">
+        <div class="titre">Affichage</div>
+        <div id="select_mode">
+          <a id="mode_all" href="#">Tout</a>
+          <a id="mode_one" href="#">Un seul</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div id="breadcrumb"><a href="#">☰</a> Série d'exercices</div>
+
+      <h1>Série 3 : Structures itératives</h1>
+
+      <div class="bloc">
+        <h3>Exercice 1 ★★</h3>
+
+        <p>Écrire un programme qui détermine quels sont les chiffres utilisés dans la représentation d'un nombre n (n
+          &gt; 0)
+          donné.</p>
+        <p><b>Exemple :</b> Pour n = 12544, Le programme doit afficher : <b>12544 est composé par les chiffres : 1, 2,
+            4,
+            5</b></p>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 2 ★★</h3>
+
+        <p>Écrire un programme qui calcule le terme de la suite suivante pour un ordre n donné :</p>
+
+        <p><img src="Images/img20.png" alt="Suite réelle"></p>
+
+        <p><b>Exemples :</b> U<sub>1</sub>=9 ; U<sub>2</sub>=69 ; U<sub>3</sub>=276 ; U<sub>4</sub> = 84 ; U<sub>5</sub>
+          = 1929</p>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 3 ★★</h3>
+
+        <p>Écrire un programme qui convertit un nombre de la base 10 à la base 16 et affiche le résultat sur 4
+          chiffres.</p>
+
+        <p><b>Exemple :</b> Pour n = 635, Le programme doit afficher : 635<sub>(10)</sub> = 027B<sub>(16)</sub></p>
+
+        <p><img src="Images/img19.png" alt="Conversion de la base 16 à la base 10"></p>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 4 ★★</h3>
+
+        <p>Écrire un programme qui saisit un entier n (n &ge; 10) puis crée deux entiers :</p>
+
+        <ul>
+          <li>Le premier est formé par les chiffres d'ordre impair de n</li>
+          <li>Le second est formé par les chiffres d'ordre pair de n</li>
+        </ul>
+
+        <p><b>Exemple :</b> Pour n = 34152, Le programme doit afficher : <br>
+          Le nombre formé par les chiffres d'ordre impair de 34152 est : 312<br>
+          Le nombre formé par les chiffres d'ordre pair de 34152 est : 45<br>
+        </p>
+
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 5 ★★★</h3>
+
+        <p>Écrire un programme qui saisit deux mots puis détermine les lettres communes et les lettres spécifiques à
+          chaque
+          mot.</p>
+        <p><b>Exemple :</b> Pour mot1 = "Sami" et mot2 = "Sahbi", Le programme doit afficher :<br>
+          <b>Les caractères communs sont : A, I, S</b><br>
+          <b>Les caractères spécifiques de Sami : M</b><br>
+          <b>Les caractères spécifiques de Sahbi : B, H</b><br>
+        </p>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 6 ★★★</h3>
+
+        <p>Écrire un programme qui saisit deux mots différents, puis détermine s'ils sont anagrammes ou non.</p>
+        <p>Deux mots anagrammes sont deux mots différents formés par les mêmes caractères dans un ordre différent.</p>
+        <p><b>Exemples :</b> cuve, vecu ; rail, lira ; chicane, caniche ; sujet, jutes</p>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 7 ★★★</h3>
+        <p>Écrire un programme qui saisit une phrase et détermine s'il s'agit d'un <b>hétérogramme</b>. Un hétérogramme
+          est
+          une phrase comportant <u>chaque lettre au plus une fois</u>.</p>
+
+        <p><b>Exemples :</b><br>
+          Lampez un fort Whisky !<br>
+          Cinq thyms jugez par kob !<br>
+          Plombez vingt fuyards !</p>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 8 ★★★</h3>
+
+        <p>Ecrire un programme qui saisit une phrase puis affiche le mot le plus long, s'il existe plusieurs mots il
+          doit
+          afficher uniquement le premier.</p>
+
+        <p><b>Exemple :</b> Pour Ch = "Je suis un tunisien, les tunisiens aiment leur pays."<br>
+          Le programme affiche : <b>Le mot le plus long est : tunisiens</b></p>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    const navlist = document.querySelector('nav>ul');
+    const blocs = Array.prototype.slice.apply(document.querySelectorAll('.bloc'));
+    let mode = 'one'; // 'all'
+    let currBloc = blocs[0];
+    const btnModeAll = document.querySelector('#mode_all');
+    const btnModeOne = document.querySelector('#mode_one');
+    const anchors = [];
+    const linkMenu = document.querySelector('#breadcrumb a');
+    const navBar = document.querySelector('nav');
+
+    btnModeAll.onclick = function (e) {
+      e.preventDefault();
+      setMode('all');
+    };
+
+    btnModeOne.onclick = function (e) {
+      e.preventDefault();
+      setMode('one');
+    };
+
+    function setMode(newMode) {
+      mode = newMode;
+      btnModeAll.className = (mode === 'all') ? 'selected' : '';
+      btnModeOne.className = (mode === 'one') ? 'selected' : '';
+      selectExercice(currBloc);
+    }
+
+    function selectExercice(bloc) {
+      let selectedAnchor = -1;
+      currBloc = bloc;
+      for (let i = 0; i < blocs.length; i++) {
+        if (blocs[i] == bloc) {
+          selectedAnchor = i;
+          anchors[i].className = 'selected';
+          blocs[i].style.display = 'block';
+        } else {
+          anchors[i].removeAttribute('class');
+          blocs[i].style.display = (mode === 'one') ? 'none' : 'block';
+        }
+      }
+      if (mode === 'all') {
+        document.location.href = anchors[selectedAnchor].href;
+      }
+      hideNavBar();
+    }
+
+    navlist.innerHTML = '';
+    for (let i = 0; i < blocs.length; i++) {
+      const bloc = blocs[i];
+      const head = bloc.querySelector('h3');
+      const title = head.innerText;
+      head.id = 'titre_' + i;
+
+      const li = document.createElement('li');
+      navlist.appendChild(li);
+
+      const anchor = document.createElement('a');
+      li.appendChild(anchor);
+
+      anchors.push(anchor);
+      anchor.innerText = title;
+      anchor.href = '#' + head.id;
+      anchor.onclick = function (e) {
+        selectExercice(bloc);
+        if (mode == 'one') {
+          e.preventDefault();
+        }
+      };
+    }
+
+    setMode('one');
+
+    linkMenu.onclick = function (e) {
+      e.preventDefault();
+      showNavbar();
+    };
+
+    function showNavbar() {
+      navBar.className = 'animate';
+    }
+
+    function hideNavBar() {
+      navBar.removeAttribute('class');
+    }
+  </script>
+</body>
+
+</html>
