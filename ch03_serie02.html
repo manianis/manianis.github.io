@@ -102,8 +102,10 @@
       <div class="bloc">
         <h3>Exercice 3 ★</h3>
 
-        <p>Soit U<sub>n</sub> = (U<sub>n-1</sub> + x / U<sub>n-1</sub>) / 2, pour n > 0 et U<sub>0</sub> = x+1, x étant
-          un réel positif.</p>
+        <p>Soit U<sub>n</sub> une suite réelle définie comme suit :</p>
+        
+        <p>U<sub>n</sub> = (U<sub>n-1</sub> + x / U<sub>n-1</sub>) / 2, si n > 0</p>
+        <p>U<sub>0</sub> = x+1, x ∈ ℝ<sub>+</sub>.</p>
 
         <p>On démontre que la suite U<sub>n</sub> est convergente. Et on donne l'algorithme suivant : </p>
 
@@ -114,7 +116,7 @@
    Lire(n)
 3) Up ⟵ x + 1
    Pour i de 1 à n Faire
-     Un ⟵ (Un + x / Un) / 2
+     Un ⟵ (Up + x / Up) / 2
      diff ⟵ Un - Up
      Up ⟵ Un
    Fin Pour
@@ -139,7 +141,108 @@
           </li>
           <li>Modifier les étapes 1 et 2 pour controler la saisie des variables <b>n</b> et <b>x</b>.</li>
           <li>Que fais le programme ?</li>
-          <li>Modifier le programme pour afficher <b>Un</b> lorsque |U<sub>n</sub> - U<sub>n-1</sub>| &lt; 10<sup>-5</sup>, remarquez que diff = U<sub>n</sub> - U<sub>n-1</sub></li>
+          <li>Modifier le programme pour afficher <b>Un</b> lorsque |U<sub>n</sub> - U<sub>n-1</sub>| &lt; 10<sup>-5</sup>,
+            remarquez que diff = U<sub>n</sub> - U<sub>n-1</sub></li>
+        </ol>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 4 ★</h3>
+
+        <p>Soit l'algorithme suivant :</p>
+
+        <pre class="sh_algo">0) Début Act4
+1) Ecrire("Donner n > 0 : ")
+   Lire(n)
+2) n1 ⟵ n
+   répéter
+     r ⟵ n1 div 10
+     sd ⟵ sd + r
+     n1 ⟵ n1 div 10
+   jusqu'à (n1 = 0)
+3) Ecrire(n, " => ", n1)
+4) Fin Act4</pre>
+        <p><b>Travail demandé</b></p>
+
+        <ol>
+          <li>Proposer le TDO relatif à l'algorithme ci-dessus.</li>
+          <li>Traduire l'algorithme en Pascal.</li>
+          <li>Ajouter le contrôle de saisie de la variable <b>n</b></li>
+          <li>Tester le programme avec : <ul>
+              <li>n = 21395</li>
+              <li>n = 16514</li>
+            </ul>
+          </li>
+          <li>Quel est le rôle du programme ?</li>
+        </ol>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 5 ★★</h3>
+
+        <pre class="sh_algo">0) Début Act5
+1) Ecrire("Donner n [3, 10] : ")
+   Lire(n)
+2) Pour i de 1 à n Faire
+     Ecrire("Donner T[", i, "] : ")
+     Lire(t[i])
+   Fin Pour
+3) n1 ⟵ 0
+   Pour i de 1 à n Faire
+     ConvCh(t[i], ch)
+     chp ⟵ faux
+     Pour j de 1 Long(ch) Faire
+       Val(ch[i], v, e)
+       si v mod 2 = 0 alors
+         chp ⟵ vrai
+       fin si
+     fin pour
+     si (non chp) alors
+       n1 ⟵ n1 + 1
+       t2[n1] ⟵ t[i]
+     fin si 
+   fin pour  
+4) Pour i de 1 à n1 Faire
+     Ecrire(t2[i])
+   Fin pour
+5) Fin Act5</pre>
+        <p><b>Travail demandé</b></p>
+
+        <ol>
+          <li>Proposer le TDNT et le TDO relatifs à l'algorithme ci-dessus.</li>
+          <li>Traduire l'algorithme en Pascal.</li>
+          <li>Ajouter le contrôle de saisie de la variable <b>n</b> (3 &le; n &le; 10) et <b>t[i]</b> (t[i] &ge; 10).</li>
+          <li>Tester le programme avec les données suivantes : <ul>
+              <li>n = 8</li>
+              <li>T<table class="normal">
+                  <tr class="center">
+                    <td>11</td>
+                    <td>20</td>
+                    <td>123</td>
+                    <td>57</td>
+                    <td>90</td>
+                    <td>319</td>
+                    <td>973</td>
+                    <td>41</td>
+                  </tr>
+                  <tr class="borderless center">
+                    <td><small>1</small></td>
+                    <td><small>2</small></td>
+                    <td><small>3</small></td>
+                    <td><small>4</small></td>
+                    <td><small>5</small></td>
+                    <td><small>6</small></td>
+                    <td><small>7</small></td>
+                    <td><small>8</small></td>
+                  </tr>
+                </table>
+              </li>
+              <li>Quel est le rôle du programme ?</li>
+              <li>Utiliser la structure <b>répéter...jusqu'à</b> au lieu de <b>pour j de 1 à Long(ch) faire</b></li>
+            </ul>
+          </li>
+          <li>Quel est le rôle du programme ?</li>
+          <li>Placer les nombres qui contiennent exactement un seul chiffre pair dans un tableau t3 et l'afficher.</li>
         </ol>
       </div>
     </main>

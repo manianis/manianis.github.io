@@ -79,7 +79,54 @@
       </div>
 
       <div class="bloc">
-        <h3>Exercice 5 ★★★</h3>
+        <h3>Exercice 5 ★★</h3>
+
+        <p>Ecrire un programme qui permet de saisir deux entiers strictement positifs a et b puis affiche le résultat
+          approché de la division de a par b avec n chiffres. (n > 0, donnée).</p>
+
+        <p><b>Exemple : </b> Pour A = 4, B = 19, N = 30</p>
+        <p>Le programme affiche : </p>
+        <p><b>
+            <script>
+              var a = 4, b = 19, n = 30;
+              var res = '', ca = a, cb = b;
+              do {
+                qe = Math.floor(ca / cb);
+                re = ca % cb;
+                qec = qe + '';
+                res = res + qec;
+                if (res == qec) {
+                  res = res + '.';
+                  n = n + res.length;
+                }
+                ca = re * 10;
+              } while (re != 0 && res.length != n);
+              document.writeln(a, "/", b, "=", res);
+            </script></b></p>
+
+        <pre class="sh_algo">0) Début ex5
+1) Lire(a)
+2) Lire(b)
+3) Lire(n)
+4) [res ⟵ "" ; ca ⟵ a ; cb ⟵ b]
+   répéter
+     qe ⟵ ca div cb
+     re ⟵ ca mod cb
+     ConvCh(qe, qec)
+     res ⟵ res + qec
+     si res = qec alors
+       res ⟵ res + "."
+       n ⟵ n + Long(res)
+     fin si
+     ca ⟵ re * 10
+   jusqu'à (re = 0) ou (Long(res) = n)
+8) Ecrire(a, "/", b, "=", res) 
+9) Fin ex5
+</pre>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 6 ★★★</h3>
 
         <p>Écrire un programme qui saisit deux mots puis détermine les lettres communes et les lettres spécifiques à
           chaque
@@ -92,7 +139,7 @@
       </div>
 
       <div class="bloc">
-        <h3>Exercice 6 ★★★</h3>
+        <h3>Exercice 7 ★★★</h3>
 
         <p>Écrire un programme qui saisit deux mots différents, puis détermine s'ils sont anagrammes ou non.</p>
         <p>Deux mots anagrammes sont deux mots différents formés par les mêmes caractères dans un ordre différent.</p>
@@ -100,7 +147,7 @@
       </div>
 
       <div class="bloc">
-        <h3>Exercice 7 ★★★</h3>
+        <h3>Exercice 8 ★★★</h3>
         <p>Écrire un programme qui saisit une phrase et détermine s'il s'agit d'un <b>hétérogramme</b>. Un hétérogramme
           est
           une phrase comportant <u>chaque lettre au plus une fois</u>.</p>
@@ -112,7 +159,7 @@
       </div>
 
       <div class="bloc">
-        <h3>Exercice 8 ★★★</h3>
+        <h3>Exercice 9 ★★★</h3>
 
         <p>Ecrire un programme qui saisit une phrase puis affiche le mot le plus long, s'il existe plusieurs mots il
           doit
@@ -122,6 +169,46 @@
           Le programme affiche : <b>Le mot le plus long est : tunisiens</b></p>
       </div>
 
+      <div class="bloc">
+        <h3>Exercice 10 ★★★</h3>
+
+        <p>Ecrire un programme qui permet de saisir une phrase <b>ch</b> (non vide) puis d'afficher les mots qui
+          contiennent le maximum de voyelles.</p>
+
+        <p><b>Exemple : </b> Pour Ch = <b>"Je suis un eleve qui cherche a reussir avec mention"</b></p>
+        <p>Le programme affiche : </p>
+        <p>
+          <b>Le nombre maximal de voyelles est : 3</b><br>
+          <b>Les mots formées par 3 voyelles sont : eleve, reussir</b></p>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 11 ★★★</h3>
+
+        <p>En mathématiques, un entier naturel est un nombre heureux si, lorsqu'on calcule la somme des carrés de ses
+          chiffres puis la somme des carrés des chiffres du nombre obtenu et ainsi de suite, on aboutit au nombre 1.</p>
+
+        <p>Dès que dans la suite associée à un nombre on rencontre 4, 16, 37, 58, 89, 145, 42 ou 20, la suite devient
+          périodique et le nombre en question est malheureux, puisque : </p>
+
+        <p>4²=16, 1²+6²=37, 3²+7²=58, 5²+8²=89, 8²+9²=145, 1²+4²+5²=42, 4²+2²=20, 2²+0²=4</p>
+
+        <p><b>Exemple :</b></p>
+        <p>Le nombre 7 est heureux, puisque sa suite associée est :</p>
+        <p>7² = 49; 4²+9²=97; 9²+7²=130,1²+3²+0²=10,1²+0²=1</p>
+
+        <p>Ecrire un programme qui permet de saisir un entier n > 0 puis affiche s'il est heureux ou malheureux.</p>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 12 ★★★</h3>
+
+        <p>En arithmétique, la décomposition en produit de facteurs premiers, consiste à chercher à écrire un entier
+          naturel non nul sous forme d'un produit de nombres premiers.</p>
+        <p>Par exemple, si le nombre donné est 45, la factorisation en nombres premiers est : 3 × 3 × 5.</p>
+        <p>Ecrire un programme qui permet de saisir un nombre n > 0 et puis affiche sa décomposition en produit de
+          facteurs premiers.</p>
+      </div>
     </main>
   </div>
 
