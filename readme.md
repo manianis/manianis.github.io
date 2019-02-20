@@ -10,6 +10,12 @@ Chapitre 1 : Structures de données
 
 Chapitre 2 : Structures conditionnelles
 
+Chapitre 3 : Structures itératives
+
+Chapitre 4 : Sous-programmes
+
+Chapitre 5 : Algorithmes avancés
+
 ## Autres
 
 Table des caractères ASCII
