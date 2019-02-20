@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Write</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="scripts/sh.css">
+
+  <style>
+    .container {
+      display: flex;
+    }
+
+    .section {
+      width: 100%;
+    }
+
+    .section textarea,
+    .section pre {
+      width: calc(100% - 16px);
+      height: 40vh;
+    }
+
+    .section pre {
+      overflow: auto;
+    }
+
+    .section .toolbar span {
+      display: inline-block;
+      border: 1px solid #333;
+      padding: 3px;
+      margin: 3px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body onload="sh_highlightDocument();">
+
+  <div class="container">
+    <div class="section">
+      <h3>Algorithme</h3>
+      <div class="toolbar"><span id="btn_affect">⟵</span></div>
+      <textarea id="algorithme"></textarea>
+      <pre id="render" class="sh_algo"></pre>
+    </div>
+    <div class="section">
+      <h3>Pascal</h3>
+      <textarea id="pascal"></textarea>
+      <pre id="render1" class="sh_pascal"></pre>
+    </div>
+  </div>
+
+  <script>
+    const alg_ta = document.querySelector('#algorithme');
+    const rd_ta = document.querySelector('#render');
+
+    const btn_affect = document.querySelector('#btn_affect');
+    btn_affect.onclick = function () {
+      alg_ta.value += '⟵';
+    };
+
+    function render_algo() {
+      rd_ta.innerHTML = alg_ta.value;
+      sh_highlightDocument();
+    }
+    alg_ta.onblur = render_algo;
+
+    const pas_ta = document.querySelector('#pascal');
+    const rd1_ta = document.querySelector('#render1');
+
+    function render_pas() {
+      rd1_ta.innerHTML = pas_ta.value;
+      sh_highlightDocument();
+    }
+    pas_ta.onblur = render_pas;
+  </script>
+
+  <script src="scripts/sh.min.js"></script>
+  <script src="scripts/sh_pascal.min.js"></script>
+  <script src="scripts/sh_algo.js"></script>
+</body>
+
+</html>
