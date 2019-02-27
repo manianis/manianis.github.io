@@ -125,6 +125,128 @@
 
         <pre>B<br>PO<br>MOD<br>MEMO<br>SOURI<br>PROCES</pre>
       </div>
+
+      <div class="bloc">
+        <h3>Exercice 5</h3>
+
+        <p>Soit un tableau T de n caractères (5 &le; n &le; 15) qui ne peuvent être que "A", "B" et "C" et tel que deux
+          éléments successifs du tableau ne sont pas égaux.</p>
+
+        <p>On se propose d'insérer un caractère <b>car</b> dans la 1<sup>ère</sup> position possible dans le tableau T
+          tout en respectant la règle ci-dessus.</p>
+
+        <p><b>car</b> ne peut être que les lettres "A", "B" ou "C" et ne peut être inséré ni à la première, ni à la
+          dernière position du tableau.</p>
+
+        <p><b>Exemple :</b></p>
+
+        <table class="normal">
+          <tr>
+            <td width="12.5%">B</td>
+            <td width="12.5%">A</td>
+            <td width="12.5%">B</td>
+            <td width="12.5%">C</td>
+            <td width="12.5%">A</td>
+            <td width="12.5%">C</td>
+            <td width="12.5%">B</td>
+            <td width="12.5%">A</td>
+          </tr>
+          <tr class="borderless center small">
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+          </tr>
+
+          <p>Pour <b>car</b> ⟵ "B" le tableau devient : </p>
+
+          <table class="normal">
+            <tr>
+              <td width="11%">B</td>
+              <td width="11%">A</td>
+              <td width="11%">B</td>
+              <td width="11%">C</td>
+              <td style="background-color: gray" width="11%">B</td>
+              <td width="11%">A</td>
+              <td width="11%">C</td>
+              <td width="11%">B</td>
+              <td width="11%">A</td>
+            </tr>
+            <tr class="borderless center small">
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <t>5</t>
+              <td>6</td>
+              <td>7</td>
+              <td>8</td>
+              <td>9</td>
+            </tr>
+          </table>
+
+          <p>On donne l'algorithme du programme principal :</p>
+
+          <pre class="sh_algo"><code>0. Début Insertion
+1.  Ecrire("Donner n [5..15] : ")
+    Lire(n)
+2.  Pour i de 1 à n Faire
+      Ecrire("Donner une lettre A, B et C : ")
+      Lire(t[i])
+    Fin Pour
+3.  Proc InsertCar(car, t, n)
+4.  Proc Afficher(t, n)
+5.  Fin Insertion</code></pre>
+
+          <h4>Travail demandé</h4>
+          <ol>
+            <li>Transformer l'étape (1) en une procédure Saisie, ajouter le contrôle de saisie.</li>
+            <li>Transformer l'étape (2) en une procédure Remplir tout en ajoutant le contrôle de saisie pour respecter
+              les conditions mentionnées précédemment. </li>
+            <li>Ecrire la procédure InsertCar qui permet d'insérer un caractère car dans le tableau T de telle manière
+              que deux éléments consécutifs soient différents.</li>
+            <li>Ecrire une procédure Afficher qui affiche les éléments du tableau T.</li>
+          </ol>
+      </div>
+
+      <div class="bloc">
+        <h3>Exercice 6</h3>
+
+        <p>Ecrire un programme qui saisit n entiers (5 &le; n &le; 20) dans un tableau t, puis affiche les nombres
+          symétriques. Les éléments du tableaux peuvent être positifs ou négatifs et doivent être d'au minimum deux
+          chiffres.</p>
+
+        <p><b>Exemple :</b></p>
+
+        <table class="normal">
+          <tr>
+            <td width="13%">424</td>
+            <td width="13%">715</td>
+            <td width="13%">133</td>
+            <td width="13%">-121</td>
+            <td width="13%">454</td>
+            <td width="13%">616</td>
+            <td width="13%">-566</td>
+          </tr>
+          <tr class="small borderless center">
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+          </tr>
+        </table>
+
+        <p>Le programme doit afficher :</p>
+
+        <p><b>Les membres symétriques sont : 424, -121, 454 et 616.</b></p>
+      </div>
     </main>
   </div>
 
