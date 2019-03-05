@@ -7,45 +7,55 @@
   <title>Cours Programmation 4èmes Scientifiques</title>
 
   <style>
-    nav>ul {
+    body {
+      font-family: sans-serif;
+      font-size: 12pt;
+    }
+
+    h2,
+    h3 {
+      margin: 0.25em 0;
+    }
+
+    nav ul {
       list-style: none;
       padding: 0;
       display: flex;
       flex-wrap: wrap;
+      margin: 0.25em 0;
     }
 
-    nav>ul>li {
+    nav ul>li {
       display: block;
-      width: 20vw;
-      height: 20vh;
+      text-align: center;
+      width: 100%;
       padding: 15px;
       margin: 5px;
-      /* background-color: #4CAF50; */
       border-radius: 5px;
       color: #000;
     }
 
-    nav>ul>li>a {
+    nav ul>li>a {
       text-decoration: none;
       color: #fff;
       font-weight: bold;
-      font-size: 1.2em;
+      line-height: 1.5em;
     }
 
-    nav>ul>li.active {
+    nav ul>li.active {
       background-color: #4CAF50;
     }
 
-    nav>ul>li.active:hover {
+    nav ul>li.active:hover {
       background-color: #93ff97;
       color: #000;
     }
 
-    nav>ul>li.active:hover>a {
+    nav ul>li.active:hover>a {
       color: #000;
     }
 
-    nav>ul>li.incomplete::after {
+    nav ul>li.incomplete::after {
       display: inline-block;
       margin-left: 15px;
       content: "Non achevé";
@@ -53,8 +63,26 @@
       vertical-align: super;
     }
 
-    nav>ul>li.serie {
+    nav ul>li.serie {
       background-color: #cc0066;
+    }
+
+    @media screen and (min-width: 400px) {
+      nav ul>li {
+        width: calc(50% - 40px);
+      }
+    }
+
+    @media screen and (min-width: 600px) {
+      nav ul>li {
+        width: calc(33.3% - 40px);
+      }
+    }
+
+    @media screen and (min-width: 800px) {
+      nav ul>li {
+        width: calc(25% - 40px);
+      }
     }
   </style>
 </head>
@@ -62,73 +90,113 @@
 <body>
   <h1>Cours d'informatique 4<sup>èmes</sup> Scientifiques</h1>
   <nav>
-    <ul>
-      <li class="active">
-        <a href="chapitre_01.html" target="chap01">Chapitre 1 : Structures de données</a>
-      </li>
+    <fieldset>
+      <legend>
+        <h2>Chapitre 1 : Structures de données</h2>
+      </legend>
+      <ul>
+        <li class="active">
+          <a href="chapitre_01.html" target="chap01">Cours</a>
+        </li>
+        <li class="active">
+          <a href="fn_predefinies.html" target="fn_predefinies">Fonctions Prédéfinies</a>
+        </li>
+        <li class="active">
+          <a href="table_ascii.html" target="ascii">Table ASCII</a>
+        </li>
+      </ul>
+      <h3>Exercices</h3>
+      <ul>
+        <li class="serie">
+          <a href="ch01_serie01.html" target="chap01_s01">Série 1</a>
+        </li>
+      </ul>
+    </fieldset>
 
-      <li class="serie">
-        <a href="ch01_serie01.html" target="chap01_s01">Série 1 : Strcutures de données</a>
-      </li>
-    </ul>
-    <ul>
-      <li class="active">
-        <a href="chapitre_02.html" target="chap02">Chapitre 2 : Structures de contrôles conditionnelles</a>
-      </li>
+    <fieldset>
+      <legend>
+        <h2>Chapitre 2 : Structures de contrôles conditionnelles</h2>
+      </legend>
+      <ul>
+        <li class="active">
+          <a href="chapitre_02.html" target="chap02">cours</a>
+        </li>
+      </ul>
+      <h3>Exercices</h3>
+      <ul>
+        <li class="serie">
+          <a href="ch02_serie01.html" target="chap02_s01">Série 2</a>
+        </li>
+        <li class="serie">
+          <a href="ch02_serie02.html" target="chap02_s02">Série 3</a>
+        </li>
+      </ul>
+    </fieldset>
 
-      <li class="serie">
-        <a href="ch02_serie01.html" target="chap02_s01">Série 2 : Strcutures de contrôles conditionnelles</a>
-      </li>
-      <li class="serie">
-        <a href="ch02_serie02.html" target="chap02_s02">Série 3 : Strcutures de contrôles conditionnelles</a>
-      </li>
-    </ul>
-    <ul>
-      <li class="active">
-        <a href="chapitre_03.html" target="chap03">Chapitre 3 : Structures de contrôles itératives</a>
-      </li>
-      <li class="serie">
-        <a href="ch03_serie01.html" target="chap03_s01">Série 4 : Strcutures de contrôles itératives</a>
-      </li>
-      <li class="serie">
-        <a href="ch03_serie02.html" target="chap03_s02">Série 5 : Strcutures de contrôles itératives</a>
-      </li>
-      <li class="serie">
-        <a href="ch03_serie03.html" target="chap03_s03">Série 6 : Strcutures de contrôles itératives</a>
-      </li>
-    </ul>
-    <ul>
-      <li class="active">
-        <a href="chapitre_04.html" target="chap04">Chapitre 4 : Les Sous-Programmes</a>
-      </li>
+    <fieldset>
+      <legend>
+        <h2>Chapitre 3 : Structures de contrôles itératives</h2>
+      </legend>
+      <ul>
+        <li class="active">
+          <a href="chapitre_03.html" target="chap03">Cours</a>
+        </li>
+      </ul>
+      <h3>Exercices</h3>
+      <ul>
+        <li class="serie">
+          <a href="ch03_serie01.html" target="chap03_s01">Série 4</a>
+        </li>
+        <li class="serie">
+          <a href="ch03_serie02.html" target="chap03_s02">Série 5</a>
+        </li>
+        <li class="serie">
+          <a href="ch03_serie03.html" target="chap03_s03">Série 6</a>
+        </li>
+      </ul>
+    </fieldset>
 
-      <li class="serie">
-        <a href="ch04_serie01.html" target="chap04_s01">Série 7 : Sous-programmes et algorithmes avancés</a>
-      </li>
-      <li class="serie">
-        <a href="ch04_serie02.html" target="chap04_s02">Série 8 : Sous-programmes et algorithmes avancés</a>
-      </li>
-      <li class="serie">
-        <a href="ch04_serie03.html" target="chap04_s02">Série 9 : Bac Blanc 2017/2018</a>
-      </li>
+    <fieldset>
+      <legend>
+        <h2>Chapitre 4 : Les Sous-Programmes</h2>
+      </legend>
+      <ul>
+        <li class="active">
+          <a href="chapitre_04.html" target="chap04">Cours</a>
+        </li>
+      </ul>
+      <h3>Exercices</h3>
+      <ul>
+        <li class="serie">
+          <a href="ch04_serie01.html" target="chap04_s01">Série 7</a>
+        </li>
+        <li class="serie">
+          <a href="ch04_serie02.html" target="chap04_s02">Série 8</a>
+        </li>
+        <li class="serie">
+          <a href="ch04_serie03.html" target="chap04_s02">Série 9</a>
+        </li>
+      </ul>
+    </fieldset>
+
+    <fieldset>
+      <legend>
+        <h2>Chapitre 5 : Les Algorithmes Avancés</h2>
+      </legend>
+      <ul>
+        <li class="active">
+          <a href="chapitre_05.html" target="chap05">Cours</a>
+        </li>
+      </ul>
+      <h3>Exercices</h3>
+      <ul>
+        <li class="serie">
+          <a href="ch04_serie04.html" target="chap04_s03">Série 10</a>
+        </li>
+      </ul>
+    </fieldset>
 
 
-      <li class="active">
-        <a href="chapitre_05.html" target="chap05">Chapitre 5 : Les Algorithmes Avancés</a>
-      </li>
-      <li class="serie">
-        <a href="ch04_serie04.html" target="chap04_s03">Série 10 : Sous-programmes et algorithmes avancés</a>
-      </li>
-    </ul>
-    <ul>
-      <li class="active">
-        <a href="table_ascii.html" target="ascii">Table de caractères ASCII</a>
-      </li>
-      <li class="active">
-        <a href="fn_predefinies.html" target="fn_predefinies">Fonctions Prédéfinies</a>
-      </li>
-
-    </ul>
   </nav>
 </body>
 
